@@ -1,15 +1,20 @@
-import { supabase } from "@/supabase";
-import { useEffect } from "react";
-import { Text } from "react-native";
+import { CreatePrediction, Login, ViewPrediction } from "@/components";
+import { CreateQuestion } from "@/components/organisms/CreateQuestion";
+import { ViewQuestion } from "@/components/organisms/ViewQuestion";
+import { Providers } from "@/providers";
+import { SafeAreaView } from "react-native";
 import "react-native-reanimated";
 
 export default function RootLayout() {
-  useEffect(() => {
-    supabase.auth.signUp({
-      email: "nick@mail.com",
-      password: "password",
-    });
-  });
-
-  return <Text>Hello</Text>;
+  return (
+    <Providers>
+      <SafeAreaView>
+        <Login />
+        <CreateQuestion />
+        <ViewQuestion />
+        <CreatePrediction />
+        <ViewPrediction />
+      </SafeAreaView>
+    </Providers>
+  );
 }

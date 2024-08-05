@@ -130,7 +130,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          created_at: string
+          created_at?: string
           id?: string
           text: string
           user_id: string

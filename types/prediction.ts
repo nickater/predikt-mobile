@@ -11,3 +11,9 @@ export const PredictionSchema: z.ZodType<Prediction> = z.object({
 });
 
 export type PredictionType = z.infer<typeof PredictionSchema>;
+
+export type CreatePredictionType = Omit<
+  PredictionType,
+  "id" | "created_at" | "is_revealed"
+>;
+export type UpdatePredictionType = Omit<PredictionType, "id" | "created_at">;

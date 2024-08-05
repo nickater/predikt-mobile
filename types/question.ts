@@ -9,3 +9,5 @@ export const QuestionSchema: z.ZodType<Question> = z.object({
 });
 
 export type QuestionType = z.infer<typeof QuestionSchema>;
+
+export type CreateQuestionType = Omit<QuestionType, "id" | "created_at">;
