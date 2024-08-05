@@ -18,15 +18,12 @@ export const CreatePrediction: FC<CreatePredictionProps> = (
     { text }: CreatePredictionUserInput,
   ) => {
     if (!user) return;
-    try {
-      mutate({
-        text,
-        user_id: user?.id,
-        question_id,
-      });
-    } catch (error) {
-      console.error(error);
-    }
+
+    mutate({
+      text,
+      user_id: user?.id,
+      question_id,
+    });
   };
 
   return (

@@ -21,7 +21,6 @@ export const CreatePredictionForm: FC<CreatePredictionFormProps> = (
 
   const onValidSubmission = (data: Inputs) => {
     onSubmit(data);
-    console.log(data);
   };
 
   const onInvalidSubmission: SubmitErrorHandler<Inputs> = (errors) => {

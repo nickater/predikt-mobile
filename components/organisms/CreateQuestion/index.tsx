@@ -10,14 +10,11 @@ export const CreateQuestion = (): React.JSX.Element => {
 
   const handleCreateQuestion = async ({ text }: CreateQuestionUserInput) => {
     if (!user) return;
-    try {
-      mutate({
-        text,
-        user_id: user?.id,
-      });
-    } catch (error) {
-      console.error(error);
-    }
+
+    mutate({
+      text,
+      user_id: user?.id,
+    });
   };
 
   return (

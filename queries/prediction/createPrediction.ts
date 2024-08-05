@@ -8,5 +8,6 @@ export function createPrediction(
   return client
     .from("predictions")
     .insert([prediction])
+    .throwOnError()
     .single();
 }

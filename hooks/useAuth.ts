@@ -8,6 +8,8 @@ export const useAuth = () => {
 
   const handleAuthChange = useCallback(
     (event: AuthChangeEvent, session: Session | null) => {
+      // console.log({ event, session });
+
       switch (event) {
         case "SIGNED_IN":
           setUser(session?.user || null);

@@ -3,7 +3,8 @@
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "cSpell.words": [
-    "Ionicons"
+    "Ionicons",
+    "Postgrest"
   ],
   "deno.enablePaths": [
     "supabase/functions"

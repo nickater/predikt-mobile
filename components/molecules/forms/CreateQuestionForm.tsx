@@ -25,7 +25,6 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = (
 
   const onValidSubmission = (data: Inputs) => {
     onSubmit(data);
-    console.log(data);
   };
 
   const onInvalidSubmission: SubmitErrorHandler<Inputs> = (errors) => {

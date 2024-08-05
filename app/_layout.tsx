@@ -17,9 +17,9 @@ export default function RootLayout() {
       <SafeAreaView>
         <Login />
         <CreateQuestion />
-        <ViewQuestion />
         <CreatePrediction question_id={question_id} />
         <ViewPrediction />
+        <ViewQuestion />
       </SafeAreaView>
     </Providers>
   );
