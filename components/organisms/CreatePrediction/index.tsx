@@ -1,0 +1,48 @@
+import { useCreatePrediction } from "@/hooks/prediction/useCreatePrediction";
+import { useAuth } from "@/hooks/useAuth";
+import { FC } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { CreatePredictionForm } from "../../molecules";
+import { CreatePredictionUserInput } from "./types";
+
+type CreatePredictionProps = {
+  question_id: string;
+};
+export const CreatePrediction: FC<CreatePredictionProps> = (
+  { question_id },
+): React.JSX.Element => {
+  const { mutate } = useCreatePrediction();
+  const { user } = useAuth();
+
+  const handleCreatePrediction = async (
+    { text }: CreatePredictionUserInput,
+  ) => {
+    if (!user) return;
+    try {
+      mutate({
+        text,
+        user_id: user?.id,
+        question_id,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <View>
+      <Text>CreatePrediction</Text>
+
+      <View style={styles.createPredictionFormContainer}>
+        <CreatePredictionForm onSubmit={handleCreatePrediction} />
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  createPredictionFormContainer: {
+    padding: 20,
+    backgroundColor: "#f9f9f9",
+  },
+});

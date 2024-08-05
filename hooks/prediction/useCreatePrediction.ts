@@ -3,12 +3,19 @@ import { CreatePredictionType } from "@/types/prediction";
 import { useMutation } from "@tanstack/react-query";
 import { useSupabase } from "../useSupabase";
 
-export function useCreatePrediction(prediction: CreatePredictionType) {
+export function useCreatePrediction() {
   const client = useSupabase();
 
-  const mutationFn = async () => {
-    const questionResult = await createPrediction(client, prediction);
-    return questionResult.data;
+  const mutationFn = async (prediction: CreatePredictionType) => {
+    const { data, error } = await createPrediction(client, prediction);
+
+    console.table({ data, error });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
   };
 
   return useMutation({ mutationFn });

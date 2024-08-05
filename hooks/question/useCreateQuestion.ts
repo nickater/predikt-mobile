@@ -7,8 +7,13 @@ export function useCreateQuestion() {
   const client = useSupabase();
 
   const mutationFn = async (question: CreateQuestionType) => {
-    const createQuestionResult = await createQuestion(client, question);
-    return createQuestionResult.data;
+    const { data, error } = await createQuestion(client, question);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
   };
 
   return useMutation({ mutationFn });
