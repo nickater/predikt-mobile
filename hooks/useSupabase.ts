@@ -1,13 +1,8 @@
-import { getSupabaseClient } from "@/supabase";
+import { supabase } from "@/supabase";
 import { useMemo } from "react";
 
 export function useSupabase() {
-  const client = useMemo(getSupabaseClient, []);
-
-  client.auth.onAuthStateChange((event, session) => {
-    // console.log("event", event);
-    // console.log("session", session);
-  });
+  const client = useMemo(() => supabase, []);
 
   return client;
 }

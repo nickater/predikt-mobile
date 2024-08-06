@@ -11,19 +11,17 @@ if (!EXPO_PUBLIC_SUPABASE_URL || !EXPO_PUBLIC_SUPABASE_ANON_KEY) {
 const supabaseUrl = EXPO_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = EXPO_PUBLIC_SUPABASE_ANON_KEY;
 
-export const getSupabaseClient = () => {
-  return createClient<Database>(
-    supabaseUrl,
-    supabaseAnonKey,
-    {
-      auth: {
-        storage: AsyncStorage,
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: false,
-      },
+export const supabase = createClient<Database>(
+  supabaseUrl,
+  supabaseAnonKey,
+  {
+    auth: {
+      storage: AsyncStorage,
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: false,
     },
-  );
-};
+  },
+);
 
-export type SupabaseClient = ReturnType<typeof getSupabaseClient>;
+export type SupabaseClient = ReturnType<typeof createClient<Database>>;

@@ -8,10 +8,10 @@ import {
 
 export const TextInput: FC<TextInputProps> = ({ style, ...rest }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <RNTextInput
         {...rest}
-        style={[styles.container, style]}
+        style={[styles.textInput, style]}
       />
     </View>
   );
@@ -19,6 +19,9 @@ export const TextInput: FC<TextInputProps> = ({ style, ...rest }) => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingVertical: 10,
+  },
+  textInput: {
     width: "100%",
     height: 50,
     padding: 10,

@@ -1,26 +1,34 @@
-import {
-  CreatePrediction,
-  CreateQuestion,
-  Login,
-  ViewPrediction,
-  ViewQuestion,
-} from "@/components";
+import { CustomSafeAreaView } from "@/components";
 import { Providers } from "@/providers";
-import { SafeAreaView } from "react-native";
+import { supabase } from "@/supabase";
+import { Session } from "@supabase/supabase-js";
+import { Slot } from "expo-router";
+import { useEffect, useState } from "react";
 import "react-native-reanimated";
+import Auth from "./auth";
 
-const question_id = "59f06889-fd36-45d1-baea-d672dfc9dec1";
+export default () => {
+  const [session, setSession] = useState<Session | null>(null);
 
-export default function RootLayout() {
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => {
+      data.subscription.unsubscribe();
+    };
+  }, []);
+
   return (
-    <Providers>
-      <SafeAreaView>
-        <Login />
-        <CreateQuestion />
-        <CreatePrediction question_id={question_id} />
-        <ViewPrediction />
-        <ViewQuestion />
-      </SafeAreaView>
-    </Providers>
+    <CustomSafeAreaView>
+      <Providers>
+        {session ? <Slot /> : <Auth />}
+      </Providers>
+    </CustomSafeAreaView>
   );
-}
+};

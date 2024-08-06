@@ -1,5 +1,5 @@
+import { useAuth } from "@/hooks/auth";
 import { useCreatePrediction } from "@/hooks/prediction/useCreatePrediction";
-import { useAuth } from "@/hooks/useAuth";
 import { FC } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { CreatePredictionForm } from "../../molecules";
@@ -12,7 +12,9 @@ export const CreatePrediction: FC<CreatePredictionProps> = (
   { question_id },
 ): React.JSX.Element => {
   const { mutate } = useCreatePrediction();
-  const { user } = useAuth();
+  const { session } = useAuth();
+
+  const user = session?.user;
 
   const handleCreatePrediction = async (
     { text }: CreatePredictionUserInput,

@@ -13,13 +13,22 @@ type TextVariant =
   | "small"
   | "large";
 
+type Position = "left" | "center" | "right";
+
 export const Text: FC<
-  PropsWithChildren<TextProps & { variant?: TextVariant }>
+  PropsWithChildren<TextProps & { variant?: TextVariant; position?: Position }>
 > = (
-  { variant, children, ...props },
+  { variant, position, children, ...props },
 ) => {
   return (
-    <RNText {...props} style={[styles[variant ?? "paragraph"], props.style]}>
+    <RNText
+      {...props}
+      style={[
+        styles[variant ?? "paragraph"],
+        styles[position ?? "left"],
+        props.style,
+      ]}
+    >
       {children}
     </RNText>
   );
@@ -30,7 +39,6 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     color: "#333333",
-    backgroundColor: "#f0f0f0",
   },
   header2: {
     fontSize: 24,
@@ -71,5 +79,14 @@ const styles = StyleSheet.create({
   large: {
     fontSize: 20,
     color: "#333333",
+  },
+  left: {
+    textAlign: "left",
+  },
+  center: {
+    textAlign: "center",
+  },
+  right: {
+    textAlign: "right",
   },
 });

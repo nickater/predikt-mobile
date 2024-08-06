@@ -1,5 +1,6 @@
 export { CreatePrediction } from "./CreatePrediction";
 export { CreateQuestion } from "./CreateQuestion";
-export { Login } from "./Login";
+export { SignIn } from "./SignIn";
+export { SignUp } from "./SignUp";
 export { ViewPrediction } from "./ViewPrediction";
 export { ViewQuestion } from "./ViewQuestion";

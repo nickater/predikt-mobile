@@ -1,12 +1,14 @@
+import { useAuth } from "@/hooks/auth";
 import { useCreateQuestion } from "@/hooks/question/useCreateQuestion";
-import { useAuth } from "@/hooks/useAuth";
 import { StyleSheet, Text, View } from "react-native";
 import { CreateQuestionForm } from "../../molecules";
 import { CreateQuestionUserInput } from "./types";
 
 export const CreateQuestion = (): React.JSX.Element => {
   const { mutate } = useCreateQuestion();
-  const { user } = useAuth();
+  const { session } = useAuth();
+
+  const user = session?.user;
 
   const handleCreateQuestion = async ({ text }: CreateQuestionUserInput) => {
     if (!user) return;
