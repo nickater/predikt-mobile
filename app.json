@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "predikt-mobile",
+    "name": "Predikt",
     "slug": "predikt-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "predikt",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -13,7 +13,6 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true,
       "bundleIdentifier": "com.predikt.mobile"
     },
     "android": {
