@@ -1,5 +1,5 @@
-import z from "zod";
-import { Profile } from "./entities";
+import z from 'zod'
+import { Profile } from './entities'
 
 export const ProfileSchema: z.ZodType<Profile> = z.object({
   avatar_url: z.string().nullable(),
@@ -7,6 +7,6 @@ export const ProfileSchema: z.ZodType<Profile> = z.object({
   id: z.string(),
   updated_at: z.string().nullable(),
   username: z.string().nullable(),
-});
+})
 
-export type ProfileType = z.infer<typeof ProfileSchema>;
+export type ProfileType = z.infer<typeof ProfileSchema>

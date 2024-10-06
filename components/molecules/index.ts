@@ -1,2 +1,2 @@
-export { CustomSafeAreaView } from "./CustomSafeAreaView";
-export * from "./forms";
+export { CustomSafeAreaView } from './CustomSafeAreaView'
+export * from './forms'

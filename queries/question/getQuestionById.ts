@@ -1,13 +1,10 @@
-import { SupabaseClient } from "@/supabase";
+import { SupabaseClient } from '@/supabase'
 
-export function getQuestionById(
-  client: SupabaseClient,
-  questionId: number,
-) {
+export function getQuestionById(client: SupabaseClient, questionId: number) {
   return client
-    .from("questions")
-    .select("*")
-    .eq("id", questionId)
+    .from('questions')
+    .select('*')
+    .eq('id', questionId)
     .throwOnError()
-    .single();
+    .single()
 }

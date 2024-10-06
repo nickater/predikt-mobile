@@ -1,3 +1,3 @@
-import { CreateQuestionType } from "@/types/question";
+import { CreateQuestionType } from '@/types/question'
 
-export type CreateQuestionUserInput = Omit<CreateQuestionType, "user_id">;
+export type CreateQuestionUserInput = Omit<CreateQuestionType, 'user_id'>

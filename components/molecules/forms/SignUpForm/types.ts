@@ -1,5 +1,5 @@
-import { SignUpUserInput } from "@/components/organisms/SignUp/types";
+import { SignUpUserInput } from '@/components/organisms/SignUp/types'
 
 export type SignUpFormUserInput = {
-  confirmPassword: string;
-} & SignUpUserInput;
+  confirmPassword: string
+} & SignUpUserInput

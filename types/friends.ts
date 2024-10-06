@@ -1,5 +1,5 @@
-import z from "zod";
-import { Friend } from "./entities";
+import z from 'zod'
+import { Friend } from './entities'
 
 export const FriendSchema: z.ZodType<Friend> = z.object({
   created_at: z.string(),
@@ -7,6 +7,6 @@ export const FriendSchema: z.ZodType<Friend> = z.object({
   id: z.string(),
   status: z.string(),
   user_id: z.string(),
-});
+})
 
-export type QuestionType = z.infer<typeof FriendSchema>;
+export type QuestionType = z.infer<typeof FriendSchema>

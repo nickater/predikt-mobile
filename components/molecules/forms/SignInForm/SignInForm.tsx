@@ -1,37 +1,37 @@
-import { FC } from "react";
-import { Controller, SubmitErrorHandler, useForm } from "react-hook-form";
-import { View } from "react-native";
-import { Button, Text, TextInput } from "../../../atoms";
-import { SignInFormUserInput } from "./types";
+import { FC } from 'react'
+import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
+import { View } from 'react-native'
+import { Button, Text, TextInput } from '../../../atoms'
+import { SignInFormUserInput } from './types'
 
 type CreatePredictionFormProps = {
-  onSubmit: (data: SignInFormUserInput) => void;
-};
+  onSubmit: (data: SignInFormUserInput) => void
+}
 
-export const SignInForm: FC<CreatePredictionFormProps> = (
-  { onSubmit },
-) => {
-  const { control, handleSubmit, formState: { errors, dirtyFields } } = useForm<
-    SignInFormUserInput
-  >({
+export const SignInForm: FC<CreatePredictionFormProps> = ({ onSubmit }) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, dirtyFields },
+  } = useForm<SignInFormUserInput>({
     defaultValues: {
-      email: "nick@mail.co",
-      password: "password",
+      email: 'nick@mail.co',
+      password: 'password',
     },
-  });
+  })
 
   const onValidSubmission = (data: SignInFormUserInput) => {
-    onSubmit(data);
-  };
+    onSubmit(data)
+  }
 
   const onInvalidSubmission: SubmitErrorHandler<SignInFormUserInput> = (
     errors,
   ) => {
-    console.error(errors);
-  };
+    console.error(errors)
+  }
 
-  const isButtonDisabled = Object.keys(errors).length > 0 ||
-    Object.keys(dirtyFields).length === 0;
+  const isButtonDisabled =
+    Object.keys(errors).length > 0 || Object.keys(dirtyFields).length === 0
 
   return (
     <View>
@@ -80,5 +80,5 @@ export const SignInForm: FC<CreatePredictionFormProps> = (
         disabled={isButtonDisabled}
       />
     </View>
-  );
-};
+  )
+}

@@ -1,38 +1,47 @@
-import { CreateQuestionType } from "@/types/question";
-import { FC } from "react";
+import { CreateQuestionType } from '@/types/question'
+import { FC, useEffect } from 'react'
 import {
   Controller,
   SubmitErrorHandler,
   SubmitHandler,
   useForm,
-} from "react-hook-form";
-import { Button, Text, View } from "react-native";
-import { TextInput } from "../../atoms";
+} from 'react-hook-form'
+import { View } from 'react-native'
+import { Button, Text, TextInput } from '../../atoms'
 
-type Inputs = Pick<CreateQuestionType, "text">;
+type Inputs = Pick<CreateQuestionType, 'text'>
 
 type CreateQuestionFormProps = {
-  onSubmit: SubmitHandler<Inputs>;
-};
-export const CreateQuestionForm: FC<CreateQuestionFormProps> = (
-  { onSubmit },
-) => {
-  const { control, handleSubmit, formState: { errors } } = useForm<Inputs>({
+  onSubmit: SubmitHandler<Inputs>
+}
+export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
+  onSubmit,
+}) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
     defaultValues: {
-      text: "",
+      text: '',
     },
-  });
+  })
 
   const onValidSubmission = (data: Inputs) => {
-    onSubmit(data);
-  };
+    console.log('valid submission', data)
+    onSubmit(data)
+  }
 
   const onInvalidSubmission: SubmitErrorHandler<Inputs> = (errors) => {
-    console.error(errors);
-  };
+    console.error(errors)
+  }
+
+  useEffect(() => {
+    console.log('CreateQuestionForm mounted')
+  }, [])
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Controller
         control={control}
         rules={{
@@ -55,5 +64,5 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = (
         onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}
       />
     </View>
-  );
-};
+  )
+}

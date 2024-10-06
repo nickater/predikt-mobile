@@ -1,50 +1,53 @@
-import { FC } from "react";
-import { StyleSheet } from "react-native";
+import { FC } from 'react'
+import { StyleSheet } from 'react-native'
 
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from 'react-native'
 
 type ButtonProps = {
-  title: string;
-  onPress: () => void;
-  type?: "primary" | "secondary" | "disabled";
-  disabled?: boolean;
-};
-export const Button: FC<ButtonProps> = (
-  { title, onPress, type = "primary", disabled = false },
-) => {
+  title: string
+  onPress: () => void
+  type?: 'primary' | 'secondary' | 'disabled'
+  disabled?: boolean
+}
+export const Button: FC<ButtonProps> = ({
+  title,
+  onPress,
+  type = 'primary',
+  disabled = false,
+}) => {
   const getButtonStyle = () => {
     if (disabled) {
-      return buttonStyles.disabledButton;
+      return buttonStyles.disabledButton
     }
 
     switch (type) {
-      case "primary":
-        return buttonStyles.primaryButton;
-      case "secondary":
-        return buttonStyles.secondaryButton;
-      case "disabled":
-        return buttonStyles.disabledButton;
+      case 'primary':
+        return buttonStyles.primaryButton
+      case 'secondary':
+        return buttonStyles.secondaryButton
+      case 'disabled':
+        return buttonStyles.disabledButton
       default:
-        return buttonStyles.primaryButton;
+        return buttonStyles.primaryButton
     }
-  };
+  }
 
   const getButtonTextStyle = () => {
     if (disabled) {
-      return buttonStyles.disabledButtonText;
+      return buttonStyles.disabledButtonText
     }
 
     switch (type) {
-      case "primary":
-        return buttonStyles.primaryButtonText;
-      case "secondary":
-        return buttonStyles.secondaryButtonText;
-      case "disabled":
-        return buttonStyles.disabledButtonText;
+      case 'primary':
+        return buttonStyles.primaryButtonText
+      case 'secondary':
+        return buttonStyles.secondaryButtonText
+      case 'disabled':
+        return buttonStyles.disabledButtonText
       default:
-        return buttonStyles.primaryButtonText;
+        return buttonStyles.primaryButtonText
     }
-  };
+  }
 
   return (
     <TouchableOpacity
@@ -54,42 +57,42 @@ export const Button: FC<ButtonProps> = (
     >
       <Text style={getButtonTextStyle()}>{title}</Text>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 const buttonStyles = StyleSheet.create({
   button: {
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginVertical: 10,
   },
   primaryButton: {
-    backgroundColor: "#007bff",
+    backgroundColor: '#007bff',
   },
   primaryButtonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   secondaryButton: {
-    backgroundColor: "#6c757d",
+    backgroundColor: '#6c757d',
   },
   secondaryButtonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   disabledButton: {
-    backgroundColor: "#d6d6d6",
+    backgroundColor: '#d6d6d6',
   },
   disabledButtonText: {
-    color: "#9e9e9e",
+    color: '#9e9e9e',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
-});
+})
 
-export default buttonStyles;
+export default buttonStyles

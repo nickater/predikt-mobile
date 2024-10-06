@@ -1,9 +1,9 @@
-import { Button, SignIn, SignUp } from "@/components";
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Button, SignIn, SignUp } from '@/components'
+import { useState } from 'react'
+import { View } from 'react-native'
 
 export default () => {
-  const [shouldShowRegistration, setShouldShowRegistration] = useState(false);
+  const [shouldShowRegistration, setShouldShowRegistration] = useState(false)
 
   return (
     <View
@@ -14,17 +14,15 @@ export default () => {
       <View
         style={{
           flexGrow: 1,
-          justifyContent: "center",
+          justifyContent: 'center',
         }}
       >
         {shouldShowRegistration ? <SignUp /> : <SignIn />}
         <Button
-          title={shouldShowRegistration ? "Sign In" : "Register"}
+          title={shouldShowRegistration ? 'Sign In' : 'Register'}
           onPress={() => setShouldShowRegistration(!shouldShowRegistration)}
         />
       </View>
     </View>
-  );
-};
-
-const styles = StyleSheet.create({});
+  )
+}

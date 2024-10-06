@@ -1,50 +1,46 @@
-import { FC } from "react";
-import { Controller, SubmitErrorHandler, useForm } from "react-hook-form";
-import { View } from "react-native";
-import { Button, Text, TextInput } from "../../../atoms";
-import { SignUpFormUserInput } from "./types";
+import { FC } from 'react'
+import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
+import { View } from 'react-native'
+import { Button, Text, TextInput } from '../../../atoms'
+import { SignUpFormUserInput } from './types'
 
 type SignUpFormProps = {
-  onSubmit: (data: SignUpFormUserInput) => void;
-};
+  onSubmit: (data: SignUpFormUserInput) => void
+}
 
-export const SignUpForm: FC<SignUpFormProps> = (
-  { onSubmit },
-) => {
+export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
   const {
     control,
     handleSubmit,
     formState: { errors, dirtyFields },
     setError,
-  } = useForm<
-    SignUpFormUserInput
-  >({
+  } = useForm<SignUpFormUserInput>({
     defaultValues: {
-      email: "nick@mail.co",
-      password: "password",
+      email: 'nick@mail.co',
+      password: 'password',
     },
-  });
+  })
 
   const onValidSubmission = (data: SignUpFormUserInput) => {
     if (data.password !== data.confirmPassword) {
-      setError("confirmPassword", {
-        type: "manual",
-        message: "Passwords do not match.",
-      });
-      return;
+      setError('confirmPassword', {
+        type: 'manual',
+        message: 'Passwords do not match.',
+      })
+      return
     }
 
-    onSubmit(data);
-  };
+    onSubmit(data)
+  }
 
   const onInvalidSubmission: SubmitErrorHandler<SignUpFormUserInput> = (
     errors,
   ) => {
-    console.error(errors);
-  };
+    console.error(errors)
+  }
 
-  const isButtonDisabled = Object.keys(errors).length > 0 ||
-    Object.keys(dirtyFields).length === 0;
+  const isButtonDisabled =
+    Object.keys(errors).length > 0 || Object.keys(dirtyFields).length === 0
 
   return (
     <View>
@@ -111,5 +107,5 @@ export const SignUpForm: FC<SignUpFormProps> = (
         disabled={isButtonDisabled}
       />
     </View>
-  );
-};
+  )
+}
