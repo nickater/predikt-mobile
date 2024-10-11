@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@/supabase'
 
-export function getQuestionById(client: SupabaseClient, questionId: number) {
+export function getQuestionById(client: SupabaseClient, questionId: string) {
   return client
     .from('questions')
     .select('*')

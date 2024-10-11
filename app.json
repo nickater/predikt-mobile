@@ -2,7 +2,7 @@
   "expo": {
     "name": "Predikt",
     "slug": "predikt-mobile",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "predikt",
@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "bundleIdentifier": "com.predikt.mobile"
+      "bundleIdentifier": "com.predikt.mobile",
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
@@ -21,11 +22,6 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.predikt.mobile"
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
     },
     "plugins": ["expo-router", "expo-font"],
     "experiments": {

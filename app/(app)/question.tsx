@@ -1,18 +1,19 @@
-import { CreateQuestion } from '@/components'
+import { CreateQuestion, CustomSafeAreaView, ViewQuestion } from '@/components'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 export default () => {
   return (
-    <View style={styles.container}>
+    <CustomSafeAreaView style={styles.container}>
+      <ViewQuestion />
       <CreateQuestion />
-    </View>
+    </CustomSafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f9f9f9',
     flex: 1,
+    justifyContent: 'space-between',
   },
 })

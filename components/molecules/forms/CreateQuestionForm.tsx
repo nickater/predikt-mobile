@@ -1,5 +1,5 @@
 import { CreateQuestionType } from '@/types/question'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import {
   Controller,
   SubmitErrorHandler,
@@ -9,7 +9,7 @@ import {
 import { View } from 'react-native'
 import { Button, Text, TextInput } from '../../atoms'
 
-type Inputs = Pick<CreateQuestionType, 'text'>
+type Inputs = Pick<CreateQuestionType, 'text' | 'is_public'>
 
 type CreateQuestionFormProps = {
   onSubmit: SubmitHandler<Inputs>
@@ -36,12 +36,8 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
     console.error(errors)
   }
 
-  useEffect(() => {
-    console.log('CreateQuestionForm mounted')
-  }, [])
-
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       <Controller
         control={control}
         rules={{

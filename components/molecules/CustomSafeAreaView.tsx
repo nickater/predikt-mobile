@@ -7,8 +7,8 @@ export const CustomSafeAreaView: FC<PropsWithChildren<SafeAreaViewProps>> = ({
   style,
 }) => {
   return (
-    <SafeAreaView style={[styles.safeArea, style]}>
-      <View style={styles.container}>{children}</View>
+    <SafeAreaView style={[styles.safeArea]}>
+      <View style={[styles.container, style]}>{children}</View>
     </SafeAreaView>
   )
 }
@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
   },
 })

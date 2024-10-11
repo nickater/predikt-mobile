@@ -1,6 +1,6 @@
 import { Text } from '@/components'
 import { useAuth } from '@/hooks/auth'
-import { Redirect, Stack } from 'expo-router'
+import { Redirect, Tabs } from 'expo-router'
 
 export default () => {
   const { session, loading } = useAuth()
@@ -13,23 +13,23 @@ export default () => {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen
+    <Tabs>
+      <Tabs.Screen
+        name="index"
+        options={{ headerShown: false, title: 'Home' }}
+      />
+      <Tabs.Screen
         name="question"
         options={{
-          presentation: 'modal',
           title: 'Question',
         }}
       />
-      <Stack.Screen
+      <Tabs.Screen
         name="prediction"
         options={{
-          presentation: 'modal',
-          // headerLargeTitle: true,
-          title: 'Prediction',
+          title: 'Account',
         }}
       />
-    </Stack>
+    </Tabs>
   )
 }

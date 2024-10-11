@@ -1,4 +1,3 @@
-import { CustomSafeAreaView } from '@/components'
 import { Providers } from '@/providers'
 import { supabase } from '@/supabase'
 import { Session } from '@supabase/supabase-js'
@@ -24,9 +23,5 @@ export default () => {
     }
   }, [])
 
-  return (
-    <CustomSafeAreaView>
-      <Providers>{session ? <Slot /> : <Auth />}</Providers>
-    </CustomSafeAreaView>
-  )
+  return <Providers>{session ? <Slot /> : <Auth />}</Providers>
 }

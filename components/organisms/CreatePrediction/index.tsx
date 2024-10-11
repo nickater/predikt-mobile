@@ -1,17 +1,16 @@
+import SelectableQuestions from '@/components/molecules/question/SelectableQuestions'
 import { useAuth } from '@/hooks/auth'
 import { useCreatePrediction } from '@/hooks/prediction/useCreatePrediction'
-import { FC } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { useFetchQuestionsByUser } from '@/hooks/question/useFetchQuestionsByUser'
+import { FC, useState } from 'react'
+import { StyleSheet, View } from 'react-native'
 import { CreatePredictionForm } from '../../molecules'
 import { CreatePredictionUserInput } from './types'
 
-type CreatePredictionProps = {
-  question_id: string
-}
-export const CreatePrediction: FC<CreatePredictionProps> = ({
-  question_id,
-}): React.JSX.Element => {
-  const { mutate } = useCreatePrediction()
+export const CreatePrediction: FC = (): React.JSX.Element => {
+  const [questionId, setQuestionId] = useState<string | null>(null)
+  const { mutate: createPrediction } = useCreatePrediction()
+  const { data: questions } = useFetchQuestionsByUser()
   const { session } = useAuth()
 
   const user = session?.user
@@ -20,18 +19,26 @@ export const CreatePrediction: FC<CreatePredictionProps> = ({
     text,
   }: CreatePredictionUserInput) => {
     if (!user) return
+    if (!questionId) return
 
-    mutate({
+    createPrediction({
       text,
       user_id: user?.id,
-      question_id,
+      question_id: questionId,
     })
   }
 
   return (
-    <View>
-      <Text>CreatePrediction</Text>
-
+    <View style={styles.container}>
+      {questions && (
+        <SelectableQuestions
+          questions={questions}
+          onSelect={(question) => {
+            console.log(question.id)
+            setQuestionId(question.id)
+          }}
+        />
+      )}
       <View style={styles.createPredictionFormContainer}>
         <CreatePredictionForm onSubmit={handleCreatePrediction} />
       </View>
@@ -40,8 +47,12 @@ export const CreatePrediction: FC<CreatePredictionProps> = ({
 }
 
 const styles = StyleSheet.create({
-  createPredictionFormContainer: {
-    padding: 20,
+  container: {
     backgroundColor: '#f9f9f9',
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  createPredictionFormContainer: {
+    // padding: 20,
   },
 })
