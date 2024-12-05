@@ -20,6 +20,7 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
@@ -28,8 +29,8 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
   })
 
   const onValidSubmission = (data: Inputs) => {
-    console.log('valid submission', data)
     onSubmit(data)
+    reset()
   }
 
   const onInvalidSubmission: SubmitErrorHandler<Inputs> = (errors) => {

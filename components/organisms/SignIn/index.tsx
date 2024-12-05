@@ -9,7 +9,7 @@ export const SignIn = () => {
   const { signIn } = useAuth()
 
   const handleOnSubmit = async (data: SignInUserInput) => {
-    await signIn(data)
+    signIn(data)
   }
 
   return (

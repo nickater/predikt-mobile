@@ -10,14 +10,18 @@ export const useAuth = () => {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session ?? null)
+      setSession(session)
+
       setLoading(false)
     })
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session ?? null)
-      setLoading(false)
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
     })
+
+    return () => subscription.unsubscribe()
   }, [])
 
   const signIn = useCallback(async (props: SignInProps) => {

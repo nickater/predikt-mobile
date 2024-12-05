@@ -48,7 +48,6 @@ export const CreatePrediction: FC = (): React.JSX.Element => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f9f9f9',
     flex: 1,
     justifyContent: 'space-between',
   },

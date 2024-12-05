@@ -1,6 +1,8 @@
 import { PostgrestError } from '@supabase/supabase-js'
 
 export function mapSupabaseError(error: PostgrestError): string {
+  console.log('error', error)
+
   switch (error.code) {
     case '23505':
       return 'Duplicate key violation'

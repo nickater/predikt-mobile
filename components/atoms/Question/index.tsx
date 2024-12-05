@@ -19,8 +19,6 @@ export default QuestionItem
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f9f9f9',
+    padding: 10,
   },
 })

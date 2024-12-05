@@ -1,8 +1,8 @@
 import { CreatePredictionType } from '@/types/prediction'
 import { FC } from 'react'
 import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
-import { Button, Text, View } from 'react-native'
-import { TextInput } from '../../atoms'
+import { View } from 'react-native'
+import { Button, Text, TextInput } from '../../atoms'
 
 type Inputs = Pick<CreatePredictionType, 'text'>
 

@@ -1,5 +1,12 @@
 {
-  "cSpell.words": ["Ionicons", "Postgrest", "predikt"],
-  "deno.enablePaths": ["supabase/functions"],
+  "cSpell.words": [
+    "Ionicons",
+    "Postgrest",
+    "predikt",
+    "supabase"
+  ],
+  "deno.enablePaths": [
+    "supabase/functions"
+  ],
   "deno.lint": true,
 }

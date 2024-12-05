@@ -9,11 +9,15 @@ export const ViewQuestion = (): React.JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <Text>ViewQuestions</Text>
+      <Text variant="header2" style={{ textAlign: 'center' }}>
+        Your Questions
+      </Text>
 
-      {data.map((question) => (
-        <Text key={question.id}>{question.text}</Text>
-      ))}
+      <View style={styles.questionSection}>
+        {data.map((question) => (
+          <Text key={question.id}>{question.text}</Text>
+        ))}
+      </View>
     </View>
   )
 }
@@ -21,5 +25,8 @@ export const ViewQuestion = (): React.JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     // padding: 20,
+  },
+  questionSection: {
+    paddingTop: 20,
   },
 })
