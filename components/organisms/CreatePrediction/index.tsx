@@ -30,15 +30,17 @@ export const CreatePrediction: FC = (): React.JSX.Element => {
 
   return (
     <View style={styles.container}>
-      {questions && (
-        <SelectableQuestions
-          questions={questions}
-          onSelect={(question) => {
-            console.log(question.id)
-            setQuestionId(question.id)
-          }}
-        />
-      )}
+      <View>
+        {questions && (
+          <SelectableQuestions
+            questions={questions}
+            onSelect={(question) => {
+              console.log(question.id)
+              setQuestionId(question.id)
+            }}
+          />
+        )}
+      </View>
       <View style={styles.createPredictionFormContainer}>
         <CreatePredictionForm onSubmit={handleCreatePrediction} />
       </View>

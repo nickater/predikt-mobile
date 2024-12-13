@@ -3,7 +3,7 @@ import Settings from '@/components/organisms/Settings'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
-export default () => {
+export default function Profile() {
   return (
     <CustomSafeAreaView style={styles.container}>
       <Settings />

@@ -1,5 +1,5 @@
 export const questionQueryKeys = {
+  publicQuestions: 'public-questions',
   userQuestions: 'user-questions',
-  questions: 'questions',
   question: 'question',
 } as const

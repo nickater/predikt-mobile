@@ -4,13 +4,13 @@ import { FontAwesome } from '@expo/vector-icons'
 import { Redirect, Tabs } from 'expo-router'
 
 export default function TabsLayout() {
-  const { session, loading, signOut } = useAuth()
+  const { session, loading } = useAuth()
 
   if (loading) {
     return <Text>Loading...</Text>
   }
 
-  if (!session?.user) {
+  if (!session) {
     return <Redirect href="/auth" />
   }
 
@@ -26,20 +26,29 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="questions"
+        name="create"
         options={{
-          title: 'Questions',
+          title: 'Create',
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="user" color={color} />
+            <FontAwesome size={28} name="plus" color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="myPredictions"
         options={{
-          title: 'Settings',
+          title: 'My Predictions',
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="cog" color={color} />
+            <FontAwesome size={28} name="question" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="user" color={color} />
           ),
         }}
       />

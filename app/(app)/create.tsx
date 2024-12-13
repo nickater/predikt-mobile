@@ -1,10 +1,11 @@
-import { CreateQuestion, CustomSafeAreaView, ViewQuestion } from '@/components'
+import { CreateQuestion, CustomSafeAreaView } from '@/components'
 import React from 'react'
+import { View } from 'react-native'
 
-export default () => {
+export default function Create() {
   return (
     <CustomSafeAreaView style={{ justifyContent: 'space-between' }}>
-      <ViewQuestion />
+      <View />
       <CreateQuestion />
     </CustomSafeAreaView>
   )

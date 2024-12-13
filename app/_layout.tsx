@@ -1,18 +1,11 @@
 import { Providers } from '@/providers'
-import { Stack } from 'expo-router/stack'
+import { Slot } from 'expo-router'
 import 'react-native-reanimated'
 
-export default () => {
+export default function App() {
   return (
     <Providers>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="auth" />
-      </Stack>
+      <Slot />
     </Providers>
   )
 }

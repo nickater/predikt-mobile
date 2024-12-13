@@ -1,5 +1,5 @@
 import { useAuth } from '@/hooks/auth'
-import React from 'react'
+import { router } from 'expo-router'
 import { View } from 'react-native'
 import { Text } from '../../atoms'
 import { SignInForm } from '../../molecules/forms/SignInForm/SignInForm'
@@ -9,7 +9,8 @@ export const SignIn = () => {
   const { signIn } = useAuth()
 
   const handleOnSubmit = async (data: SignInUserInput) => {
-    signIn(data)
+    await signIn(data)
+    router.replace('/')
   }
 
   return (

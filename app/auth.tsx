@@ -1,7 +1,7 @@
 import { Button, CustomSafeAreaView, SignIn, SignUp } from '@/components'
 import { useState } from 'react'
 
-export default () => {
+export default function Auth() {
   const [shouldShowRegistration, setShouldShowRegistration] = useState(false)
 
   return (

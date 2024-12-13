@@ -1,4 +1,5 @@
 import { useAuth } from '@/hooks/auth'
+import { router } from 'expo-router'
 import React from 'react'
 import { View } from 'react-native'
 import { Text } from '../../atoms'
@@ -9,6 +10,7 @@ export const SignUp = () => {
 
   const handleOnSubmit = async (data: SignUpFormUserInput) => {
     await signUp(data)
+    router.replace('/')
   }
 
   return (

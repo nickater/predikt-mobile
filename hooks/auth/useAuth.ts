@@ -24,7 +24,7 @@ export const useAuth = () => {
     return () => subscription.unsubscribe()
   }, [])
 
-  const signIn = useCallback(async (props: SignInProps) => {
+  const signIn = async (props: SignInProps) => {
     const { email, password } = props
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -32,7 +32,7 @@ export const useAuth = () => {
     })
 
     if (error) Alert.alert('Error', error.message)
-  }, [])
+  }
 
   const signUp = useCallback(async (props: SignUpProps) => {
     const { email, password, username } = props
