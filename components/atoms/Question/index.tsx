@@ -10,7 +10,7 @@ type QuestionItemProps = {
 const QuestionItem: FC<QuestionItemProps> = ({ question }) => {
   return (
     <View style={styles.container}>
-      <Text>{question.text}</Text>
+      <Text>{question.title}</Text>
     </View>
   )
 }

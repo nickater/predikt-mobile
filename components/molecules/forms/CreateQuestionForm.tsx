@@ -9,10 +9,13 @@ import {
 import { View } from 'react-native'
 import { Button, Text, TextInput } from '../../atoms'
 
-type Inputs = Pick<CreateQuestionType, 'visibility' | 'title' | 'description'>
+export type CreateQuestionFormInputsPick = Pick<
+  CreateQuestionType,
+  'visibility' | 'title' | 'description'
+>
 
-type CreateQuestionFormProps = {
-  onSubmit: SubmitHandler<Inputs>
+export type CreateQuestionFormProps = {
+  onSubmit: SubmitHandler<CreateQuestionFormInputsPick>
 }
 export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
   onSubmit,
@@ -22,7 +25,7 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<CreateQuestionFormInputsPick>({
     defaultValues: {
       visibility: 'public',
       title: '',
@@ -30,12 +33,14 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
     },
   })
 
-  const onValidSubmission = (data: Inputs) => {
+  const onValidSubmission = (data: CreateQuestionFormInputsPick) => {
     onSubmit(data)
     reset()
   }
 
-  const onInvalidSubmission: SubmitErrorHandler<Inputs> = (errors) => {
+  const onInvalidSubmission: SubmitErrorHandler<
+    CreateQuestionFormInputsPick
+  > = (errors) => {
     console.error(errors)
   }
 

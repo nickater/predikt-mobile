@@ -9,6 +9,8 @@ export function useFetchQuestionsByUser() {
   const { session } = useAuth()
   const userId = session?.user.id
 
+  console.log('userId', userId)
+
   const queryKey = [questionQueryKeys.userQuestions, userId]
 
   const queryFn = async () => {

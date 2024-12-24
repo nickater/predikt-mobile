@@ -5,7 +5,7 @@ import { useFetchQuestionsByUser } from '@/hooks/question/useFetchQuestionsByUse
 import { FC, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { CreatePredictionForm } from '../../molecules'
-import { CreatePredictionUserInput } from './types'
+import { CreatePredictionFormInputs } from '@/components/molecules/forms/CreatePredictionForm'
 
 export const CreatePrediction: FC = (): React.JSX.Element => {
   const [questionId, setQuestionId] = useState<string | null>(null)
@@ -16,13 +16,13 @@ export const CreatePrediction: FC = (): React.JSX.Element => {
   const user = session?.user
 
   const handleCreatePrediction = async ({
-    text,
-  }: CreatePredictionUserInput) => {
+    prediction,
+  }: CreatePredictionFormInputs) => {
     if (!user) return
     if (!questionId) return
 
     createPrediction({
-      text,
+      prediction,
       user_id: user?.id,
       question_id: questionId,
     })

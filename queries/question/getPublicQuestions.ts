@@ -7,7 +7,7 @@ export async function getPublicQuestions(
   return client
     .from('questions')
     .select('*')
-    .eq('is_public', true)
+    .eq('visibility', 'public')
     .throwOnError()
     .then((response) => response.data || [])
 }

@@ -11,7 +11,7 @@ export const ViewQuestions = (): React.JSX.Element => {
     <View style={styles.container}>
       <View style={styles.questionSection}>
         {data.map((question) => (
-          <Text key={question.id}>{question.text}</Text>
+          <Text key={question.id}>{question.title}</Text>
         ))}
       </View>
     </View>

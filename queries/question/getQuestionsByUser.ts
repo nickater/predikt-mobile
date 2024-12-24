@@ -8,7 +8,11 @@ export async function getQuestionByUser(
   return client
     .from('questions')
     .select('*')
-    .eq('user_id', userId)
+    .eq('author_id', userId)
     .throwOnError()
-    .then((response) => response.data || [])
+    .then((response) => {
+      console.log('response', response)
+
+      return response.data || []
+    })
 }

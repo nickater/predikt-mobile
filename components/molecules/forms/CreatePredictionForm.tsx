@@ -4,10 +4,13 @@ import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
 import { View } from 'react-native'
 import { Button, Text, TextInput } from '../../atoms'
 
-type Inputs = Pick<CreatePredictionType, 'text'>
+export type CreatePredictionFormInputs = Pick<
+  CreatePredictionType,
+  'prediction'
+>
 
 type CreatePredictionFormProps = {
-  onSubmit: (data: Inputs) => void
+  onSubmit: (data: CreatePredictionFormInputs) => void
 }
 
 export const CreatePredictionForm: FC<CreatePredictionFormProps> = ({
@@ -17,17 +20,19 @@ export const CreatePredictionForm: FC<CreatePredictionFormProps> = ({
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<CreatePredictionFormInputs>({
     defaultValues: {
-      text: '',
+      prediction: '',
     },
   })
 
-  const onValidSubmission = (data: Inputs) => {
+  const onValidSubmission = (data: CreatePredictionFormInputs) => {
     onSubmit(data)
   }
 
-  const onInvalidSubmission: SubmitErrorHandler<Inputs> = (errors) => {
+  const onInvalidSubmission: SubmitErrorHandler<CreatePredictionFormInputs> = (
+    errors,
+  ) => {
     console.error(errors)
   }
 
@@ -46,9 +51,9 @@ export const CreatePredictionForm: FC<CreatePredictionFormProps> = ({
             value={value}
           />
         )}
-        name="text"
+        name="prediction"
       />
-      {errors.text && <Text>This is required.</Text>}
+      {errors.prediction && <Text>This is required.</Text>}
 
       <Button
         title="Submit"

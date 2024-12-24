@@ -5,5 +5,5 @@ export function createQuestion(
   client: SupabaseClient,
   question: CreateQuestionType,
 ) {
-  return client.from('questions').insert([question]).throwOnError().select()
+  return client.from('questions').upsert(question).throwOnError().select()
 }

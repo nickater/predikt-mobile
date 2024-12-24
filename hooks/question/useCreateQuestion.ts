@@ -25,7 +25,10 @@ export function useCreateQuestion() {
 
   const onSuccess = () => {
     queryClient.invalidateQueries({
-      queryKey: [questionQueryKeys.userQuestions],
+      queryKey: [
+        questionQueryKeys.userQuestions,
+        questionQueryKeys.publicQuestions,
+      ],
     })
   }
 
