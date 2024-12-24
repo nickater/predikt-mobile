@@ -1,16 +1,17 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createClient } from '@supabase/supabase-js'
-import { Database } from './types/supabase'
+import { Database } from './types/database.types'
 
-// eslint-disable-next-line expo/no-env-var-destructuring
-const { EXPO_PUBLIC_SUPABASE_URL, EXPO_PUBLIC_SUPABASE_ANON_KEY } = process.env
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY
 
-if (!EXPO_PUBLIC_SUPABASE_URL || !EXPO_PUBLIC_SUPABASE_ANON_KEY) {
-  throw new Error('Missing env vars')
+if (!supabaseUrl) {
+  throw new Error('Missing env.EXPO_PUBLIC_SUPABASE_URL')
 }
 
-const supabaseUrl = EXPO_PUBLIC_SUPABASE_URL
-const supabaseAnonKey = EXPO_PUBLIC_SUPABASE_ANON_KEY
+if (!supabaseAnonKey) {
+  throw new Error('Missing env.EXPO_PUBLIC_SUPABASE_ANON_KEY')
+}
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {

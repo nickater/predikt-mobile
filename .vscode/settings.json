@@ -1,13 +1,39 @@
 {
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
   "cSpell.words": [
+    "bunx",
+    "hhtgeiunnaxqkoausmnw",
     "Ionicons",
+    "netinfo",
     "Postgrest",
     "predikt",
-    "supabase"
+    "supabase",
+    "uidotdev",
+    "usehooks"
   ],
   "deno.enablePaths": [
     "supabase/functions"
   ],
   "deno.lint": true,
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "deno.unstable": [
+    "bare-node-builtins",
+    "byonm",
+    "sloppy-imports",
+    "unsafe-proto",
+    "webgpu",
+    "broadcast-channel",
+    "worker-options",
+    "cron",
+    "kv",
+    "ffi",
+    "fs",
+    "http",
+    "net"
+  ],
+  "editor.formatOnSave": true,
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.format.enable": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

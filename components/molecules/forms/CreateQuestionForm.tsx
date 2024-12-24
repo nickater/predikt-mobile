@@ -9,7 +9,7 @@ import {
 import { View } from 'react-native'
 import { Button, Text, TextInput } from '../../atoms'
 
-type Inputs = Pick<CreateQuestionType, 'text' | 'is_public'>
+type Inputs = Pick<CreateQuestionType, 'text' | 'is_public' >
 
 type CreateQuestionFormProps = {
   onSubmit: SubmitHandler<Inputs>
@@ -25,6 +25,7 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
   } = useForm<Inputs>({
     defaultValues: {
       text: '',
+      
     },
   })
 
@@ -62,4 +63,24 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
       />
     </View>
   )
+}
+
+// New question form with:
+// Question text
+// Deadline picker
+// Privacy settings
+// Public
+// Private (invite only)
+// Friends only
+// Optional evidence/context
+// Result validation method
+
+// create a type from this form
+
+type CreateQuestionFormInputs = {
+  text: string
+  deadline: Date
+  is_public: boolean
+  evidence: string
+  result_validation_method: string
 }

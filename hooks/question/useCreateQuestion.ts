@@ -29,6 +29,5 @@ export function useCreateQuestion() {
     })
   }
 
-  console.log('useCreateQuestion')
   return useMutation({ mutationFn, onError, onSuccess })
 }
