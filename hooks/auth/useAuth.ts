@@ -44,7 +44,7 @@ export const useAuth = () => {
     if (error) Alert.alert('Error', error.message)
 
     const { error: updateError } = await supabase
-      .from('user_profiles')
+      .from('profiles')
       .update({ username })
       .match({ email })
 
