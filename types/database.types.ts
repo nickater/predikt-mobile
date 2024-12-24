@@ -71,11 +71,11 @@ export type Database = {
             referencedColumns: ['id']
           },
           {
-            foreignKeyName: 'predictions_user_id_fkey1'
+            foreignKeyName: 'predictions_user_id_fkey'
             columns: ['user_id']
             isOneToOne: false
             referencedRelation: 'user_profiles'
-            referencedColumns: ['user_id']
+            referencedColumns: ['id']
           },
         ]
       }
@@ -121,32 +121,11 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: 'questions_author_id_fkey1'
+            foreignKeyName: 'questions_author_id_fkey'
             columns: ['author_id']
             isOneToOne: false
             referencedRelation: 'user_profiles'
-            referencedColumns: ['user_id']
-          },
-          {
-            foreignKeyName: 'questions_author_id_fkey2'
-            columns: ['author_id']
-            isOneToOne: false
-            referencedRelation: 'user_profiles'
-            referencedColumns: ['user_id']
-          },
-          {
-            foreignKeyName: 'questions_author_id_fkey3'
-            columns: ['author_id']
-            isOneToOne: false
-            referencedRelation: 'user_profiles'
-            referencedColumns: ['user_id']
-          },
-          {
-            foreignKeyName: 'questions_author_id_fkey4'
-            columns: ['author_id']
-            isOneToOne: false
-            referencedRelation: 'user_profiles'
-            referencedColumns: ['user_id']
+            referencedColumns: ['id']
           },
         ]
       }
@@ -156,9 +135,9 @@ export type Database = {
           correct_predictions: number | null
           created_at: string | null
           display_name: string | null
+          id: string
           prediction_count: number | null
           updated_at: string | null
-          user_id: string
           username: string
         }
         Insert: {
@@ -166,9 +145,9 @@ export type Database = {
           correct_predictions?: number | null
           created_at?: string | null
           display_name?: string | null
+          id: string
           prediction_count?: number | null
           updated_at?: string | null
-          user_id: string
           username: string
         }
         Update: {
@@ -176,9 +155,9 @@ export type Database = {
           correct_predictions?: number | null
           created_at?: string | null
           display_name?: string | null
+          id?: string
           prediction_count?: number | null
           updated_at?: string | null
-          user_id?: string
           username?: string
         }
         Relationships: []
@@ -213,17 +192,6 @@ export type Database = {
       }
     }
     Enums: {
-      moderation_status: 'approved' | 'pending' | 'rejected'
-      notification_type:
-        | 'prediction_result'
-        | 'achievement_earned'
-        | 'question_deadline'
-      prediction_status:
-        | 'pending'
-        | 'correct'
-        | 'incorrect'
-        | 'partially_correct'
-      resolution_type: 'manual' | 'automatic' | 'community'
       visibility_type: 'public' | 'private' | 'friends'
     }
     CompositeTypes: {

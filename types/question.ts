@@ -1,6 +1,5 @@
 import { z } from 'zod'
 import { CreateQuestion, Question, UpdateQuestion } from './entities'
-import { QuestionVisibilitySchema as questionVisibilitySchema } from './questionVisibility'
 
 export const questionSchema: z.ZodType<Question> = z.object({
   id: z.string(),
@@ -14,7 +13,9 @@ export const questionSchema: z.ZodType<Question> = z.object({
   last_activity_at: z.string().nullable(),
   last_updated_at: z.string().nullable(),
   show_prediction_count: z.boolean().nullable(),
-  visibility: questionVisibilitySchema,
+  total_predictions: z.number().nullable(),
+  view_count: z.number().nullable(),
+  visibility: z.enum(['public', 'private', 'friends']),
 })
 
 export type QuestionType = z.infer<typeof questionSchema>
@@ -27,7 +28,7 @@ export const createQuestionSchema: z.ZodType<CreateQuestion> = z.object({
   deadline: z.string(),
   is_active: z.boolean().nullable(),
   show_prediction_count: z.boolean().nullable(),
-  visibility: questionVisibilitySchema,
+  visibility: z.enum(['public', 'private', 'friends']),
 })
 
 export type CreateQuestionType = z.infer<typeof createQuestionSchema>
@@ -39,7 +40,7 @@ const updateQuestionSchema: z.ZodType<UpdateQuestion> = z.object({
   deadline: z.string().optional(),
   is_active: z.boolean().nullable().optional(),
   show_prediction_count: z.boolean().nullable().optional(),
-  visibility: questionVisibilitySchema.optional(),
+  visibility: z.enum(['public', 'private', 'friends']).optional(),
 })
 
 export type UpdateQuestionType = z.infer<typeof updateQuestionSchema>

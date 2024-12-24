@@ -1,6 +1,6 @@
 {
   "[typescript]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "cSpell.words": [
     "bunx",

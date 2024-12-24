@@ -9,7 +9,7 @@ import {
 import { View } from 'react-native'
 import { Button, Text, TextInput } from '../../atoms'
 
-type Inputs = Pick<CreateQuestionType, 'text' | 'is_public' >
+type Inputs = Pick<CreateQuestionType, 'visibility' | 'title' | 'description'>
 
 type CreateQuestionFormProps = {
   onSubmit: SubmitHandler<Inputs>
@@ -24,8 +24,9 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
-      text: '',
-      
+      visibility: 'public',
+      title: '',
+      description: '',
     },
   })
 
@@ -53,9 +54,9 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
             value={value}
           />
         )}
-        name="text"
+        name="title"
       />
-      {errors.text && <Text>This field is required.</Text>}
+      {errors.title && <Text>This field is required.</Text>}
 
       <Button
         title="Submit"
