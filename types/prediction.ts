@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { Prediction, CreatePrediction, UpdatePrediction } from './entities'
+import type { Prediction, CreatePrediction, UpdatePrediction } from './entities'
 
 export const predictionSchema: z.ZodType<Prediction> = z.object({
   id: z.string(),

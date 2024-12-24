@@ -64,56 +64,83 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: 'predictions_question_id_fkey'
+            foreignKeyName: 'fk_question'
             columns: ['question_id']
             isOneToOne: false
             referencedRelation: 'questions'
             referencedColumns: ['id']
           },
           {
-            foreignKeyName: 'predictions_user_id_fkey'
+            foreignKeyName: 'fk_user'
             columns: ['user_id']
             isOneToOne: false
-            referencedRelation: 'user_profiles'
+            referencedRelation: 'profiles'
             referencedColumns: ['id']
           },
         ]
       }
+      profiles: {
+        Row: {
+          id: string
+          updated_at: string | null
+          username: string | null
+        }
+        Insert: {
+          id: string
+          updated_at?: string | null
+          username?: string | null
+        }
+        Update: {
+          id?: string
+          updated_at?: string | null
+          username?: string | null
+        }
+        Relationships: []
+      }
       questions: {
         Row: {
+          allow_anonymous_predictions: boolean | null
           author_id: string
           created_at: string | null
           deadline: string
           description: string | null
           id: string
           is_active: boolean | null
+          last_activity_at: string | null
           last_updated_at: string | null
+          show_prediction_count: boolean | null
           title: string
           total_predictions: number | null
           view_count: number | null
           visibility: Database['public']['Enums']['visibility_type']
         }
         Insert: {
+          allow_anonymous_predictions?: boolean | null
           author_id: string
           created_at?: string | null
           deadline: string
           description?: string | null
           id?: string
           is_active?: boolean | null
+          last_activity_at?: string | null
           last_updated_at?: string | null
+          show_prediction_count?: boolean | null
           title: string
           total_predictions?: number | null
           view_count?: number | null
-          visibility?: Database['public']['Enums']['visibility_type']
+          visibility: Database['public']['Enums']['visibility_type']
         }
         Update: {
+          allow_anonymous_predictions?: boolean | null
           author_id?: string
           created_at?: string | null
           deadline?: string
           description?: string | null
           id?: string
           is_active?: boolean | null
+          last_activity_at?: string | null
           last_updated_at?: string | null
+          show_prediction_count?: boolean | null
           title?: string
           total_predictions?: number | null
           view_count?: number | null
@@ -121,75 +148,20 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: 'questions_author_id_fkey'
+            foreignKeyName: 'fk_author'
             columns: ['author_id']
             isOneToOne: false
-            referencedRelation: 'user_profiles'
+            referencedRelation: 'profiles'
             referencedColumns: ['id']
           },
         ]
-      }
-      user_profiles: {
-        Row: {
-          accuracy_score: number | null
-          correct_predictions: number | null
-          created_at: string | null
-          display_name: string | null
-          id: string
-          prediction_count: number | null
-          updated_at: string | null
-          username: string
-        }
-        Insert: {
-          accuracy_score?: number | null
-          correct_predictions?: number | null
-          created_at?: string | null
-          display_name?: string | null
-          id: string
-          prediction_count?: number | null
-          updated_at?: string | null
-          username: string
-        }
-        Update: {
-          accuracy_score?: number | null
-          correct_predictions?: number | null
-          created_at?: string | null
-          display_name?: string | null
-          id?: string
-          prediction_count?: number | null
-          updated_at?: string | null
-          username?: string
-        }
-        Relationships: []
       }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      calculate_trending_score: {
-        Args: {
-          views: number
-          predictions: number
-          shares: number
-          created_at: string
-        }
-        Returns: number
-      }
-      update_user_prediction_stats: {
-        Args: {
-          user_id: string
-          is_correct: boolean
-        }
-        Returns: undefined
-      }
-      update_user_reputation: {
-        Args: {
-          user_id: string
-          points: number
-        }
-        Returns: undefined
-      }
+      [_ in never]: never
     }
     Enums: {
       visibility_type: 'public' | 'private' | 'friends'

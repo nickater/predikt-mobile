@@ -4,7 +4,7 @@ import { QuestionType } from '@/types/question'
 import * as React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-interface HomeFeedProps {}
+type HomeFeedProps = {}
 
 const HomeFeed = (props: HomeFeedProps) => {
   const { data, error, isLoading } = useFetchPublicQuestions()
