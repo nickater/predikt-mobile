@@ -6,6 +6,7 @@ import { FC, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { CreatePredictionForm } from '../../molecules'
 import { CreatePredictionFormInputs } from '@/components/molecules/forms/CreatePredictionForm'
+import { QuestionType } from '@/types/question'
 
 export const CreatePrediction: FC = (): React.JSX.Element => {
   const [questionId, setQuestionId] = useState<string | null>(null)
@@ -28,16 +29,17 @@ export const CreatePrediction: FC = (): React.JSX.Element => {
     })
   }
 
+  const handleSelectQuestion = (question: QuestionType) => {
+    setQuestionId(question.id)
+  }
+
   return (
     <View style={styles.container}>
       <View>
         {questions && (
           <SelectableQuestions
             questions={questions}
-            onSelect={(question) => {
-              console.log(question.id)
-              setQuestionId(question.id)
-            }}
+            onSelect={handleSelectQuestion}
           />
         )}
       </View>

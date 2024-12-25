@@ -1,30 +1,23 @@
-import { z } from 'zod'
-import type { Prediction, CreatePrediction, UpdatePrediction } from './entities'
+import {
+  predictionsRowSchema,
+  predictionsInsertSchema,
+  predictionsRelationshipsSchema,
+  predictionsUpdateSchema,
+} from './schemas'
 
-export const predictionSchema: z.ZodType<Prediction> = z.object({
-  id: z.string(),
-  user_id: z.string(),
-  question_id: z.string(),
-  prediction: z.string(),
-  created_at: z.string().nullable(),
-  updated_at: z.string().nullable(),
-  is_anonymous: z.boolean().nullable(),
-})
+export const predictionSchema = predictionsRowSchema
 
-export type PredictionType = z.infer<typeof predictionSchema>
+export type PredictionType = (typeof predictionSchema)['_output']
 
-export const createPredictionSchema: z.ZodType<CreatePrediction> = z.object({
-  user_id: z.string(),
-  question_id: z.string(),
-  prediction: z.string(),
-  is_anonymous: z.boolean().nullable(),
-})
+export const createPredictionSchema = predictionsInsertSchema
 
-export type CreatePredictionType = z.infer<typeof createPredictionSchema>
+export type CreatePredictionType = (typeof createPredictionSchema)['_output']
 
-export const updatePredictionSchema: z.ZodType<UpdatePrediction> = z.object({
-  prediction: z.string().optional(),
-  is_anonymous: z.boolean().nullable().optional(),
-})
+export const updatePredictionSchema = predictionsUpdateSchema
 
-export type UpdatePredictionType = z.infer<typeof updatePredictionSchema>
+export type UpdatePredictionType = (typeof updatePredictionSchema)['_output']
+
+export const predictionRelationshipsSchema = predictionsRelationshipsSchema
+
+export type PredictionRelationshipsType =
+  (typeof predictionRelationshipsSchema)['_output']

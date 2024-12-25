@@ -6,7 +6,7 @@ import {
   CreateQuestionForm,
   CreateQuestionFormInputsPick,
 } from '@/components/molecules/forms/CreateQuestionForm'
-import { CreateQuestion as CreateQuestionEntity } from '@/types/entities'
+import { CreateQuestionType } from '@/types/question'
 
 export const CreateQuestion = (): React.JSX.Element => {
   const { mutate } = useCreateQuestion()
@@ -14,7 +14,7 @@ export const CreateQuestion = (): React.JSX.Element => {
 
   const user = session?.user
 
-  const defaultQuestion: CreateQuestionEntity = {
+  const defaultQuestion: CreateQuestionType = {
     author_id: '',
     deadline: '',
     allow_anonymous_predictions: false,

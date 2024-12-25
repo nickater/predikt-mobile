@@ -1,15 +1,23 @@
-import z from 'zod'
-import { UserProfile, UpdateUserProfile } from './entities'
+import {
+  profilesRowSchema,
+  profilesInsertSchema,
+  profilesRelationshipsSchema,
+  profilesUpdateSchema,
+} from './schemas'
 
-export const UserProfileSchema: z.ZodType<UserProfile> = z.object({
-  id: z.string(),
-  created_at: z.string().nullable(),
-  updated_at: z.string().nullable(),
-  username: z.string(),
-})
+export const profileSchema = profilesRowSchema
 
-export type UserProfileType = z.infer<typeof UserProfileSchema>
+export type ProfileType = (typeof profileSchema)['_output']
 
-export const UpdateUserProfileSchema: z.ZodType<UpdateUserProfile> = z.object({
-  username: z.string().optional(),
-})
+export const createProfileSchema = profilesInsertSchema
+
+export type CreateProfileType = (typeof createProfileSchema)['_output']
+
+export const updateProfileSchema = profilesUpdateSchema
+
+export type UpdateProfileType = (typeof updateProfileSchema)['_output']
+
+export const profileRelationshipsSchema = profilesRelationshipsSchema
+
+export type ProfileRelationshipsType =
+  (typeof profileRelationshipsSchema)['_output']

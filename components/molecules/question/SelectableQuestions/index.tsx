@@ -1,7 +1,6 @@
-import QuestionItem from '@/components/atoms/Question'
 import { QuestionType } from '@/types/question'
 import React, { FC, useState } from 'react'
-import { Pressable, StyleSheet, View } from 'react-native'
+import { FlatList, Pressable, StyleSheet, View } from 'react-native'
 
 type SelectableQuestionsProps = {
   questions: QuestionType[]
@@ -21,18 +20,24 @@ const SelectableQuestions: FC<SelectableQuestionsProps> = ({
   }
 
   return (
-    <View>
-      {questions.map((question) => (
-        <Pressable onPress={handleSelect(question)} key={question.id}>
-          <View
-            key={question.id}
-            style={selectedQuestion === question.id ? styles.selected : {}}
-          >
-            <QuestionItem question={question} />
+    <FlatList
+      data={questions}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item: question }) => (
+        <Pressable onPress={handleSelect(question)}>
+          <View style={selectedQuestion === question.id ? styles.selected : {}}>
+            {/* <QuestionItem question={question} /> */}
+            {/* <QuestionCard
+              title={question.title}
+              deadline={question.deadline}
+              predictionCount={question.prediction_count}
+              author={question.author}
+              timeRemaining={question.time_remaining}
+            /> */}
           </View>
         </Pressable>
-      ))}
-    </View>
+      )}
+    />
   )
 }
 

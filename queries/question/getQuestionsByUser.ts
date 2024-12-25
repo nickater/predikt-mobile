@@ -10,9 +10,5 @@ export async function getQuestionByUser(
     .select('*')
     .eq('author_id', userId)
     .throwOnError()
-    .then((response) => {
-      console.log('response', response)
-
-      return response.data || []
-    })
+    .then((response) => response.data || [])
 }

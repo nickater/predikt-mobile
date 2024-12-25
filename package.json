@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "types:update": "bunx supabase gen types --lang=typescript --project-id 'hhtgeiunnaxqkoausmnw' --schema public > types/supabase.ts"
+    "types:update": "supabase gen types typescript --linked > types/database.types.ts && supabase-to-zod --input types/database.types.ts --output types/schemas.ts"
   },
   "jest": {
     "preset": "jest-expo"
@@ -45,6 +45,7 @@
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
+    "supabase-to-zod": "^1.0.7",
     "zod": "^3.23.8"
   },
   "devDependencies": {
