@@ -1,6 +1,6 @@
 import { useAuth } from '@/hooks/auth'
 import { useCreateQuestion } from '@/hooks/question/useCreateQuestion'
-import { StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 
 import {
   CreateQuestionForm,
@@ -35,22 +35,30 @@ export const CreateQuestion = (): React.JSX.Element => {
     const question = {
       ...defaultQuestion,
       title: input.title,
+      description: input.description,
+      visibility: input.visibility,
+      allow_anonymous_predictions: input.allow_anonymous_predictions,
       author_id: user.id,
-      deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+      deadline: new Date(input.deadline).toISOString(),
     }
 
-    await mutate(question)
+    mutate(question)
   }
 
   return (
-    <View style={styles.createQuestionFormContainer}>
+    <ScrollView
+      style={styles.createQuestionFormContainer}
+      keyboardShouldPersistTaps="handled"
+      showsVerticalScrollIndicator={false}
+    >
       <CreateQuestionForm onSubmit={handleCreateQuestion} />
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   createQuestionFormContainer: {
     // padding: 20,
+    // flex: 1,
   },
 })

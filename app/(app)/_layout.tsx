@@ -17,7 +17,7 @@ export default function TabsLayout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: 'blue', headerShown: false }}>
       <Tabs.Screen
-        name="index"
+        name="(home)"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => (
@@ -26,7 +26,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="create"
+        name="(question)"
         options={{
           title: 'Create',
           tabBarIcon: ({ color }) => (
@@ -35,7 +35,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="myPredictions"
+        name="(predictions)"
         options={{
           title: 'My Predictions',
           tabBarIcon: ({ color }) => (
@@ -44,7 +44,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="(profile)"
         options={{
           title: 'Profile',
           tabBarIcon: ({ color }) => (
