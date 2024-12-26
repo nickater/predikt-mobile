@@ -7,7 +7,7 @@ interface QuestionDetailLayoutProps {}
 
 const QuestionDetailLayout = (props: QuestionDetailLayoutProps) => {
   return (
-    <Stack>
+    <Stack screenOptions={{ headerTitle: 'Question Detail' }}>
       <Stack.Screen
         name="[id]"
         options={{

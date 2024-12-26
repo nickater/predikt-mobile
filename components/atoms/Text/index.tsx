@@ -1,22 +1,11 @@
 import { FC, PropsWithChildren } from 'react'
 import { StyleSheet, Text as RNText, TextProps } from 'react-native'
-
-type TextVariant =
-  | 'header1'
-  | 'header2'
-  | 'paragraph'
-  | 'caption'
-  | 'link'
-  | 'highlighted'
-  | 'bold'
-  | 'italic'
-  | 'small'
-  | 'large'
-
-type Position = 'left' | 'center' | 'right'
+import { TextPosition, TextVariant } from './types'
 
 export const Text: FC<
-  PropsWithChildren<TextProps & { variant?: TextVariant; position?: Position }>
+  PropsWithChildren<
+    TextProps & { variant?: TextVariant; position?: TextPosition }
+  >
 > = ({ variant, position, children, ...props }) => {
   return (
     <RNText

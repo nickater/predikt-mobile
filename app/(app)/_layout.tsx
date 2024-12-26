@@ -1,10 +1,12 @@
 import { Text } from '@/components'
 import { useAuth } from '@/hooks/auth'
+import { useThemeColor } from '@/hooks/useThemeColor'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import { Redirect, Tabs } from 'expo-router'
 
 export default function TabsLayout() {
   const { session, loading } = useAuth()
+  const { tabIconDefault, tabIconSelected } = useThemeColor()
 
   if (loading) {
     return <Text>Loading...</Text>
@@ -15,16 +17,13 @@ export default function TabsLayout() {
   }
 
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue', headerShown: false }}>
-      <Tabs.Screen
-        name="(home)"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="home" color={color} />
-          ),
-        }}
-      />
+    <Tabs
+      screenOptions={{
+        tabBarInactiveTintColor: tabIconDefault,
+        tabBarActiveTintColor: tabIconSelected,
+        headerShown: false,
+      }}
+    >
       <Tabs.Screen
         name="(question)"
         options={{

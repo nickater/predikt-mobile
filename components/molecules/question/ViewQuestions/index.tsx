@@ -1,25 +1,41 @@
-import { FC } from 'react'
-import { StyleSheet } from 'react-native'
+import { FC, useState } from 'react'
+import { StyleSheet, View } from 'react-native'
 import { PublicQuestions } from '../PublicQuestions'
 import { UserQuestions } from '../UserQuestions'
+import { ButtonBar } from '@/components/atoms/ButtonBar'
 
 type ViewQuestionsProps = {
-  filter?: 'public' | 'private'
   onQuestionPress: (questionId: string) => void
 }
 export const ViewQuestions: FC<ViewQuestionsProps> = ({
-  filter = 'public',
   onQuestionPress,
 }): React.JSX.Element => {
+  const [filter, setFilter] = useState<'public' | 'private'>('public')
+
   const handleQuestionPress = (questionId: string) => {
     onQuestionPress(questionId)
   }
 
-  if (filter === 'public') {
-    return <PublicQuestions onSelect={handleQuestionPress} />
+  const handleFilterPress = (filter: 'public' | 'private') => {
+    return () => setFilter(filter)
   }
 
-  return <UserQuestions onSelect={handleQuestionPress} />
+  const questionMap = {
+    public: <PublicQuestions onSelect={handleQuestionPress} />,
+    private: <UserQuestions onSelect={handleQuestionPress} />,
+  }
+
+  return (
+    <View>
+      <ButtonBar
+        buttonProps={[
+          { text: 'Public', onPress: handleFilterPress('public') },
+          { text: 'Private', onPress: handleFilterPress('private') },
+        ]}
+      />
+      {questionMap[filter]}
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

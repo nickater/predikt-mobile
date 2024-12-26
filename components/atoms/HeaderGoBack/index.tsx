@@ -1,18 +1,17 @@
 import { useNavigation } from 'expo-router'
-import { Text, View, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { Text } from '../Text'
 
 const GoBackButton = () => {
   const navigation = useNavigation()
 
+  const handleGoBack = () => {
+    navigation.goBack()
+  }
+
   return (
     <View style={styles.container}>
-      <Text
-        onPress={() => {
-          navigation.goBack()
-        }}
-      >
-        Back
-      </Text>
+      <Text onPress={handleGoBack}>Back</Text>
     </View>
   )
 }
@@ -20,5 +19,7 @@ const GoBackButton = () => {
 export default GoBackButton
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingLeft: 16,
+  },
 })
