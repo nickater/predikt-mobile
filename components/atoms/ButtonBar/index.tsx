@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
-import { Text } from '../Text'
+import { StyleSheet, View } from 'react-native'
+import { Button } from '../Button'
 
 interface ButtonBarProps {
   buttonProps: {
@@ -13,15 +13,12 @@ export const ButtonBar: FC<ButtonBarProps> = ({ buttonProps }) => {
   return (
     <View style={styles.container}>
       {buttonProps.map((buttonProp, index) => (
-        <TouchableOpacity
+        <Button
+          type="ghost"
           key={index}
-          style={styles.button}
+          title={buttonProp.text}
           onPress={buttonProp.onPress}
-        >
-          <Text position="center" variant="bold">
-            {buttonProp.text}
-          </Text>
-        </TouchableOpacity>
+        />
       ))}
     </View>
   )
@@ -31,10 +28,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     gap: 10,
+    justifyContent: 'space-between',
   },
   button: {
     padding: 10,
-    backgroundColor: 'lightblue',
     borderRadius: 5,
     flex: 1,
   },

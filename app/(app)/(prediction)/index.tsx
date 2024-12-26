@@ -1,9 +1,9 @@
 import { CustomSafeAreaView } from '@/components/molecules/CustomSafeAreaView'
 import { UserPredictions } from '@/components/molecules/prediction/UserPredictions'
 
-export default function MyPredictions() {
+export default function PredictionDefault() {
   return (
-    <CustomSafeAreaView>
+    <CustomSafeAreaView horizontal>
       <UserPredictions />
     </CustomSafeAreaView>
   )

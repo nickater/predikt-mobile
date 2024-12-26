@@ -1,12 +1,13 @@
 import { FC } from 'react'
 import { StyleSheet } from 'react-native'
 
-import { Text, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
+import { Text } from '../Text'
 
 type ButtonProps = {
   title: string
   onPress: () => void
-  type?: 'primary' | 'secondary' | 'disabled'
+  type?: 'primary' | 'secondary' | 'ghost' | 'disabled'
   disabled?: boolean
 }
 export const Button: FC<ButtonProps> = ({
@@ -25,6 +26,8 @@ export const Button: FC<ButtonProps> = ({
         return buttonStyles.primaryButton
       case 'secondary':
         return buttonStyles.secondaryButton
+      case 'ghost':
+        return buttonStyles.ghostButton
       case 'disabled':
         return buttonStyles.disabledButton
       default:
@@ -42,6 +45,9 @@ export const Button: FC<ButtonProps> = ({
         return buttonStyles.primaryButtonText
       case 'secondary':
         return buttonStyles.secondaryButtonText
+      case 'ghost':
+        return buttonStyles.ghostButtonText
+
       case 'disabled':
         return buttonStyles.disabledButtonText
       default:
@@ -82,6 +88,14 @@ const buttonStyles = StyleSheet.create({
   },
   secondaryButtonText: {
     color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  ghostButton: {
+    backgroundColor: 'transparent',
+  },
+  ghostButtonText: {
+    color: '#007bff',
     fontSize: 16,
     fontWeight: 'bold',
   },

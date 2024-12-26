@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { PublicQuestions } from '../PublicQuestions'
 import { UserQuestions } from '../UserQuestions'
 import { ButtonBar } from '@/components/atoms/ButtonBar'
+import { Divider } from '@/components/atoms/Divider'
 
 type ViewQuestionsProps = {
   onQuestionPress: (questionId: string) => void
@@ -33,6 +34,7 @@ export const ViewQuestions: FC<ViewQuestionsProps> = ({
           { text: 'Private', onPress: handleFilterPress('private') },
         ]}
       />
+      <Divider />
       {questionMap[filter]}
     </View>
   )

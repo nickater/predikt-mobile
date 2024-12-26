@@ -1,11 +1,11 @@
+import { Text } from '@/components/atoms'
+import PredictionCard from '@/components/atoms/PredictionCard'
 import { useAuth } from '@/hooks/auth'
 import { useFetchUserPredictions } from '@/hooks/prediction/useFetchUserPredictions'
 import * as React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 
-interface UserPredictionsProps {}
-
-export const UserPredictions = (props: UserPredictionsProps) => {
+export const UserPredictions = () => {
   const { session } = useAuth()
   const { data: predictions, isLoading } = useFetchUserPredictions(
     session?.user.id,
@@ -15,14 +15,19 @@ export const UserPredictions = (props: UserPredictionsProps) => {
 
   return (
     <View style={styles.container}>
-      <Text>User Prediction</Text>
-      {predictions?.map((prediction) => (
-        <Text key={prediction.id}>{prediction.prediction}</Text>
-      ))}
+      <Text variant="bold" position="center">
+        User Predictions
+      </Text>
+      <FlatList
+        data={predictions}
+        renderItem={({ item }) => <PredictionCard {...item} />}
+      />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    padding: 16,
+  },
 })
