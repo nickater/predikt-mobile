@@ -1,7 +1,7 @@
 import { QuestionType } from '@/types/question'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { FlatList, Pressable, StyleSheet, View } from 'react-native'
-import QuestionCard from '../QuestionCard'
+import { QuestionCard } from '../QuestionCard'
 
 type SelectableQuestionsProps = {
   questions: QuestionType[]

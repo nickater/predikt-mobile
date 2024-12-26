@@ -2,12 +2,14 @@ import React, { FC, PropsWithChildren } from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { SafeAreaViewProps } from 'react-native-safe-area-context'
 
-export const CustomSafeAreaView: FC<PropsWithChildren<SafeAreaViewProps>> = ({
-  children,
-  style,
-}) => {
+type CustomSafeAreaViewProps = SafeAreaViewProps & {
+  horizontal?: boolean
+}
+export const CustomSafeAreaView: FC<
+  PropsWithChildren<CustomSafeAreaViewProps>
+> = ({ children, style, horizontal }) => {
   return (
-    <SafeAreaView style={[styles.safeArea]}>
+    <SafeAreaView style={[styles.safeArea, horizontal && styles.horizontal]}>
       <View style={[styles.container, style]}>{children}</View>
     </SafeAreaView>
   )
@@ -16,12 +18,12 @@ export const CustomSafeAreaView: FC<PropsWithChildren<SafeAreaViewProps>> = ({
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#fff', // Default background color, you can change it or make it configurable
-    paddingHorizontal: 20,
+    backgroundColor: '#fff',
   },
   container: {
     flex: 1,
+  },
+  horizontal: {
     paddingHorizontal: 10,
-    justifyContent: 'center',
   },
 })

@@ -1,17 +1,18 @@
 import { PublicQuestions } from '@/components/molecules/question/PublicQuestions'
 import { UserQuestions } from '@/components/molecules/question/UserQuestions'
 import { useFetchPublicQuestions } from '@/hooks/question/useFetchPublicQuestions'
-import { QuestionType } from '@/types/question'
 import { useRouter } from 'expo-router'
 import * as React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
-type HomeFeedProps = {}
+type HomeFeedProps = {
+  onQuestionCardPress: (questionId: string) => void
+}
 
-const HomeFeed = (props: HomeFeedProps) => {
-  const [selectedFilter, setSelectedFilter] = React.useState<'public' | 'own'>(
-    'public',
-  )
+const HomeFeed: React.FC<HomeFeedProps> = ({ onQuestionCardPress }) => {
+  const [selectedFilter, setSelectedFilter] = React.useState<
+    'public' | 'private'
+  >('public')
   const { data, error, isLoading } = useFetchPublicQuestions()
   const router = useRouter()
 
@@ -19,8 +20,8 @@ const HomeFeed = (props: HomeFeedProps) => {
 
   if (error || !data) return <Text>Error: {error?.message}</Text>
 
-  const handleSelect = (question: QuestionType) => {
-    router.push(`/(app)/(home)/questionDetail/${question.id}`)
+  const handleSelect = (questionId: string) => {
+    onQuestionCardPress(questionId)
   }
 
   return (
@@ -38,9 +39,9 @@ const HomeFeed = (props: HomeFeedProps) => {
         <TouchableOpacity
           style={[
             styles.button,
-            selectedFilter === 'own' && styles.selectedButton,
+            selectedFilter === 'private' && styles.selectedButton,
           ]}
-          onPress={() => setSelectedFilter('own')}
+          onPress={() => setSelectedFilter('private')}
         >
           <Text style={styles.buttonText}>My Questions</Text>
         </TouchableOpacity>
@@ -48,7 +49,9 @@ const HomeFeed = (props: HomeFeedProps) => {
       {selectedFilter === 'public' && (
         <PublicQuestions onSelect={handleSelect} />
       )}
-      {selectedFilter === 'own' && <UserQuestions onSelect={handleSelect} />}
+      {selectedFilter === 'private' && (
+        <UserQuestions onSelect={handleSelect} />
+      )}
     </View>
   )
 }

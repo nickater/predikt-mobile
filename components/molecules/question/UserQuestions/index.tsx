@@ -1,12 +1,12 @@
 import { useFetchOwnQuestions } from '@/hooks/question/useFetchOwnQuestions'
 import { StyleSheet, View } from 'react-native'
 import { Text } from '../../../atoms'
-import SelectableQuestions from '../SelectableQuestions'
+import SelectableQuestions from '../../../atoms/SelectableQuestions'
 import { FC } from 'react'
 import { QuestionType } from '@/types/question'
 
 type UserQuestionsProps = {
-  onSelect: (question: QuestionType) => void
+  onSelect: (questionId: string) => void
 }
 export const UserQuestions: FC<UserQuestionsProps> = ({
   onSelect,
@@ -16,7 +16,7 @@ export const UserQuestions: FC<UserQuestionsProps> = ({
   if (!data) return <Text>Loading...</Text>
 
   const handleQuestionSelect = (question: QuestionType) => {
-    onSelect(question)
+    onSelect(question.id)
   }
 
   return (

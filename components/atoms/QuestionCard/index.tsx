@@ -2,23 +2,27 @@ import { Text, View, StyleSheet } from 'react-native'
 import { QuestionCardProps } from './types'
 import { useMemo } from 'react'
 import { getTimeRemaining } from './utils'
+import { formatDate } from '@/utils/stringFormat/dateFormatter'
 
-const QuestionCard = (props: QuestionCardProps) => {
+export const QuestionCard = (props: QuestionCardProps) => {
   const { title, deadline, predictionCount } = props
+
+  const formattedDeadline = useMemo(() => {
+    const deadlineDate = new Date(deadline)
+    return formatDate(deadlineDate)
+  }, [deadline])
 
   const timeRemaining = useMemo(() => getTimeRemaining(deadline), [deadline])
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.deadline}>Deadline: {deadline}</Text>
+      <Text style={styles.deadline}>Deadline: {formattedDeadline}</Text>
       <Text style={styles.predictions}>Predictions: {predictionCount} </Text>
       <Text style={styles.timeRemaining}>Time Remaining: {timeRemaining}</Text>
     </View>
   )
 }
-
-export default QuestionCard
 
 const styles = StyleSheet.create({
   container: {

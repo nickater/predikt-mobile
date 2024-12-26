@@ -10,5 +10,4 @@ export const getPredictionsByUser = (
     .eq('user_id', userId)
     .throwOnError()
     .order('created_at', { ascending: false })
-    .then((res) => res.data)
 }

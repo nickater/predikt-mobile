@@ -1,21 +1,25 @@
-import { useFetchQuestionsByUser } from '@/hooks/question/useFetchQuestionsByUser'
-import { StyleSheet, View } from 'react-native'
-import { Text } from '../../../atoms'
+import { FC } from 'react'
+import { StyleSheet } from 'react-native'
+import { PublicQuestions } from '../PublicQuestions'
+import { UserQuestions } from '../UserQuestions'
 
-export const ViewQuestions = (): React.JSX.Element => {
-  const { data } = useFetchQuestionsByUser()
+type ViewQuestionsProps = {
+  filter?: 'public' | 'private'
+  onQuestionPress: (questionId: string) => void
+}
+export const ViewQuestions: FC<ViewQuestionsProps> = ({
+  filter = 'public',
+  onQuestionPress,
+}): React.JSX.Element => {
+  const handleQuestionPress = (questionId: string) => {
+    onQuestionPress(questionId)
+  }
 
-  if (!data) return <Text>Loading...</Text>
+  if (filter === 'public') {
+    return <PublicQuestions onSelect={handleQuestionPress} />
+  }
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.questionSection}>
-        {data.map((question) => (
-          <Text key={question.id}>{question.title}</Text>
-        ))}
-      </View>
-    </View>
-  )
+  return <UserQuestions onSelect={handleQuestionPress} />
 }
 
 const styles = StyleSheet.create({

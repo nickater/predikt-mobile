@@ -6,7 +6,7 @@ interface QuestionDetailProps {
   questionId: string
 }
 
-const QuestionDetail = ({
+export const QuestionDetail = ({
   questionId,
 }: QuestionDetailProps): React.JSX.Element => {
   const { data, isError, error, isLoading } = useFetchQuestionDetail(questionId)
@@ -36,5 +36,3 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 })
-
-export default QuestionDetail
