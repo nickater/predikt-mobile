@@ -5,7 +5,7 @@ import { questionQueryKeys } from './queryKeys'
 
 export function useFetchPublicQuestions() {
   const client = useSupabase()
-  const queryKey = [questionQueryKeys.publicQuestions]
+  const queryKey = [questionQueryKeys.question]
 
   const queryFn = async () => {
     const questions = await getPublicQuestions(client)

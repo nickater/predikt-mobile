@@ -3,11 +3,13 @@ import { createPrediction } from '@/queries/prediction/createPrediction'
 import { CreatePredictionType } from '@/types/prediction'
 import { mapSupabaseError } from '@/utils/supabase/mapError'
 import { PostgrestError } from '@supabase/supabase-js'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSupabase } from '../useSupabase'
+import { questionQueryKeys } from '../question/queryKeys'
 
 export function useCreatePrediction() {
   const client = useSupabase()
+  const queryClient = useQueryClient()
 
   const doesPredictionExist = async (questionId: string, userId: string) => {
     const data = await checkIfPredictionExists(client, questionId, userId)
@@ -34,8 +36,14 @@ export function useCreatePrediction() {
     const postgrestError = error as unknown as PostgrestError
     const message = mapSupabaseError(postgrestError)
 
-    console.error('useCreatePrediction', message)
+    console.error('useCreatePrediction', message, error)
   }
 
-  return useMutation({ mutationFn, onError })
+  const onSuccess = () => {
+    queryClient.invalidateQueries({
+      queryKey: [questionQueryKeys.question],
+    })
+  }
+
+  return useMutation({ mutationFn, onError, onSuccess })
 }

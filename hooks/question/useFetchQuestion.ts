@@ -3,10 +3,11 @@ import { useQuery } from '@tanstack/react-query'
 import { useDebounce } from '@uidotdev/usehooks'
 import { useState } from 'react'
 import { useSupabase } from '../useSupabase'
+import { QuestionType } from '@/types/question'
 
 export function useFetchQuestion() {
   const client = useSupabase()
-  const [questionId, setQuestionId] = useState<string | null>(null)
+  const [questionId, setQuestionId] = useState<QuestionType['id'] | null>(null)
   const debouncedQuestionId = useDebounce(questionId, 1000)
   const queryKey = ['profile', questionId]
 

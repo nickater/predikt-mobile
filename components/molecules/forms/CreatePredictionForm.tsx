@@ -10,7 +10,7 @@ export type CreatePredictionFormInputs = Pick<
 >
 
 type CreatePredictionFormProps = {
-  onSubmit: (data: CreatePredictionFormInputs) => void
+  onSubmit: (data: CreatePredictionFormInputs, resetForm: () => void) => void
 }
 
 export const CreatePredictionForm: FC<CreatePredictionFormProps> = ({
@@ -20,6 +20,7 @@ export const CreatePredictionForm: FC<CreatePredictionFormProps> = ({
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<CreatePredictionFormInputs>({
     defaultValues: {
       prediction: '',
@@ -27,7 +28,7 @@ export const CreatePredictionForm: FC<CreatePredictionFormProps> = ({
   })
 
   const onValidSubmission = (data: CreatePredictionFormInputs) => {
-    onSubmit(data)
+    onSubmit(data, reset)
   }
 
   const onInvalidSubmission: SubmitErrorHandler<CreatePredictionFormInputs> = (

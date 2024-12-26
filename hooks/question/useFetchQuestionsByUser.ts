@@ -9,7 +9,7 @@ export function useFetchQuestionsByUser() {
   const { session } = useAuth()
   const userId = session?.user.id
 
-  const queryKey = [questionQueryKeys.userQuestions, userId]
+  const queryKey = [questionQueryKeys.question]
 
   const queryFn = async () => {
     if (!userId) return null
@@ -17,11 +17,9 @@ export function useFetchQuestionsByUser() {
     return questionResult
   }
 
-  return {
-    ...useQuery({
-      queryKey,
-      queryFn,
-      enabled: !!userId,
-    }),
-  }
+  return useQuery({
+    queryKey,
+    queryFn,
+    enabled: !!userId,
+  })
 }

@@ -1,6 +1,7 @@
 import { QuestionType } from '@/types/question'
 import React, { FC, useState } from 'react'
 import { FlatList, Pressable, StyleSheet, View } from 'react-native'
+import QuestionCard from '../QuestionCard'
 
 type SelectableQuestionsProps = {
   questions: QuestionType[]
@@ -26,14 +27,11 @@ const SelectableQuestions: FC<SelectableQuestionsProps> = ({
       renderItem={({ item: question }) => (
         <Pressable onPress={handleSelect(question)}>
           <View style={selectedQuestion === question.id ? styles.selected : {}}>
-            {/* <QuestionItem question={question} /> */}
-            {/* <QuestionCard
+            <QuestionCard
               title={question.title}
               deadline={question.deadline}
-              predictionCount={question.prediction_count}
-              author={question.author}
-              timeRemaining={question.time_remaining}
-            /> */}
+              predictionCount={question.total_predictions || 0}
+            />
           </View>
         </Pressable>
       )}

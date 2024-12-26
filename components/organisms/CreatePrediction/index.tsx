@@ -1,12 +1,12 @@
+import { CreatePredictionFormInputs } from '@/components/molecules/forms/CreatePredictionForm'
 import SelectableQuestions from '@/components/molecules/question/SelectableQuestions'
 import { useAuth } from '@/hooks/auth'
 import { useCreatePrediction } from '@/hooks/prediction/useCreatePrediction'
 import { useFetchQuestionsByUser } from '@/hooks/question/useFetchQuestionsByUser'
+import { QuestionType } from '@/types/question'
 import { FC, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { CreatePredictionForm } from '../../molecules'
-import { CreatePredictionFormInputs } from '@/components/molecules/forms/CreatePredictionForm'
-import { QuestionType } from '@/types/question'
 
 export const CreatePrediction: FC = (): React.JSX.Element => {
   const [questionId, setQuestionId] = useState<string | null>(null)
@@ -16,17 +16,26 @@ export const CreatePrediction: FC = (): React.JSX.Element => {
 
   const user = session?.user
 
-  const handleCreatePrediction = async ({
-    prediction,
-  }: CreatePredictionFormInputs) => {
+  const handleCreatePrediction = async (
+    { prediction }: CreatePredictionFormInputs,
+    resetForm: () => void,
+  ) => {
     if (!user) return
     if (!questionId) return
 
-    createPrediction({
-      prediction,
-      user_id: user?.id,
-      question_id: questionId,
-    })
+    createPrediction(
+      {
+        prediction,
+        user_id: user?.id,
+        question_id: questionId,
+      },
+      {
+        onSuccess: () => {
+          resetForm()
+          setQuestionId(null)
+        },
+      },
+    )
   }
 
   const handleSelectQuestion = (question: QuestionType) => {
