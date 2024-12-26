@@ -2,6 +2,7 @@ import { PublicQuestions } from '@/components/molecules/question/PublicQuestions
 import { UserQuestions } from '@/components/molecules/question/UserQuestions'
 import { useFetchPublicQuestions } from '@/hooks/question/useFetchPublicQuestions'
 import { QuestionType } from '@/types/question'
+import { useRouter } from 'expo-router'
 import * as React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
@@ -12,13 +13,14 @@ const HomeFeed = (props: HomeFeedProps) => {
     'public',
   )
   const { data, error, isLoading } = useFetchPublicQuestions()
+  const router = useRouter()
 
   if (isLoading) return <Text>Loading...</Text>
 
   if (error || !data) return <Text>Error: {error?.message}</Text>
 
   const handleSelect = (question: QuestionType) => {
-    console.log('Selected question:', question)
+    router.push(`/(app)/(home)/questionDetail/${question.id}`)
   }
 
   return (
@@ -43,8 +45,10 @@ const HomeFeed = (props: HomeFeedProps) => {
           <Text style={styles.buttonText}>My Questions</Text>
         </TouchableOpacity>
       </View>
-      {selectedFilter === 'public' && <PublicQuestions />}
-      {selectedFilter === 'own' && <UserQuestions />}
+      {selectedFilter === 'public' && (
+        <PublicQuestions onSelect={handleSelect} />
+      )}
+      {selectedFilter === 'own' && <UserQuestions onSelect={handleSelect} />}
     </View>
   )
 }

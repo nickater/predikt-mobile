@@ -1,6 +1,6 @@
 import { Text } from '@/components'
 import { useAuth } from '@/hooks/auth'
-import { FontAwesome } from '@expo/vector-icons'
+import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import { Redirect, Tabs } from 'expo-router'
 
 export default function TabsLayout() {
@@ -28,18 +28,22 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="(question)"
         options={{
-          title: 'Create',
+          title: 'Questions',
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="plus" color={color} />
+            <FontAwesome size={28} name="question" color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="(predictions)"
+        name="(prediction)"
         options={{
-          title: 'My Predictions',
+          title: 'Predictions',
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="question" color={color} />
+            <MaterialCommunityIcons
+              size={28}
+              name="crystal-ball"
+              color={color}
+            />
           ),
         }}
       />

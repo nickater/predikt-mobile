@@ -2,17 +2,25 @@ import { useFetchOwnQuestions } from '@/hooks/question/useFetchOwnQuestions'
 import { StyleSheet, View } from 'react-native'
 import { Text } from '../../../atoms'
 import SelectableQuestions from '../SelectableQuestions'
+import { FC } from 'react'
+import { QuestionType } from '@/types/question'
 
-export const UserQuestions = (): React.JSX.Element => {
+type UserQuestionsProps = {
+  onSelect: (question: QuestionType) => void
+}
+export const UserQuestions: FC<UserQuestionsProps> = ({
+  onSelect,
+}): React.JSX.Element => {
   const { data } = useFetchOwnQuestions()
 
   if (!data) return <Text>Loading...</Text>
 
+  const handleQuestionSelect = (question: QuestionType) => {
+    onSelect(question)
+  }
+
   return (
-    <SelectableQuestions
-      questions={data}
-      onSelect={(question) => console.log('Selected question:', question)}
-    />
+    <SelectableQuestions questions={data} onSelect={handleQuestionSelect} />
   )
 }
 

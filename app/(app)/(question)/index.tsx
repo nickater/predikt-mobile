@@ -1,10 +1,10 @@
-import { CreateQuestion, CustomSafeAreaView } from '@/components'
+import { CustomSafeAreaView, ViewQuestions } from '@/components'
 import React from 'react'
 
-export default function Create() {
+export default function QuestionTab() {
   return (
     <CustomSafeAreaView>
-      <CreateQuestion />
+      <ViewQuestions />
     </CustomSafeAreaView>
   )
 }
