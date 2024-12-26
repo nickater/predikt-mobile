@@ -16,6 +16,14 @@ export const CreatePrediction: FC = (): React.JSX.Element => {
 
   const user = session?.user
 
+  const onSuccessfulPredictionCreation = (resetForm: () => void) => {
+    return () => {
+      setQuestionId(null)
+      resetForm()
+      handleSelectQuestion(null)
+    }
+  }
+
   const handleCreatePrediction = async (
     { prediction }: CreatePredictionFormInputs,
     resetForm: () => void,
@@ -30,15 +38,14 @@ export const CreatePrediction: FC = (): React.JSX.Element => {
         question_id: questionId,
       },
       {
-        onSuccess: () => {
-          resetForm()
-          setQuestionId(null)
-        },
+        onSuccess: onSuccessfulPredictionCreation(resetForm),
       },
     )
   }
 
-  const handleSelectQuestion = (question: QuestionType) => {
+  const handleSelectQuestion = (question: QuestionType | null) => {
+    if (!question) return setQuestionId(null)
+
     setQuestionId(question.id)
   }
 
@@ -49,6 +56,7 @@ export const CreatePrediction: FC = (): React.JSX.Element => {
           <SelectableQuestions
             questions={questions}
             onSelect={handleSelectQuestion}
+            selectedQuestionId={questionId}
           />
         )}
       </View>

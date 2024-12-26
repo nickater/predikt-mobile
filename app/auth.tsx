@@ -3,6 +3,15 @@ import { useState } from 'react'
 
 export default function Auth() {
   const [shouldShowRegistration, setShouldShowRegistration] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const handleToggle = () => {
+    setLoading(true)
+    setTimeout(() => {
+      setShouldShowRegistration(!shouldShowRegistration)
+      setLoading(false)
+    }, 500)
+  }
 
   return (
     <CustomSafeAreaView
@@ -12,8 +21,15 @@ export default function Auth() {
     >
       {shouldShowRegistration ? <SignUp /> : <SignIn />}
       <Button
-        title={shouldShowRegistration ? 'Sign In' : 'Register'}
-        onPress={() => setShouldShowRegistration(!shouldShowRegistration)}
+        title={
+          loading
+            ? 'Loading...'
+            : shouldShowRegistration
+              ? 'Sign In'
+              : 'Register'
+        }
+        onPress={handleToggle}
+        disabled={loading}
       />
     </CustomSafeAreaView>
   )

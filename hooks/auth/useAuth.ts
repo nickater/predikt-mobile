@@ -35,20 +35,13 @@ export const useAuth = () => {
   }
 
   const signUp = useCallback(async (props: SignUpProps) => {
-    const { email, password, username } = props
+    const { email, password } = props
     const { error } = await supabase.auth.signUp({
       email,
       password,
     })
 
     if (error) Alert.alert('Error', error.message)
-
-    const { error: updateError } = await supabase
-      .from('profiles')
-      .update({ username })
-      .match({ email })
-
-    if (updateError) Alert.alert('Error', updateError.message)
   }, [])
 
   const signOut = useCallback(async () => {
