@@ -2,6 +2,10 @@ import { getPredictionsByUser } from '@/queries/prediction/getPredictionsByUser'
 import { useQuery } from '@tanstack/react-query'
 import { useSupabase } from '../useSupabase'
 
+export type UseFetchUserPredictionsReturnType = ReturnType<
+  typeof useFetchUserPredictions
+>
+
 export function useFetchUserPredictions(userId?: string) {
   const client = useSupabase()
   const queryKey = ['userPredictions', userId]

@@ -6,7 +6,15 @@ export const getPredictionsByUser = (
 ) => {
   return client
     .from('predictions')
-    .select('*')
+    .select(
+      `
+      *,
+      question:question_id(
+        *,
+        author:author_id(*)
+      )
+      `,
+    )
     .eq('user_id', userId)
     .throwOnError()
     .order('created_at', { ascending: false })

@@ -1,5 +1,5 @@
 import { QuestionType } from '@/types/question'
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import { FlatList, Pressable, StyleSheet, View } from 'react-native'
 import { QuestionCard } from '../QuestionCard'
 
@@ -7,16 +7,23 @@ type SelectableQuestionsProps = {
   questions: QuestionType[]
   onSelect: (question: QuestionType) => void
   selectedQuestionId?: string | null
+  showPredictionCount?: boolean
 }
 const SelectableQuestions: FC<SelectableQuestionsProps> = ({
   questions,
   onSelect,
   selectedQuestionId,
+  showPredictionCount = false,
 }) => {
   const handleSelect = (question: QuestionType) => {
     return () => {
       onSelect(question)
     }
+  }
+
+  const predictionCount = (question: QuestionType) => {
+    if (!showPredictionCount) return null
+    return question.total_predictions
   }
 
   return (
@@ -31,7 +38,7 @@ const SelectableQuestions: FC<SelectableQuestionsProps> = ({
             <QuestionCard
               title={question.title}
               deadline={question.deadline}
-              predictionCount={question.total_predictions || 0}
+              predictionCount={predictionCount(question)}
             />
           </View>
         </Pressable>

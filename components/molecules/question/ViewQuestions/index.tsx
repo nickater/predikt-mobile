@@ -43,7 +43,6 @@ export const ViewQuestions: FC<ViewQuestionsProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   listContainer: {
     paddingTop: 20,

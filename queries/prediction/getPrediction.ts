@@ -1,13 +1,19 @@
 import { SupabaseClient } from '@/supabase'
 import { PredictionType } from '@/types/prediction'
 
+// get a single prediction with its question title
 export function getPredictionById(
   client: SupabaseClient,
   predictionId: PredictionType['id'],
 ) {
   return client
     .from('predictions')
-    .select('*')
+    .select(
+      `
+      *,
+      question:question_id(*)
+    `,
+    )
     .eq('id', predictionId)
     .throwOnError()
     .single()

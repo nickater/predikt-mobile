@@ -1,8 +1,11 @@
-import { Text, View, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { QuestionCardProps } from './types'
 import { useMemo } from 'react'
 import { getTimeRemaining } from './utils'
 import { formatDate } from '@/utils/stringFormat/dateFormatter'
+import Card from '../Card'
+import { ConditionalText } from '../ConditionalText'
+import { Text } from '../Text'
 
 export const QuestionCard = (props: QuestionCardProps) => {
   const { title, deadline, predictionCount } = props
@@ -14,23 +17,20 @@ export const QuestionCard = (props: QuestionCardProps) => {
   const timeRemaining = useMemo(() => getTimeRemaining(deadline), [deadline])
 
   return (
-    <View style={styles.container}>
+    <Card>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.deadline}>Deadline: {formattedDeadline}</Text>
-      <Text style={styles.predictions}>Predictions: {predictionCount} </Text>
-      <Text style={styles.timeRemaining}>Time Remaining: {timeRemaining}</Text>
-    </View>
+      <Text variant="large" style={styles.timeRemaining}>
+        Time Remaining: {timeRemaining}
+      </Text>
+      <ConditionalText variant="small" condition={predictionCount !== null}>
+        Predictions: {predictionCount}
+      </ConditionalText>
+    </Card>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    borderRadius: 10,
-    backgroundColor: '#fff',
-    boxShadow: '0 10px 10px -10px rgba(0,0,0,0.3)',
-    shadowOffset: { width: 0, height: 2 },
-  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -45,6 +45,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   timeRemaining: {
-    fontSize: 16,
+    marginBottom: 5,
   },
 })

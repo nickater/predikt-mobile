@@ -20,7 +20,11 @@ export const UserQuestions: FC<UserQuestionsProps> = ({
   }
 
   return (
-    <SelectableQuestions questions={data} onSelect={handleQuestionSelect} />
+    <SelectableQuestions
+      showPredictionCount={true}
+      questions={data}
+      onSelect={handleQuestionSelect}
+    />
   )
 }
 
