@@ -3,7 +3,7 @@ import { UserPredictions } from '@/components/molecules/prediction/UserPredictio
 
 export default function PredictionDefault() {
   return (
-    <CustomSafeAreaView horizontal>
+    <CustomSafeAreaView>
       <UserPredictions />
     </CustomSafeAreaView>
   )

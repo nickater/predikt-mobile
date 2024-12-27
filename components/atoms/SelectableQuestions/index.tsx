@@ -1,5 +1,5 @@
 import { QuestionType } from '@/types/question'
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { FlatList, Pressable, StyleSheet, View } from 'react-native'
 import { QuestionCard } from '../QuestionCard'
 

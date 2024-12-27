@@ -7,6 +7,7 @@ import { useFetchUserPredictions } from '@/hooks/prediction/useFetchUserPredicti
 import * as React from 'react'
 import { useMemo, useState } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
+import Animated, { SlideInLeft } from 'react-native-reanimated'
 
 export const UserPredictions = () => {
   const { session } = useAuth()
@@ -33,14 +34,13 @@ export const UserPredictions = () => {
   )
 
   const predictionToShow = useMemo(() => {
-    if (listFilter === 'active') return activePredictions
-    if (listFilter === 'inactive') return inactivePredictions
+    if (listFilter === 'active' && activePredictions) return activePredictions
+    if (listFilter === 'inactive' && inactivePredictions)
+      return inactivePredictions
     return []
   }, [activePredictions, inactivePredictions, listFilter])
 
   if (isLoading) return <Text>Loading...</Text>
-
-  if (!predictions) return <Text>No predictions found</Text>
 
   return (
     <View style={styles.container}>
@@ -51,17 +51,23 @@ export const UserPredictions = () => {
         ]}
       />
       <Divider />
-      <FlatList
-        data={predictionToShow}
-        style={styles.list}
-        renderItem={({ item }) => (
-          <PredictionCard
-            {...item}
-            questionTitle={'What is the meaning of life?'}
-            authorDisplayName={item.question.author.username}
-          />
-        )}
-      />
+      {predictionToShow?.length > 0 ? (
+        <FlatList
+          data={predictionToShow}
+          style={styles.list}
+          renderItem={({ item }) => (
+            <Animated.View entering={SlideInLeft}>
+              <PredictionCard
+                {...item}
+                questionTitle={item.question.title}
+                authorDisplayName={item.question.author.username}
+              />
+            </Animated.View>
+          )}
+        />
+      ) : (
+        <Text>No predictions found</Text>
+      )}
     </View>
   )
 }

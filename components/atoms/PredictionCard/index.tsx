@@ -2,9 +2,10 @@ import { PredictionType } from '@/types/prediction'
 import React, { FC, useMemo } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text } from '../Text'
-import { formatDate } from '@/utils/stringFormat/dateFormatter'
+import { formatDate, formatShortDate } from '@/utils/stringFormat/dateFormatter'
 import { ConditionalText } from '../ConditionalText'
 import Card from '../Card'
+import { Divider } from '../Divider'
 
 type PredictionCardProps = PredictionType & {
   questionTitle: string
@@ -22,18 +23,71 @@ export const PredictionCard: FC<PredictionCardProps> = ({
     if (!created_at) return ''
 
     const date = new Date(created_at)
-    return formatDate(date)
+    return formatShortDate(date)
   }, [created_at])
 
   return (
     <Card>
-      <Text>Question: {questionTitle}?</Text>
-      <Text variant="bold">Prediction: {prediction}</Text>
-      <ConditionalText condition={authorDisplayName}>
-        Author: {authorDisplayName}
-      </ConditionalText>
-      <Text>Anonymous: {is_anonymous ? 'Yes' : 'No'}</Text>
-      <Text>Created: {formattedCreatedAt}</Text>
+      <View style={styles.questionContainer}>
+        <View style={styles.questionTopRow}>
+          <ConditionalText condition={authorDisplayName}>
+            {authorDisplayName}
+          </ConditionalText>
+          <Text position="center" variant="bold">
+            QUESTION
+          </Text>
+          <Text>{formattedCreatedAt}</Text>
+        </View>
+        <View style={styles.questionBottomRow}>
+          <Text>{questionTitle}</Text>
+        </View>
+      </View>
+      <Divider />
+      <View style={styles.predictionContainer}>
+        <View style={styles.predictionTopRow}>
+          <Text position="center" variant="bold">
+            PREDICTION
+          </Text>
+        </View>
+        <View style={styles.predictionBottomRow}>
+          <Text>{prediction}</Text>
+        </View>
+        <View style={styles.anonymousContainer}>
+          <Text>Anonymous: {is_anonymous ? 'Yes' : 'No'}</Text>
+        </View>
+      </View>
     </Card>
   )
 }
+
+const styles = StyleSheet.create({
+  questionContainer: {
+    paddingVertical: 18,
+  },
+  questionTopRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  questionBottomRow: {
+    backgroundColor: '#f5f5f5',
+    padding: 10,
+  },
+  predictionContainer: {
+    paddingTop: 18,
+  },
+  predictionTopRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 10,
+  },
+  predictionBottomRow: {
+    padding: 10,
+    backgroundColor: '#f5f5f5',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  anonymousContainer: {
+    marginTop: 10,
+  },
+})

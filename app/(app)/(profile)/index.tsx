@@ -1,12 +1,12 @@
 import { CustomSafeAreaView } from '@/components'
-import Settings from '@/components/organisms/Settings'
+import { Profile } from '@/components/organisms/Profile'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
-export default function Profile() {
+export default function ProfileScreen() {
   return (
-    <CustomSafeAreaView style={styles.container}>
-      <Settings />
+    <CustomSafeAreaView style={styles.container} horizontal>
+      <Profile />
     </CustomSafeAreaView>
   )
 }

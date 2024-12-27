@@ -1,5 +1,5 @@
 import { CreateQuestion, CustomSafeAreaView } from '@/components'
-import Settings from '@/components/organisms/Settings'
+import Settings from '@/components/organisms/Profile'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 

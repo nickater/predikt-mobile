@@ -1,17 +1,17 @@
-import { StyleSheet } from 'react-native'
-import { QuestionCardProps } from './types'
+import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
 import { useMemo } from 'react'
-import { getTimeRemaining } from './utils'
-import { formatDate } from '@/utils/stringFormat/dateFormatter'
+import { StyleSheet } from 'react-native'
 import Card from '../Card'
 import { ConditionalText } from '../ConditionalText'
 import { Text } from '../Text'
+import { QuestionCardProps } from './types'
+import { getTimeRemaining } from './utils'
 
 export const QuestionCard = (props: QuestionCardProps) => {
   const { title, deadline, predictionCount } = props
   const formattedDeadline = useMemo(() => {
     const deadlineDate = new Date(deadline)
-    return formatDate(deadlineDate)
+    return formatShortDate(deadlineDate)
   }, [deadline])
 
   const timeRemaining = useMemo(() => getTimeRemaining(deadline), [deadline])
@@ -20,9 +20,7 @@ export const QuestionCard = (props: QuestionCardProps) => {
     <Card>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.deadline}>Deadline: {formattedDeadline}</Text>
-      <Text variant="large" style={styles.timeRemaining}>
-        Time Remaining: {timeRemaining}
-      </Text>
+      <Text style={styles.timeRemaining}>{timeRemaining}</Text>
       <ConditionalText variant="small" condition={predictionCount !== null}>
         Predictions: {predictionCount}
       </ConditionalText>

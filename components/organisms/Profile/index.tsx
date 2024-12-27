@@ -1,20 +1,21 @@
+import { Text } from '@/components/atoms'
 import { Button } from '@/components/atoms/Button'
 import { useAuth } from '@/hooks/auth'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
-const Settings = () => {
+export const Profile = () => {
   const { signOut } = useAuth()
 
   return (
     <View style={styles.container}>
-      <Text>Settings</Text>
+      <Text position="center" variant="header1">
+        Profile
+      </Text>
       <Button title="Sign Out" onPress={signOut} />
     </View>
   )
 }
-
-export default Settings
 
 const styles = StyleSheet.create({
   container: {
