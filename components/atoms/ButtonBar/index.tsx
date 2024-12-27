@@ -1,6 +1,6 @@
-import { FC } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Button } from '../Button'
+import { FC, useState } from 'react'
+import { StyleSheet, View, Pressable } from 'react-native'
+import { Text } from '../Text'
 
 interface ButtonBarProps {
   buttonProps: {
@@ -10,15 +10,30 @@ interface ButtonBarProps {
 }
 
 export const ButtonBar: FC<ButtonBarProps> = ({ buttonProps }) => {
+  const [selectedButton, setSelectedButton] = useState(0)
+
+  const handlePress = (index: number) => {
+    return () => {
+      setSelectedButton(index)
+      buttonProps[index].onPress()
+    }
+  }
+
   return (
     <View style={styles.container}>
       {buttonProps.map((buttonProp, index) => (
-        <Button
-          type="ghost"
+        <Pressable
           key={index}
-          title={buttonProp.text}
-          onPress={buttonProp.onPress}
-        />
+          style={({ pressed }) => [
+            styles.button,
+            selectedButton === index && styles.selectedButton,
+          ]}
+          onPress={handlePress(index)}
+        >
+          <Text variant="paragraph" position="center">
+            {buttonProp.text}
+          </Text>
+        </Pressable>
       ))}
     </View>
   )
@@ -32,7 +47,10 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    borderRadius: 5,
+    // borderRadius: 5,
     flex: 1,
+  },
+  selectedButton: {
+    backgroundColor: 'rgb(210, 230, 255)',
   },
 })

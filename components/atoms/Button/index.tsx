@@ -93,6 +93,8 @@ const buttonStyles = StyleSheet.create({
   },
   ghostButton: {
     backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#007bff',
   },
   ghostButtonText: {
     color: '#007bff',
