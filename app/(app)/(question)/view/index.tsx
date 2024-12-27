@@ -1,11 +1,17 @@
 import { CustomSafeAreaView, ViewQuestions } from '@/components'
+import { useRouter } from 'expo-router'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
 export default function Profile() {
+  const router = useRouter()
+  const handleQuestionPress = (questionId: string) => {
+    router.push(`/(app)/(question)/question-detail/${questionId}`)
+  }
+
   return (
     <CustomSafeAreaView style={styles.container}>
-      <ViewQuestions />
+      <ViewQuestions onQuestionPress={handleQuestionPress} />
     </CustomSafeAreaView>
   )
 }

@@ -6,7 +6,6 @@ import { formatDate } from '@/utils/stringFormat/dateFormatter'
 
 export const QuestionCard = (props: QuestionCardProps) => {
   const { title, deadline, predictionCount } = props
-
   const formattedDeadline = useMemo(() => {
     const deadlineDate = new Date(deadline)
     return formatDate(deadlineDate)
@@ -29,12 +28,8 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     backgroundColor: '#fff',
-    shadowColor: '#000',
+    boxShadow: '0 10px 10px -10px rgba(0,0,0,0.3)',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
-    margin: 10,
   },
   title: {
     fontSize: 20,

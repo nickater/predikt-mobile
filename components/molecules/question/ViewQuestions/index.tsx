@@ -27,7 +27,7 @@ export const ViewQuestions: FC<ViewQuestionsProps> = ({
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <ButtonBar
         buttonProps={[
           { text: 'Public', onPress: handleFilterPress('public') },
@@ -35,16 +35,19 @@ export const ViewQuestions: FC<ViewQuestionsProps> = ({
         ]}
       />
       <Divider />
-      {questionMap[filter]}
+      <View style={styles.listContainer}>{questionMap[filter]}</View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    // padding: 20,
+    flex: 1,
+    backgroundColor: '#f5f5f5',
   },
-  questionSection: {
+  listContainer: {
     paddingTop: 20,
+    paddingHorizontal: 20,
+    flexGrow: 1,
   },
 })
