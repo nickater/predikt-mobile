@@ -6,6 +6,7 @@ export type TextVariant =
   | 'link'
   | 'highlighted'
   | 'bold'
+  | 'bold2'
   | 'italic'
   | 'small'
   | 'large'

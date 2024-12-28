@@ -7,7 +7,6 @@ import { useFetchUserPredictions } from '@/hooks/prediction/useFetchUserPredicti
 import * as React from 'react'
 import { useMemo, useState } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
-import Animated, { SlideInLeft } from 'react-native-reanimated'
 
 export const UserPredictions = () => {
   const { session } = useAuth()
@@ -33,41 +32,50 @@ export const UserPredictions = () => {
     [predictions],
   )
 
-  const predictionToShow = useMemo(() => {
-    if (listFilter === 'active' && activePredictions) return activePredictions
-    if (listFilter === 'inactive' && inactivePredictions)
-      return inactivePredictions
-    return []
-  }, [activePredictions, inactivePredictions, listFilter])
+  const questionMap = useMemo(
+    () => ({
+      active: (
+        <FlatList
+          data={activePredictions}
+          contentContainerStyle={styles.list}
+          renderItem={({ item }) => (
+            <PredictionCard
+              {...item}
+              questionTitle={item.question.title}
+              authorDisplayName={item.question.author.username}
+            />
+          )}
+        />
+      ),
+      inactive: (
+        <FlatList
+          data={inactivePredictions}
+          contentContainerStyle={styles.list}
+          renderItem={({ item }) => (
+            <PredictionCard
+              {...item}
+              questionTitle={item.question.title}
+              authorDisplayName={item.question.author.username}
+            />
+          )}
+        />
+      ),
+    }),
+    [activePredictions, inactivePredictions],
+  )
 
   if (isLoading) return <Text>Loading...</Text>
 
+  const buttons = [
+    { text: 'Active', onPress: () => setListFilter('active') },
+    { text: 'Inactive', onPress: () => setListFilter('inactive') },
+  ]
+
   return (
     <View style={styles.container}>
-      <ButtonBar
-        buttonProps={[
-          { text: 'Active', onPress: () => setListFilter('active') },
-          { text: 'Inactive', onPress: () => setListFilter('inactive') },
-        ]}
-      />
+      <ButtonBar buttonProps={buttons} />
       <Divider />
-      {predictionToShow?.length > 0 ? (
-        <FlatList
-          data={predictionToShow}
-          style={styles.list}
-          renderItem={({ item }) => (
-            <Animated.View entering={SlideInLeft}>
-              <PredictionCard
-                {...item}
-                questionTitle={item.question.title}
-                authorDisplayName={item.question.author.username}
-              />
-            </Animated.View>
-          )}
-        />
-      ) : (
-        <Text>No predictions found</Text>
-      )}
+      <View style={styles.list}>{questionMap[listFilter]}</View>
     </View>
   )
 }
@@ -75,8 +83,10 @@ export const UserPredictions = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor: 'red',
   },
   list: {
-    padding: 16,
+    // backgroundColor: 'blue',
+    flexGrow: 1,
   },
 })

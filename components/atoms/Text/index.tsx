@@ -55,6 +55,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  bold2: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   italic: {
     fontSize: 16,
     fontStyle: 'italic',

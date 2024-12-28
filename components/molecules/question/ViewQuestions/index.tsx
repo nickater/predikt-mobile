@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useCallback, useMemo, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { PublicQuestions } from '../PublicQuestions'
 import { UserQuestions } from '../UserQuestions'
@@ -13,18 +13,24 @@ export const ViewQuestions: FC<ViewQuestionsProps> = ({
 }): React.JSX.Element => {
   const [filter, setFilter] = useState<'public' | 'private'>('public')
 
-  const handleQuestionPress = (questionId: string) => {
-    onQuestionPress(questionId)
-  }
+  const handleQuestionPress = useCallback(
+    (questionId: string) => {
+      onQuestionPress(questionId)
+    },
+    [onQuestionPress],
+  )
 
   const handleFilterPress = (filter: 'public' | 'private') => {
     return () => setFilter(filter)
   }
 
-  const questionMap = {
-    public: <PublicQuestions onSelect={handleQuestionPress} />,
-    private: <UserQuestions onSelect={handleQuestionPress} />,
-  }
+  const questionMap = useMemo(
+    () => ({
+      public: <PublicQuestions onSelect={handleQuestionPress} />,
+      private: <UserQuestions onSelect={handleQuestionPress} />,
+    }),
+    [handleQuestionPress],
+  )
 
   return (
     <View style={styles.container}>
