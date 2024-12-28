@@ -1,9 +1,8 @@
 import { useFetchOwnQuestions } from '@/hooks/question/useFetchOwnQuestions'
-import { StyleSheet, View } from 'react-native'
-import { Text } from '../../../atoms'
-import SelectableQuestions from '../../../atoms/SelectableQuestions'
-import { FC } from 'react'
 import { QuestionType } from '@/types/question'
+import { FC } from 'react'
+import { StyleSheet } from 'react-native'
+import { SelectableQuestions, Text } from '../../../atoms'
 
 type UserQuestionsProps = {
   onSelect: (questionId: string) => void

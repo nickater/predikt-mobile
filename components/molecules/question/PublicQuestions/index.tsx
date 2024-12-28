@@ -1,9 +1,8 @@
 import { useFetchPublicQuestions } from '@/hooks/question/useFetchPublicQuestions'
-import { StyleSheet, View } from 'react-native'
-import { Text } from '../../../atoms'
-import SelectableQuestions from '../../../atoms/SelectableQuestions'
 import { QuestionType } from '@/types/question'
 import { FC } from 'react'
+import { StyleSheet } from 'react-native'
+import { SelectableQuestions, Text } from '../../../atoms'
 
 type PublicQuestionsProps = {
   onSelect: (questionId: string) => void

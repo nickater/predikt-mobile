@@ -7,7 +7,7 @@ type HomeFeedProps = {
   onQuestionCardPress: (questionId: string) => void
 }
 
-const HomeFeed: React.FC<HomeFeedProps> = ({ onQuestionCardPress }) => {
+export const HomeFeed: React.FC<HomeFeedProps> = ({ onQuestionCardPress }) => {
   const { data, error, isLoading } = useFetchPublicQuestions()
 
   if (isLoading) return <Text>Loading...</Text>
@@ -20,8 +20,6 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onQuestionCardPress }) => {
     </View>
   )
 }
-
-export default HomeFeed
 
 const styles = StyleSheet.create({
   container: {},

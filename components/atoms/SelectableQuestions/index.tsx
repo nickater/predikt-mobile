@@ -9,7 +9,8 @@ type SelectableQuestionsProps = {
   selectedQuestionId?: string | null
   showPredictionCount?: boolean
 }
-const SelectableQuestions: FC<SelectableQuestionsProps> = ({
+
+export const SelectableQuestions: FC<SelectableQuestionsProps> = ({
   questions,
   onSelect,
   selectedQuestionId,
@@ -46,8 +47,6 @@ const SelectableQuestions: FC<SelectableQuestionsProps> = ({
     />
   )
 }
-
-export default SelectableQuestions
 
 const styles = StyleSheet.create({
   selected: {

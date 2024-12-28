@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
-export default function Profile() {
+export default () => {
   const router = useRouter()
   const handleQuestionPress = (questionId: string) => {
     router.push(`/(app)/(question)/question-detail/${questionId}`)

@@ -1,9 +1,7 @@
 import { CreateQuestion, CustomSafeAreaView } from '@/components'
-import Settings from '@/components/organisms/Profile'
-import React from 'react'
 import { StyleSheet } from 'react-native'
 
-export default function Profile() {
+export default () => {
   return (
     <CustomSafeAreaView style={styles.container}>
       <CreateQuestion />

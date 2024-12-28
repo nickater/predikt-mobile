@@ -1,4 +1,4 @@
-import Card from '@/components/atoms/Card'
+import { Card } from '@/components'
 import { useFetchQuestionDetail } from '@/hooks/question/useFetchQuestionDetail'
 import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
 import { useMemo } from 'react'

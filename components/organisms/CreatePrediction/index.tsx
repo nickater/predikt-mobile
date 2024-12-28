@@ -1,5 +1,5 @@
 import { CreatePredictionFormInputs } from '@/components/molecules/forms/CreatePredictionForm'
-import SelectableQuestions from '@/components/atoms/SelectableQuestions'
+import { SelectableQuestions } from '@/components/atoms'
 import { useAuth } from '@/hooks/auth'
 import { useCreatePrediction } from '@/hooks/prediction/useCreatePrediction'
 import { useFetchQuestionsByUser } from '@/hooks/question/useFetchQuestionsByUser'

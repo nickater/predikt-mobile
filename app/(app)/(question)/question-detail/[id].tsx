@@ -3,7 +3,7 @@ import { useLocalSearchParams } from 'expo-router'
 import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-export default function QuestionDetailLayout() {
+export default () => {
   const { id } = useLocalSearchParams<{ id: string }>()
 
   return (

@@ -3,7 +3,7 @@ import { Profile } from '@/components/organisms/Profile'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
-export default function ProfileScreen() {
+export default function ProfileTab() {
   return (
     <CustomSafeAreaView style={styles.container} horizontal>
       <Profile />

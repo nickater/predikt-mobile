@@ -18,7 +18,7 @@ export default function Auth() {
       style={{
         flex: 1,
       }}
-      horizontal={true}
+      horizontal
     >
       {shouldShowRegistration ? <SignUp /> : <SignIn />}
       <Button

@@ -1,17 +1,14 @@
-import GoBackButton from '@/components/atoms/HeaderGoBack'
+import { HeaderGoBackButton } from '@/components'
 import { Stack } from 'expo-router'
 import * as React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
 
-interface QuestionDetailLayoutProps {}
-
-const QuestionDetailLayout = (props: QuestionDetailLayoutProps) => {
+const QuestionDetailLayout = () => {
   return (
     <Stack screenOptions={{ headerTitle: 'Question Detail' }}>
       <Stack.Screen
         name="[id]"
         options={{
-          headerLeft: GoBackButton,
+          headerLeft: HeaderGoBackButton,
         }}
       />
     </Stack>

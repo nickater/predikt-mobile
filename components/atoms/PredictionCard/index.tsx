@@ -1,11 +1,11 @@
 import { PredictionType } from '@/types/prediction'
+import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
 import React, { FC, useMemo } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { Text } from '../Text'
-import { formatDate, formatShortDate } from '@/utils/stringFormat/dateFormatter'
+import { StyleSheet, View } from 'react-native'
+import { Card } from '../Card'
 import { ConditionalText } from '../ConditionalText'
-import Card from '../Card'
 import { Divider } from '../Divider'
+import { Text } from '../Text'
 
 type PredictionCardProps = PredictionType & {
   questionTitle: string

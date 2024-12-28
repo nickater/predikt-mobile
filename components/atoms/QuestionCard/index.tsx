@@ -1,8 +1,7 @@
 import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
 import { useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
-import Card from '../Card'
-import { ConditionalText } from '../ConditionalText'
+import { Card } from '../Card'
 import { Text } from '../Text'
 import { QuestionCardProps } from './types'
 import { getTimeRemaining } from './utils'
@@ -29,9 +28,7 @@ export const QuestionCard = (props: QuestionCardProps) => {
         <Text style={styles.deadline}>Deadline: {formattedDeadline}</Text>
         <Text style={styles.timeRemaining}>{timeRemaining}</Text>
       </View>
-      <ConditionalText variant="small" condition={predictionCount !== null}>
-        Predictions: {predictionCount}
-      </ConditionalText>
+      <Text variant="small">Predictions: {predictionCount}</Text>
     </Card>
   )
 }

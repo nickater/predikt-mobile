@@ -1,8 +1,8 @@
+import 'react-native-reanimated'
 import { Providers } from '@/providers'
 import { Stack } from 'expo-router'
-import 'react-native-reanimated'
 
-export default function App() {
+export default function AppLayout() {
   return (
     <Providers>
       <Stack screenOptions={{ headerShown: false }}>

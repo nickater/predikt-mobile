@@ -5,7 +5,7 @@ interface CardProps extends ViewProps {
   children: React.ReactNode
 }
 
-const Card: React.FC<CardProps> = ({ children, style, ...rest }) => {
+export const Card: React.FC<CardProps> = ({ children, style, ...rest }) => {
   return (
     <View style={[styles.container, style]} {...rest}>
       {children}
@@ -22,5 +22,3 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 })
-
-export default Card
