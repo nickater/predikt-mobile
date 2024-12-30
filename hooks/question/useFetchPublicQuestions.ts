@@ -1,19 +1,17 @@
-import { getPublicQuestions } from '@/queries/question/getPublicQuestions'
+import {
+  getPublicQuestionsQueryFn,
+  getPublicQuestionsQueryKey,
+} from '@/queries/question/getPublicQuestions'
 import { useQuery } from '@tanstack/react-query'
 import { useSupabase } from '../useSupabase'
-import { questionQueryKeys } from './queryKeys'
+
+const ONE_HOUR = 1000 * 60 * 60
 
 export function useFetchPublicQuestions() {
-  const client = useSupabase()
-  const queryKey = [questionQueryKeys.question]
+  const supabase = useSupabase()
+  const queryKey = getPublicQuestionsQueryKey()
 
-  const queryFn = async () => {
-    const questions = await getPublicQuestions(client)
-    return questions
-  }
+  const queryFn = getPublicQuestionsQueryFn()(supabase)
 
-  return useQuery({
-    queryKey,
-    queryFn,
-  })
+  return useQuery({ queryKey, queryFn, staleTime: ONE_HOUR })
 }

@@ -1,25 +1,20 @@
-import { getQuestionByUser } from '@/queries/question/getQuestionsByUser'
+import {
+  getUserQuestionsQueryFn,
+  getUserQuestionsQueryKey,
+} from '@/queries/question/getQuestionsByUser'
 import { useQuery } from '@tanstack/react-query'
 import { useAuth } from '../auth'
 import { useSupabase } from '../useSupabase'
-import { questionQueryKeys } from './queryKeys'
+
+const ONE_HOUR = 1000 * 60 * 60
 
 export function useFetchOwnQuestions() {
-  const client = useSupabase()
+  const supabase = useSupabase()
   const { session } = useAuth()
-  const userId = session?.user.id
+  const userId = session?.user?.id
 
-  const queryKey = [questionQueryKeys.userQuestions]
+  const queryFn = getUserQuestionsQueryFn(userId)(supabase)
+  const queryKey = getUserQuestionsQueryKey(userId)
 
-  const queryFn = async () => {
-    if (!userId) return null
-    const questionResult = await getQuestionByUser(client, userId)
-    return questionResult
-  }
-
-  return useQuery({
-    queryKey,
-    queryFn,
-    enabled: !!userId,
-  })
+  return useQuery({ queryKey, queryFn, enabled: !!userId, staleTime: ONE_HOUR })
 }

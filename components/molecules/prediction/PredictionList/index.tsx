@@ -1,4 +1,4 @@
-import { Text } from '@/components/atoms'
+import { LoadingBasicText, Text } from '@/components/atoms'
 import { PredictionCard } from '@/components/atoms/PredictionCard'
 import { PredictionWithRelations } from '@/types/prediction'
 import { FlatList, StyleSheet, View } from 'react-native'
@@ -8,6 +8,10 @@ interface PredictionListProps {
 }
 
 const PredictionList = ({ data }: PredictionListProps) => {
+  if (!data) {
+    return <LoadingBasicText />
+  }
+
   if (data.length === 0) {
     return (
       <View style={styles.noDataContainer}>

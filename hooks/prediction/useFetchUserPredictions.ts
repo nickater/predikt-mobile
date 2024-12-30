@@ -1,20 +1,24 @@
-import { getPredictionsByUser } from '@/queries/prediction/getPredictionsByUser'
 import { useQuery } from '@tanstack/react-query'
 import { useSupabase } from '../useSupabase'
-import { PredictionWithRelations } from '@/types/prediction'
+import {
+  getUserPredictionsQueryFn,
+  getUserPredictionsQueryKey,
+} from '@/queries/prediction/getPredictionsByUser'
 
 export type UseFetchUserPredictionsReturnType = ReturnType<
   typeof useFetchUserPredictions
 >
 
+const ONE_HOUR = 1000 * 60 * 60
+
 export function useFetchUserPredictions(userId?: string) {
   const client = useSupabase()
-  const queryKey = ['userPredictions', userId]
 
-  const queryFn = async (): Promise<PredictionWithRelations[]> => {
-    const userPredictionsResult = await getPredictionsByUser(client, userId!)
-    return userPredictionsResult.data
-  }
+  const queryKey = getUserPredictionsQueryKey(userId!)
 
-  return useQuery({ queryKey, queryFn, enabled: !!userId })
+  const queryFnWithoutClient = getUserPredictionsQueryFn(userId!)
+
+  const queryFn = queryFnWithoutClient(client)
+
+  return useQuery({ queryKey, queryFn, enabled: !!userId, staleTime: ONE_HOUR })
 }

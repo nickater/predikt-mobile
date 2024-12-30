@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@/supabase'
 
-export function getProfileById(client: SupabaseClient, profileId: number) {
+export function getProfileById(client: SupabaseClient, profileId: string) {
   return client
     .from('profiles')
     .select('*')
