@@ -4,7 +4,7 @@ import * as React from 'react'
 
 const QuestionDetailLayout = () => {
   return (
-    <Stack screenOptions={{ headerTitle: 'Question Detail' }}>
+    <Stack screenOptions={{ headerTitle: '' }}>
       <Stack.Screen
         name="[id]"
         options={{

@@ -1,20 +1,22 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true,
     "paths": {
       "@/*": [
         "./*"
       ],
-      "@/atoms": [
-        "./src/components/atoms/*"
+      "@/components/*": [
+        "./components/*"
       ],
-      "@/molecules": [
-        "./src/components/molecules/*"
+      "@/atoms/*": [
+        "./components/atoms/*"
       ],
-      "@/organisms": [
-        "./src/components/organisms/*"
+      "@/molecules/*": [
+        "./components/molecules/*"
       ],
+      "@/organisms/*": [
+        "./components/organisms/*"
+      ]
     }
   },
   "include": [

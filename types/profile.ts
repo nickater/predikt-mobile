@@ -1,23 +1,12 @@
-import {
-  profilesRowSchema,
-  profilesInsertSchema,
-  profilesRelationshipsSchema,
-  profilesUpdateSchema,
-} from './schemas'
+import { Database } from './database.types'
 
-export const profileSchema = profilesRowSchema
+export type ProfileType = Database['public']['Tables']['profiles']['Row']
 
-export type ProfileType = (typeof profileSchema)['_output']
+export type CreateProfileType =
+  Database['public']['Tables']['profiles']['Insert']
 
-export const createProfileSchema = profilesInsertSchema
-
-export type CreateProfileType = (typeof createProfileSchema)['_output']
-
-export const updateProfileSchema = profilesUpdateSchema
-
-export type UpdateProfileType = (typeof updateProfileSchema)['_output']
-
-export const profileRelationshipsSchema = profilesRelationshipsSchema
+export type UpdateProfileType =
+  Database['public']['Tables']['profiles']['Update']
 
 export type ProfileRelationshipsType =
-  (typeof profileRelationshipsSchema)['_output']
+  Database['public']['Tables']['profiles']['Relationships']

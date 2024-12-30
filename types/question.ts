@@ -1,23 +1,12 @@
-import {
-  questionsRowSchema,
-  questionsInsertSchema,
-  questionsRelationshipsSchema,
-  questionsUpdateSchema,
-} from './schemas'
+import { Database } from './database.types'
 
-export const questionSchema = questionsRowSchema
+export type QuestionType = Database['public']['Tables']['questions']['Row']
 
-export type QuestionType = (typeof questionSchema)['_output']
+export type CreateQuestionType =
+  Database['public']['Tables']['questions']['Insert']
 
-export const createQuestionSchema = questionsInsertSchema
-
-export type CreateQuestionType = (typeof createQuestionSchema)['_output']
-
-export const updateQuestionSchema = questionsUpdateSchema
-
-export type UpdateQuestionType = (typeof updateQuestionSchema)['_output']
-
-export const questionRelationshipsSchema = questionsRelationshipsSchema
+export type UpdateQuestionType =
+  Database['public']['Tables']['questions']['Update']
 
 export type QuestionRelationshipsType =
-  (typeof questionRelationshipsSchema)['_output']
+  Database['public']['Tables']['questions']['Relationships']

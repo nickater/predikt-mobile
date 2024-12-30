@@ -1,34 +1,26 @@
 import { CreatePredictionType } from '@/types/prediction'
 import { FC } from 'react'
-import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
+import { Controller, SubmitErrorHandler, UseFormReturn } from 'react-hook-form'
 import { View } from 'react-native'
-import { Button, Text, TextInput } from '../../atoms'
+import { Button, Text, TextInput } from '../../../atoms'
 
 export type CreatePredictionFormInputs = Pick<
   CreatePredictionType,
   'prediction'
 >
 
-type CreatePredictionFormProps = {
-  onSubmit: (data: CreatePredictionFormInputs, resetForm: () => void) => void
+type CreatePredictionFormProps = UseFormReturn<CreatePredictionFormInputs> & {
+  onSubmit: (data: CreatePredictionFormInputs) => void
 }
 
 export const CreatePredictionForm: FC<CreatePredictionFormProps> = ({
+  control,
   onSubmit,
+  formState: { errors },
+  handleSubmit,
 }) => {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<CreatePredictionFormInputs>({
-    defaultValues: {
-      prediction: '',
-    },
-  })
-
   const onValidSubmission = (data: CreatePredictionFormInputs) => {
-    onSubmit(data, reset)
+    onSubmit(data)
   }
 
   const onInvalidSubmission: SubmitErrorHandler<CreatePredictionFormInputs> = (

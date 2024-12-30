@@ -1,4 +1,4 @@
-import { CreatePredictionFormInputs } from '@/components/molecules/forms/CreatePredictionForm'
+import { CreatePredictionFormInputs } from '@/components/molecules/forms/CreatePredictionForm/CreatePredictionForm'
 import { SelectableQuestions } from '@/components/atoms'
 import { useAuth } from '@/hooks/auth'
 import { useCreatePrediction } from '@/hooks/prediction/useCreatePrediction'

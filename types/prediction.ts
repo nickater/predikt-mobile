@@ -1,23 +1,12 @@
-import {
-  predictionsRowSchema,
-  predictionsInsertSchema,
-  predictionsRelationshipsSchema,
-  predictionsUpdateSchema,
-} from './schemas'
+import { Database } from './database.types'
 
-export const predictionSchema = predictionsRowSchema
+export type PredictionType = Database['public']['Tables']['predictions']['Row']
 
-export type PredictionType = (typeof predictionSchema)['_output']
+export type CreatePredictionType =
+  Database['public']['Tables']['predictions']['Insert']
 
-export const createPredictionSchema = predictionsInsertSchema
-
-export type CreatePredictionType = (typeof createPredictionSchema)['_output']
-
-export const updatePredictionSchema = predictionsUpdateSchema
-
-export type UpdatePredictionType = (typeof updatePredictionSchema)['_output']
-
-export const predictionRelationshipsSchema = predictionsRelationshipsSchema
+export type UpdatePredictionType =
+  Database['public']['Tables']['predictions']['Update']
 
 export type PredictionRelationshipsType =
-  (typeof predictionRelationshipsSchema)['_output']
+  Database['public']['Tables']['predictions']['Relationships']

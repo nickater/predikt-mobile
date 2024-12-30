@@ -1,9 +1,13 @@
-import { Card } from '@/components'
+import { Card, CreatePredictionForm } from '@/components'
+import { useAuth } from '@/hooks/auth'
+import { useCreatePrediction } from '@/hooks/prediction/useCreatePrediction'
 import { useFetchQuestionDetail } from '@/hooks/question/useFetchQuestionDetail'
-import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
+import { formatDateTime } from '@/utils/stringFormat/dateFormatter'
 import { useMemo } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import { ConditionalText, Text } from '../../../atoms'
+import { Text } from '../../../atoms'
+import { CreatePredictionFormInputs } from '../../forms/CreatePredictionForm/CreatePredictionForm'
+import { useCreatePredictionForm } from '../../forms/CreatePredictionForm/useCreatePredictionForm'
 
 interface QuestionDetailProps {
   questionId: string
@@ -19,47 +23,56 @@ export const QuestionDetail = ({
     isLoading,
   } = useFetchQuestionDetail(questionId)
 
+  const createPredictionForm = useCreatePredictionForm()
+
   const formattedDeadline = useMemo(() => {
     if (!question) return ''
     const date = new Date(question.deadline)
-    return formatShortDate(date)
+    return formatDateTime(date)
   }, [question])
 
-  const formattedCreatedAt = useMemo(() => {
-    if (!question || !question.created_at) return ''
-    const date = new Date(question.created_at)
-    return formatShortDate(date)
-  }, [question])
+  const { mutateAsync } = useCreatePrediction()
+  const { session } = useAuth()
 
   if (isLoading) return <Text>Loading...</Text>
 
   if (isError || !question) return <Text>Error: {error?.message}</Text>
 
+  const onSubmit = async (data: CreatePredictionFormInputs) => {
+    console.log(data)
+
+    if (!session?.user) return
+
+    await mutateAsync({
+      user_id: session.user.id,
+      question_id: question.id,
+      prediction: data.prediction,
+    })
+
+    createPredictionForm.reset()
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text variant="header2" position="center" style={styles.title}>
-        {question.title}
-      </Text>
-      <ConditionalText variant="bold" condition={question.description}>
-        {question.description}
-      </ConditionalText>
-      <Card>
-        <View style={styles.row}>
-          <Text style={styles.infoText}>Created: {formattedCreatedAt}</Text>
-          <Text style={styles.infoText}>Deadline: {formattedDeadline}</Text>
-        </View>
-        <View style={styles.row}>
-          {/* <Text style={styles.infoText}>
-            Show Prediction Count:{' '}
-            {question.show_prediction_count ? 'Yes' : 'No'}
-          </Text> */}
-          <Text style={styles.infoText}>
-            Total Predictions: {question.total_predictions}
+      <Card style={{ backgroundColor: '#f9f9f9' }}>
+        <View>
+          <Text variant="header2" style={styles.title}>
+            {question.title}
           </Text>
         </View>
-        <View style={styles.bottomRow}>
-          <Text style={styles.infoText}>View Count: {question.view_count}</Text>
-          <Text style={styles.infoText}>Visibility: {question.visibility}</Text>
+      </Card>
+      <Card>
+        <View>
+          <Text>Deadline: {formattedDeadline}</Text>
+        </View>
+        <View>
+          <Text style={styles.description}>Status: Open</Text>
+        </View>
+      </Card>
+      <Card>
+        <View>
+          <Text>Make your prediction</Text>
+          <CreatePredictionForm {...createPredictionForm} onSubmit={onSubmit} />
         </View>
       </Card>
     </ScrollView>
@@ -75,6 +88,7 @@ const styles = StyleSheet.create({
   },
   description: {
     // marginBottom: 20,
+    color: 'red',
   },
   row: {
     justifyContent: 'space-between',
