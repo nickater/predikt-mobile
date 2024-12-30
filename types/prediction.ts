@@ -1,4 +1,6 @@
 import { Database } from './database.types'
+import { ProfileType } from './profile'
+import { QuestionType } from './question'
 
 export type PredictionType = Database['public']['Tables']['predictions']['Row']
 
@@ -10,3 +12,10 @@ export type UpdatePredictionType =
 
 export type PredictionRelationshipsType =
   Database['public']['Tables']['predictions']['Relationships']
+
+export type PredictionWithRelations =
+  Database['public']['Tables']['predictions']['Row'] & {
+    question: QuestionType & {
+      author: ProfileType
+    }
+  }

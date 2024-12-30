@@ -1,12 +1,12 @@
 import { Text } from '@/components/atoms'
 import { ButtonBar } from '@/components/atoms/ButtonBar'
 import { Divider } from '@/components/atoms/Divider'
-import { PredictionCard } from '@/components/atoms/PredictionCard'
 import { useAuth } from '@/hooks/auth'
 import { useFetchUserPredictions } from '@/hooks/prediction/useFetchUserPredictions'
 import * as React from 'react'
 import { useMemo, useState } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import PredictionList from '../PredictionList'
 
 export const UserPredictions = () => {
   const { session } = useAuth()
@@ -34,32 +34,8 @@ export const UserPredictions = () => {
 
   const questionMap = useMemo(
     () => ({
-      active: (
-        <FlatList
-          data={activePredictions}
-          contentContainerStyle={styles.list}
-          renderItem={({ item }) => (
-            <PredictionCard
-              {...item}
-              questionTitle={item.question.title}
-              authorDisplayName={item.question.author.username}
-            />
-          )}
-        />
-      ),
-      inactive: (
-        <FlatList
-          data={inactivePredictions}
-          contentContainerStyle={styles.list}
-          renderItem={({ item }) => (
-            <PredictionCard
-              {...item}
-              questionTitle={item.question.title}
-              authorDisplayName={item.question.author.username}
-            />
-          )}
-        />
-      ),
+      active: <PredictionList data={activePredictions} />,
+      inactive: <PredictionList data={inactivePredictions} />,
     }),
     [activePredictions, inactivePredictions],
   )
