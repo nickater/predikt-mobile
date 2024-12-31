@@ -51,15 +51,26 @@ export const useAuth = () => {
 
   const signUp = useCallback(
     async (props: SignUpProps) => {
-      const { email, password } = props
-      const { error } = await supabase.auth.signUp({
+      const { email, password, username } = props
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
       })
 
       if (error) Alert.alert('Error', error.message)
+      if (!data) return
+
+      const { user } = data
+
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .upsert([{ id: user.id, username }])
+
+      if (profileError) Alert.alert('Error', profileError.message)
+
+      await prefetchPublicQuestions(queryClient, supabase)
     },
-    [supabase],
+    [queryClient, supabase],
   )
 
   const signOut = useCallback(async () => {

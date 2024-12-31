@@ -13,23 +13,15 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
     control,
     handleSubmit,
     formState: { errors, dirtyFields },
-    setError,
   } = useForm<SignUpFormUserInput>({
     defaultValues: {
-      email: 'nick@mail.co',
-      password: 'password',
+      username: '',
+      email: '',
+      password: '',
     },
   })
 
   const onValidSubmission = (data: SignUpFormUserInput) => {
-    if (data.password !== data.confirmPassword) {
-      setError('confirmPassword', {
-        type: 'manual',
-        message: 'Passwords do not match.',
-      })
-      return
-    }
-
     onSubmit(data)
   }
 
@@ -44,6 +36,25 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
 
   return (
     <View>
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Username"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+          />
+        )}
+        name="username"
+      />
+      {errors.username && <Text>Username is required.</Text>}
+
       <Controller
         control={control}
         rules={{
@@ -82,25 +93,6 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
         name="password"
       />
       {errors.password && <Text>This is required.</Text>}
-
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Confirm Password"
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            secureTextEntry
-          />
-        )}
-        name="confirmPassword"
-      />
       <Button
         title="Submit"
         onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}

@@ -1,7 +1,7 @@
 export type SignUpProps = {
   email: string
-  password: string
   username: string
+  password: string
 }
 
 export type SignInProps = {
