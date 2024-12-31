@@ -9,7 +9,7 @@ import { Text } from '../../../atoms'
 import { CreatePredictionFormInputs } from '../../forms/CreatePredictionForm/CreatePredictionForm'
 import { useCreatePredictionForm } from '../../forms/CreatePredictionForm/useCreatePredictionForm'
 
-interface QuestionDetailProps {
+type QuestionDetailProps = {
   questionId: string
 }
 

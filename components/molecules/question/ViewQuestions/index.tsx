@@ -4,12 +4,16 @@ import { PublicQuestions } from '../PublicQuestions'
 import { UserQuestions } from '../UserQuestions'
 import { ButtonBar } from '@/components/atoms/ButtonBar'
 import { Divider } from '@/components/atoms/Divider'
+import ActionButton from '@/components/atoms/ActionButton'
 
 type ViewQuestionsProps = {
   onQuestionPress: (questionId: string) => void
+  onAddQuestionPress: () => void
 }
+
 export const ViewQuestions: FC<ViewQuestionsProps> = ({
   onQuestionPress,
+  onAddQuestionPress,
 }): React.JSX.Element => {
   const [filter, setFilter] = useState<'public' | 'private'>('public')
 
@@ -33,16 +37,19 @@ export const ViewQuestions: FC<ViewQuestionsProps> = ({
   )
 
   return (
-    <View style={styles.container}>
-      <ButtonBar
-        buttonProps={[
-          { text: 'Public', onPress: handleFilterPress('public') },
-          { text: 'Private', onPress: handleFilterPress('private') },
-        ]}
-      />
-      <Divider />
-      <View style={styles.listContainer}>{questionMap[filter]}</View>
-    </View>
+    <>
+      <View style={styles.container}>
+        <ButtonBar
+          buttonProps={[
+            { text: 'Public', onPress: handleFilterPress('public') },
+            { text: 'Private', onPress: handleFilterPress('private') },
+          ]}
+        />
+        <Divider />
+        <View style={styles.listContainer}>{questionMap[filter]}</View>
+      </View>
+      <ActionButton title="+" onPress={onAddQuestionPress} />
+    </>
   )
 }
 

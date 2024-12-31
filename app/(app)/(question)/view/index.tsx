@@ -9,9 +9,16 @@ export default () => {
     router.push(`/(app)/(question)/question-detail/${questionId}`)
   }
 
+  const handleAddQuestionPress = () => {
+    router.push(`/(app)/(question)/create`)
+  }
+
   return (
     <CustomSafeAreaView style={styles.container}>
-      <ViewQuestions onQuestionPress={handleQuestionPress} />
+      <ViewQuestions
+        onQuestionPress={handleQuestionPress}
+        onAddQuestionPress={handleAddQuestionPress}
+      />
     </CustomSafeAreaView>
   )
 }
