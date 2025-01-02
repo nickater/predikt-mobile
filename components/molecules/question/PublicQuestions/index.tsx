@@ -20,6 +20,8 @@ export const PublicQuestions: FC<PublicQuestionsProps> = ({
 
   if (error || !data) return <Text>Error: {error?.message}</Text>
 
+  console.log(data)
+
   return (
     <SelectableQuestions questions={data} onSelect={handleQuestionSelect} />
   )

@@ -6,9 +6,10 @@ import { Text } from '../Text'
 import { QuestionCardProps } from './types'
 import { getTimeRemaining } from './utils'
 import { Divider } from '../Divider'
+import { FontAwesome } from '@expo/vector-icons'
 
 export const QuestionCard = (props: QuestionCardProps) => {
-  const { title, deadline, predictionCount } = props
+  const { title, deadline, predictionCount, predictionExists } = props
   const formattedDeadline = useMemo(() => {
     const deadlineDate = new Date(deadline)
     return formatShortDate(deadlineDate)
@@ -22,6 +23,14 @@ export const QuestionCard = (props: QuestionCardProps) => {
         <Text variant="bold2" position="center">
           {title}
         </Text>
+        {predictionExists && (
+          <FontAwesome
+            style={{ paddingLeft: 6 }}
+            name="check-circle"
+            size={24}
+            color="green"
+          />
+        )}
       </View>
       <Divider />
       <View style={styles.bottomContainer}>

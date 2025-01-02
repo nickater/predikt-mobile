@@ -5,7 +5,6 @@ import { mapSupabaseError } from '@/utils/supabase/mapError'
 import { PostgrestError } from '@supabase/supabase-js'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSupabase } from '../useSupabase'
-import { getUserPredictionsQueryKey } from '@/queries/prediction/getPredictionsByUser'
 
 export function useCreatePrediction() {
   const client = useSupabase()
@@ -40,12 +39,7 @@ export function useCreatePrediction() {
   }
 
   const onSuccess = async () => {
-    const user = await client.auth.getUser()
-    const userId = user.data.user.id
-    const queryKey = getUserPredictionsQueryKey(userId)
-    queryClient.invalidateQueries({
-      queryKey,
-    })
+    queryClient.invalidateQueries()
   }
 
   return useMutation({ mutationFn, onError, onSuccess })

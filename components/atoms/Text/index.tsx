@@ -10,6 +10,7 @@ export const Text: FC<
   return (
     <RNText
       {...props}
+      lineBreakMode="tail"
       style={[
         styles[variant ?? 'paragraph'],
         styles[position ?? 'left'],

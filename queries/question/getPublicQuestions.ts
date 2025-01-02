@@ -18,7 +18,7 @@ export const getPublicQuestionsQueryFn = () => (client: SupabaseClient) => {
   }
 }
 
-export const getPublicQuestionsQueryKey = () => ['publicQuestions']
+export const getPublicQuestionsQueryKey = () => 'publicQuestions'
 
 // Only used in prefetching in the initial load of the app
 export const prefetchPublicQuestions = async (
@@ -29,7 +29,7 @@ export const prefetchPublicQuestions = async (
   const questionsQueryKey = getPublicQuestionsQueryKey()
 
   client.prefetchQuery({
-    queryKey: questionsQueryKey,
+    queryKey: [questionsQueryKey],
     queryFn: questionsQuery(dbClient),
   })
 }

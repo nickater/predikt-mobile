@@ -11,10 +11,12 @@ import { useCreatePredictionForm } from '../../forms/CreatePredictionForm/useCre
 
 type QuestionDetailProps = {
   questionId: string
+  onPredictionSubmit: () => void
 }
 
 export const QuestionDetail = ({
   questionId,
+  onPredictionSubmit,
 }: QuestionDetailProps): React.JSX.Element => {
   const {
     data: question,
@@ -50,6 +52,8 @@ export const QuestionDetail = ({
     })
 
     createPredictionForm.reset()
+
+    onPredictionSubmit()
   }
 
   return (
@@ -69,12 +73,23 @@ export const QuestionDetail = ({
           <Text style={styles.description}>Status: Open</Text>
         </View>
       </Card>
-      <Card>
-        <View>
-          <Text>Make your prediction</Text>
-          <CreatePredictionForm {...createPredictionForm} onSubmit={onSubmit} />
-        </View>
-      </Card>
+      {!question.predictionExists ? (
+        <Card>
+          <View>
+            <Text>Make your prediction</Text>
+            <CreatePredictionForm
+              {...createPredictionForm}
+              onSubmit={onSubmit}
+            />
+          </View>
+        </Card>
+      ) : (
+        <Card>
+          <View>
+            <Text>You have already made a prediction</Text>
+          </View>
+        </Card>
+      )}
     </ScrollView>
   )
 }

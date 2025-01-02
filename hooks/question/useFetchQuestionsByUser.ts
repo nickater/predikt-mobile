@@ -13,7 +13,7 @@ export function useFetchQuestionsByUser() {
   const supabase = useSupabase()
   const userId = session?.user?.id
 
-  const queryKey = getUserQuestionsQueryKey(userId)
+  const queryKey = [getUserQuestionsQueryKey()]
 
   const queryFn = getUserQuestionsQueryFn(userId)(supabase)
 

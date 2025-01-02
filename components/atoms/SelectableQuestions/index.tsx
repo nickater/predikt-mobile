@@ -4,7 +4,7 @@ import { FlatList, Pressable, StyleSheet, View } from 'react-native'
 import { QuestionCard } from '../QuestionCard'
 
 type SelectableQuestionsProps = {
-  questions: QuestionType[]
+  questions: (QuestionType & { predictionExists: boolean })[]
   onSelect: (question: QuestionType) => void
   selectedQuestionId?: string | null
   showPredictionCount?: boolean
@@ -40,6 +40,7 @@ export const SelectableQuestions: FC<SelectableQuestionsProps> = ({
               title={question.title}
               deadline={question.deadline}
               predictionCount={predictionCount(question)}
+              predictionExists={question.predictionExists}
             />
           </View>
         </Pressable>
