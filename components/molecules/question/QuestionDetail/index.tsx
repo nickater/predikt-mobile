@@ -41,8 +41,6 @@ export const QuestionDetail = ({
   if (isError || !question) return <Text>Error: {error?.message}</Text>
 
   const onSubmit = async (data: CreatePredictionFormInputs) => {
-    console.log(data)
-
     if (!session?.user) return
 
     await mutateAsync({

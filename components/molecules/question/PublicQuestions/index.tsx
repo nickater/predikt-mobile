@@ -1,7 +1,6 @@
 import { useFetchPublicQuestions } from '@/hooks/question/useFetchPublicQuestions'
 import { QuestionType } from '@/types/question'
 import { FC } from 'react'
-import { StyleSheet } from 'react-native'
 import { SelectableQuestions, Text } from '../../../atoms'
 
 type PublicQuestionsProps = {
@@ -27,18 +26,7 @@ export const PublicQuestions: FC<PublicQuestionsProps> = ({
 
   if (error || !data) return <Text>Error: {error?.message}</Text>
 
-  console.log(data)
-
   return (
     <SelectableQuestions questions={data} onSelect={handleQuestionSelect} />
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // padding: 20,
-  },
-  questionSection: {
-    paddingTop: 20,
-  },
-})
