@@ -1,15 +1,26 @@
 import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
+import { FontAwesome } from '@expo/vector-icons'
 import { useMemo } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { Pressable, StyleSheet, View } from 'react-native'
 import { Card } from '../Card'
+import { ConditionalText } from '../ConditionalText'
+import { Divider } from '../Divider'
 import { Text } from '../Text'
 import { QuestionCardProps } from './types'
 import { getTimeRemaining } from './utils'
-import { Divider } from '../Divider'
-import { FontAwesome } from '@expo/vector-icons'
+import { useGetUsernameById } from '@/hooks/profile/useGetUsernameById'
 
 export const QuestionCard = (props: QuestionCardProps) => {
-  const { title, deadline, predictionCount, predictionExists } = props
+  const {
+    id,
+    title,
+    deadline,
+    predictionCount,
+    predictionExists,
+    isSelected,
+    onSelect,
+    authorId,
+  } = props
   const formattedDeadline = useMemo(() => {
     const deadlineDate = new Date(deadline)
     return formatShortDate(deadlineDate)
@@ -17,28 +28,45 @@ export const QuestionCard = (props: QuestionCardProps) => {
 
   const timeRemaining = useMemo(() => getTimeRemaining(deadline), [deadline])
 
+  const { data, isLoading } = useGetUsernameById(authorId)
+
+  const handleSelect = (questionId: string) => {
+    return () => {
+      onSelect(questionId)
+    }
+  }
+
+  if (isLoading) return <Text>Loading...</Text>
+
   return (
-    <Card>
-      <View style={styles.topContainer}>
-        <Text variant="bold2" position="center">
-          {title}
-        </Text>
-        {predictionExists && (
-          <FontAwesome
-            style={{ paddingLeft: 6 }}
-            name="check-circle"
-            size={24}
-            color="green"
-          />
-        )}
+    <Pressable onPress={handleSelect(id)}>
+      <View style={isSelected ? styles.selected : {}}>
+        <Card>
+          <View style={styles.topContainer}>
+            <Text variant="bold2" position="center">
+              {title}
+            </Text>
+            {predictionExists && (
+              <FontAwesome
+                style={{ paddingLeft: 6 }}
+                name="check-circle"
+                size={24}
+                color="green"
+              />
+            )}
+          </View>
+          <ConditionalText condition={data}>Created by: {data}</ConditionalText>
+          <Divider />
+          <View style={styles.bottomContainer}>
+            <Text style={styles.deadline}>Deadline: {formattedDeadline}</Text>
+            <Text style={styles.timeRemaining}>{timeRemaining}</Text>
+          </View>
+          <ConditionalText condition={predictionCount >= 0} variant="small">
+            Predictions: {predictionCount}
+          </ConditionalText>
+        </Card>
       </View>
-      <Divider />
-      <View style={styles.bottomContainer}>
-        <Text style={styles.deadline}>Deadline: {formattedDeadline}</Text>
-        <Text style={styles.timeRemaining}>{timeRemaining}</Text>
-      </View>
-      <Text variant="small">Predictions: {predictionCount}</Text>
-    </Card>
+    </Pressable>
   )
 }
 
@@ -66,5 +94,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingTop: 10,
+  },
+  selected: {
+    backgroundColor: 'lightblue',
+    borderRadius: 10,
   },
 })

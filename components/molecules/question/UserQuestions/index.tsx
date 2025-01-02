@@ -15,6 +15,11 @@ export const UserQuestions: FC<UserQuestionsProps> = ({
   if (!data) return <Text>Loading...</Text>
 
   const handleQuestionSelect = (question: QuestionType) => {
+    if (new Date(question.deadline) < new Date()) {
+      alert('This question has expired.')
+      return
+    }
+
     onSelect(question.id)
   }
 

@@ -19,7 +19,8 @@ export const getUserQuestionsQueryFn =
     }
   }
 
-export const getUserQuestionsQueryKey = () => 'userQuestions'
+export const getUserQuestionsQueryKey = (userId: string) =>
+  `userQuestions-${userId}`
 
 // Only used in prefetching in the initial load of the app
 export const prefetchQuestionsByUser = async (
@@ -28,7 +29,7 @@ export const prefetchQuestionsByUser = async (
   userId: string,
 ) => {
   const questionsQuery = getUserQuestionsQueryFn(userId)
-  const questionsQueryKey = getUserQuestionsQueryKey()
+  const questionsQueryKey = getUserQuestionsQueryKey(userId)
 
   client.prefetchQuery({
     queryKey: [questionsQueryKey],

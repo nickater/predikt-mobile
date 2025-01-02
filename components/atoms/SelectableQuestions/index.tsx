@@ -23,7 +23,7 @@ export const SelectableQuestions: FC<SelectableQuestionsProps> = ({
   }
 
   const predictionCount = (question: QuestionType) => {
-    if (!showPredictionCount) return null
+    if (!showPredictionCount) return -1
     return question.total_predictions
   }
 
@@ -31,20 +31,20 @@ export const SelectableQuestions: FC<SelectableQuestionsProps> = ({
     <FlatList
       data={questions}
       keyExtractor={(item) => item.id}
-      renderItem={({ item: question }) => (
-        <Pressable onPress={handleSelect(question)}>
-          <View
-            style={selectedQuestionId === question.id ? styles.selected : {}}
-          >
-            <QuestionCard
-              title={question.title}
-              deadline={question.deadline}
-              predictionCount={predictionCount(question)}
-              predictionExists={question.predictionExists}
-            />
-          </View>
-        </Pressable>
-      )}
+      renderItem={({ item: question }) => {
+        return (
+          <QuestionCard
+            id={question.id}
+            authorId={question.author_id}
+            isSelected={selectedQuestionId === question.id}
+            title={question.title}
+            deadline={question.deadline}
+            predictionCount={predictionCount(question)}
+            predictionExists={question.predictionExists}
+            onSelect={handleSelect(question)}
+          />
+        )
+      }}
     />
   )
 }

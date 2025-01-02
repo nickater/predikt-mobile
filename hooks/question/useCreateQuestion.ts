@@ -4,7 +4,6 @@ import { mapSupabaseError } from '@/utils/supabase/mapError'
 import { PostgrestError } from '@supabase/supabase-js'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSupabase } from '../useSupabase'
-import { questionQueryKeys } from './queryKeys'
 
 export function useCreateQuestion() {
   const client = useSupabase()
@@ -24,12 +23,7 @@ export function useCreateQuestion() {
   }
 
   const onSuccess = () => {
-    return queryClient.invalidateQueries({
-      queryKey: [
-        questionQueryKeys.userQuestions,
-        questionQueryKeys.publicQuestions,
-      ],
-    })
+    return queryClient.invalidateQueries()
   }
 
   return useMutation({ mutationFn, onError, onSuccess })

@@ -13,6 +13,13 @@ export const PublicQuestions: FC<PublicQuestionsProps> = ({
   const { data, error, isLoading } = useFetchPublicQuestions()
 
   const handleQuestionSelect = (question: QuestionType) => {
+    const hasQuestionDeadlineExpired = new Date(question.deadline) < new Date()
+
+    if (hasQuestionDeadlineExpired) {
+      alert('This question has expired.')
+      return
+    }
+
     onSelect(question.id)
   }
 
