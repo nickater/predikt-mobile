@@ -2,7 +2,6 @@ import { Text } from '@/components/atoms'
 import { Button } from '@/components/atoms/Button'
 import { useAuth } from '@/hooks/auth'
 import { useProfile } from '@/hooks/profile/useGetProfile'
-import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
 export const Profile = () => {

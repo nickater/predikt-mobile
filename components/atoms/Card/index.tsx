@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { Pressable, StyleSheet, ViewProps } from 'react-native'
 
 interface CardProps extends ViewProps {

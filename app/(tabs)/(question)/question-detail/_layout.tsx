@@ -1,6 +1,5 @@
 import { HeaderGoBackButton } from '@/components'
 import { Stack } from 'expo-router'
-import * as React from 'react'
 
 const QuestionDetailLayout = () => {
   return (

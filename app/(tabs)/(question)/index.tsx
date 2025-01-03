@@ -1,6 +1,5 @@
 import { CustomSafeAreaView, ViewQuestions } from '@/components'
 import { useRouter } from 'expo-router'
-import React from 'react'
 import { StyleSheet } from 'react-native'
 
 export default () => {

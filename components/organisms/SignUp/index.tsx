@@ -1,6 +1,6 @@
 import { useAuth } from '@/hooks/auth'
 import { router } from 'expo-router'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { View } from 'react-native'
 import { Text } from '../../atoms'
 import { SignUpForm, SignUpFormUserInput } from '../../molecules'

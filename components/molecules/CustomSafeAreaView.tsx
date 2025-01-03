@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { SafeAreaViewProps } from 'react-native-safe-area-context'
 

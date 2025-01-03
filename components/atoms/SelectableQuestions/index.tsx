@@ -1,5 +1,5 @@
 import { QuestionType } from '@/types/question'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { FlatList } from 'react-native'
 import { QuestionCard } from '../QuestionCard'
 

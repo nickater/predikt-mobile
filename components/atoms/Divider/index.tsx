@@ -1,5 +1,4 @@
 import { useThemeColor } from '@/hooks/useThemeColor'
-import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
 
 export const Divider = () => {

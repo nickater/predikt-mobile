@@ -1,6 +1,6 @@
 import { PredictionType } from '@/types/prediction'
 import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
-import React, { FC, useMemo } from 'react'
+import { FC, useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Card } from '../Card'
 import { ConditionalText } from '../ConditionalText'
