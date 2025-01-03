@@ -1,3 +1,4 @@
+import { PredictionList } from '../PredictionList'
 import { Text } from '@/components/atoms'
 import { ButtonBar } from '@/components/atoms/ButtonBar'
 import { Divider } from '@/components/atoms/Divider'
@@ -5,7 +6,6 @@ import { useAuth } from '@/hooks/auth'
 import { useFetchUserPredictions } from '@/hooks/prediction/useFetchUserPredictions'
 import { useMemo, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import PredictionList from '../PredictionList'
 
 export const UserPredictions = () => {
   const { session } = useAuth()
@@ -58,10 +58,8 @@ export const UserPredictions = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'red',
   },
   list: {
-    // backgroundColor: 'blue',
     flexGrow: 1,
   },
 })

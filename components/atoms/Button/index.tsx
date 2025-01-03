@@ -1,7 +1,6 @@
 import { FC } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 
-import { TouchableOpacity } from 'react-native'
 import { Text } from '../Text'
 
 type ButtonProps = {
@@ -110,5 +109,3 @@ const buttonStyles = StyleSheet.create({
     fontWeight: 'bold',
   },
 })
-
-export default buttonStyles

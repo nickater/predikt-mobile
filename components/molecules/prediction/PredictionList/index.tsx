@@ -7,7 +7,7 @@ interface PredictionListProps {
   data: PredictionWithRelations[]
 }
 
-const PredictionList = ({ data }: PredictionListProps) => {
+export const PredictionList = ({ data }: PredictionListProps) => {
   if (!data) {
     return <LoadingBasicText />
   }
@@ -34,8 +34,6 @@ const PredictionList = ({ data }: PredictionListProps) => {
     />
   )
 }
-
-export default PredictionList
 
 const styles = StyleSheet.create({
   container: {

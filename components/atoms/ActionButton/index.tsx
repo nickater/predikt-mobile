@@ -7,7 +7,7 @@ interface ActionButtonProps {
   style?: ViewStyle
 }
 
-const ActionButton: React.FC<ActionButtonProps> = ({
+export const ActionButton: React.FC<ActionButtonProps> = ({
   title,
   onPress,
   style,
@@ -40,5 +40,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 })
-
-export default ActionButton

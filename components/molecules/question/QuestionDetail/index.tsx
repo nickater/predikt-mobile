@@ -1,12 +1,15 @@
-import { Card, CreatePredictionForm } from '@/components'
+import { Card, Text } from '@/components/atoms'
 import { useAuth } from '@/hooks/auth'
 import { useCreatePrediction } from '@/hooks/prediction/useCreatePrediction'
 import { useFetchQuestionDetail } from '@/hooks/question/useFetchQuestionDetail'
 import { formatDateTime } from '@/utils/stringFormat/dateFormatter'
 import { useMemo } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import { Text } from '../../../atoms'
-import { CreatePredictionFormInputs } from '../../forms/CreatePredictionForm/CreatePredictionForm'
+
+import {
+  CreatePredictionForm,
+  CreatePredictionFormInputs,
+} from '../../forms/CreatePredictionForm/CreatePredictionForm'
 import { useCreatePredictionForm } from '../../forms/CreatePredictionForm/useCreatePredictionForm'
 
 type QuestionDetailProps = {
