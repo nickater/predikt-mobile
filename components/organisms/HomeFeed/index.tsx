@@ -1,5 +1,5 @@
 import { Text } from '@/components/atoms'
-import { useFetchPublicQuestions } from '@/hooks/question/useFetchPublicQuestions'
+import { useFetchPublicQuestions } from '@/hooks'
 import { StyleSheet, View } from 'react-native'
 
 type HomeFeedProps = {

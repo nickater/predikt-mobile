@@ -1,7 +1,7 @@
-import { useFetchPublicQuestions } from '@/hooks/question/useFetchPublicQuestions'
+import { SelectableQuestions, Text } from '@/components/atoms'
+import { useFetchPublicQuestions } from '@/hooks'
 import { QuestionType } from '@/types/question'
 import { FC } from 'react'
-import { SelectableQuestions, Text } from '../../../atoms'
 
 type PublicQuestionsProps = {
   onSelect: (questionId: string) => void

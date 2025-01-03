@@ -1,14 +1,14 @@
 import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
 import { FontAwesome } from '@expo/vector-icons'
 import { useMemo } from 'react'
-import { Pressable, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Card } from '../Card'
 import { ConditionalText } from '../ConditionalText'
 import { Divider } from '../Divider'
 import { Text } from '../Text'
 import { QuestionCardProps } from './types'
 import { getTimeRemaining } from './utils'
-import { useGetUsernameById } from '@/hooks/profile/useGetUsernameById'
+import { useGetUsernameById } from '@/hooks'
 
 export const QuestionCard = (props: QuestionCardProps) => {
   const {

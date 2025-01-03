@@ -1,5 +1,4 @@
-import { useAuth } from '@/hooks/auth'
-import { useCreateQuestion } from '@/hooks/question/useCreateQuestion'
+import { useAuth } from '@/hooks'
 import { ScrollView, StyleSheet } from 'react-native'
 
 import {
@@ -7,6 +6,7 @@ import {
   CreateQuestionFormInputsPick,
 } from '@/components/molecules/forms/CreateQuestionForm'
 import { CreateQuestionType } from '@/types/question'
+import { useCreateQuestion } from '@/hooks'
 
 export const CreateQuestion = (): React.JSX.Element => {
   const { mutate } = useCreateQuestion()

@@ -1,3 +1,3 @@
-import { SignInProps } from '@/hooks/auth/types'
+import { SignInProps } from '@/hooks'
 
 export type SignInUserInput = SignInProps

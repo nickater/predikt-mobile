@@ -1,6 +1,5 @@
 import { Text } from '@/components'
-import { useAuth } from '@/hooks/auth'
-import { useThemeColor } from '@/hooks/useThemeColor'
+import { useAuth, useThemeColor } from '@/hooks'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import { Redirect, Tabs } from 'expo-router'
 

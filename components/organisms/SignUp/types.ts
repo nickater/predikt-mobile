@@ -1,4 +1,4 @@
-import { SignUpProps } from '@/hooks/auth/types'
+import { SignUpProps } from '@/hooks'
 
 export type SignUpUserInput = {
   email: string

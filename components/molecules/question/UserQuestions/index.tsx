@@ -1,7 +1,7 @@
-import { useFetchOwnQuestions } from '@/hooks/question/useFetchOwnQuestions'
+import { useFetchOwnQuestions } from '@/hooks'
 import { QuestionType } from '@/types/question'
 import { FC } from 'react'
-import { SelectableQuestions, Text } from '../../../atoms'
+import { SelectableQuestions, Text } from '@/components/atoms'
 
 type UserQuestionsProps = {
   onSelect: (questionId: string) => void

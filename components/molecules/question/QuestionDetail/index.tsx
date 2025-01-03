@@ -1,7 +1,5 @@
 import { Card, Text } from '@/components/atoms'
-import { useAuth } from '@/hooks/auth'
-import { useCreatePrediction } from '@/hooks/prediction/useCreatePrediction'
-import { useFetchQuestionDetail } from '@/hooks/question/useFetchQuestionDetail'
+import { useAuth, useCreatePrediction, useFetchQuestionDetail } from '@/hooks'
 import { formatDateTime } from '@/utils/stringFormat/dateFormatter'
 import { useMemo } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'

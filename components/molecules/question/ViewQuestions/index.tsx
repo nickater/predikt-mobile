@@ -2,9 +2,7 @@ import { FC, useCallback, useMemo, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { PublicQuestions } from '../PublicQuestions'
 import { UserQuestions } from '../UserQuestions'
-import { ButtonBar } from '@/components/atoms/ButtonBar'
-import { Divider } from '@/components/atoms/Divider'
-import ActionButton from '@/components/atoms/ActionButton'
+import { ActionButton, ButtonBar, Divider } from '@/components/atoms'
 
 type ViewQuestionsProps = {
   onQuestionPress: (questionId: string) => void

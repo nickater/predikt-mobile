@@ -1,9 +1,9 @@
-import { useAuth } from '@/hooks/auth'
+import { Text } from '@/components/atoms'
+import { SignUpForm, SignUpFormUserInput } from '@/components/molecules'
+import { useAuth } from '@/hooks'
 import { router } from 'expo-router'
 import { useState } from 'react'
 import { View } from 'react-native'
-import { Text } from '../../atoms'
-import { SignUpForm, SignUpFormUserInput } from '../../molecules'
 
 export const SignUp = () => {
   const { signUp } = useAuth()
