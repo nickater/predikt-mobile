@@ -1,15 +1,33 @@
-import React from 'react'
-import { View, StyleSheet, ViewProps } from 'react-native'
+import React, { useState } from 'react'
+import { Pressable, StyleSheet, ViewProps } from 'react-native'
 
 interface CardProps extends ViewProps {
   children: React.ReactNode
+  onPress?: () => void
 }
 
-export const Card: React.FC<CardProps> = ({ children, style, ...rest }) => {
+export const Card: React.FC<CardProps> = ({
+  children,
+  style,
+  onPress,
+  ...rest
+}) => {
+  const [isPressed, setIsPressed] = useState(false)
+
   return (
-    <View style={[styles.container, style]} {...rest}>
+    <Pressable
+      style={({ pressed }) => [
+        styles.container,
+        style,
+        pressed || isPressed ? styles.pressed : null,
+      ]}
+      onPressIn={() => setIsPressed(true)}
+      onPressOut={() => setIsPressed(false)}
+      onPress={onPress}
+      {...rest}
+    >
       {children}
-    </View>
+    </Pressable>
   )
 }
 
@@ -20,5 +38,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     borderRadius: 8,
+  },
+  pressed: {
+    backgroundColor: '#e0e0e0',
   },
 })

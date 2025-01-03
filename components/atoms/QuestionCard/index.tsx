@@ -17,7 +17,6 @@ export const QuestionCard = (props: QuestionCardProps) => {
     deadline,
     predictionCount,
     predictionExists,
-    isSelected,
     onSelect,
     authorId,
   } = props
@@ -36,37 +35,33 @@ export const QuestionCard = (props: QuestionCardProps) => {
     }
   }
 
-  if (isLoading) return <Text>Loading...</Text>
+  if (isLoading) return null
 
   return (
-    <Pressable onPress={handleSelect(id)}>
-      <View style={isSelected ? styles.selected : {}}>
-        <Card>
-          <View style={styles.topContainer}>
-            <Text variant="bold2" position="center">
-              {title}
-            </Text>
-            {predictionExists && (
-              <FontAwesome
-                style={{ paddingLeft: 6 }}
-                name="check-circle"
-                size={24}
-                color="green"
-              />
-            )}
-          </View>
-          <ConditionalText condition={data}>Created by: {data}</ConditionalText>
-          <Divider />
-          <View style={styles.bottomContainer}>
-            <Text style={styles.deadline}>Deadline: {formattedDeadline}</Text>
-            <Text style={styles.timeRemaining}>{timeRemaining}</Text>
-          </View>
-          <ConditionalText condition={predictionCount >= 0} variant="small">
-            Predictions: {predictionCount}
-          </ConditionalText>
-        </Card>
+    <Card onPress={handleSelect(id)}>
+      <View style={styles.topContainer}>
+        <Text variant="bold2" position="center">
+          {title}
+        </Text>
+        {predictionExists && (
+          <FontAwesome
+            style={{ paddingLeft: 6 }}
+            name="check-circle"
+            size={24}
+            color="green"
+          />
+        )}
       </View>
-    </Pressable>
+      <ConditionalText condition={data}>Created by: {data}</ConditionalText>
+      <Divider />
+      <View style={styles.bottomContainer}>
+        <Text style={styles.deadline}>Deadline: {formattedDeadline}</Text>
+        <Text style={styles.timeRemaining}>{timeRemaining}</Text>
+      </View>
+      <ConditionalText condition={predictionCount >= 0} variant="small">
+        Predictions: {predictionCount}
+      </ConditionalText>
+    </Card>
   )
 }
 
@@ -97,6 +92,10 @@ const styles = StyleSheet.create({
   },
   selected: {
     backgroundColor: 'lightblue',
-    borderRadius: 10,
+  },
+  pressedIn: {
+    backgroundColor: 'lightblue',
+
+    opacity: 0.5,
   },
 })
