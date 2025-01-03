@@ -16,7 +16,7 @@ export const SignUp = () => {
     try {
       await signUp(data)
       router.replace('/')
-    } catch (err) {
+    } catch {
       setError('Sign up failed. Please try again.')
     } finally {
       setLoading(false)

@@ -1,6 +1,6 @@
 import { useAuth } from '@/hooks/auth'
 import { router } from 'expo-router'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { View } from 'react-native'
 import { Text } from '../../atoms'
 import { SignInForm } from '../../molecules'
@@ -17,7 +17,7 @@ export const SignIn = () => {
     try {
       await signIn(data)
       router.replace('/')
-    } catch (err) {
+    } catch {
       setError('Sign in failed. Please try again.')
     } finally {
       setLoading(false)

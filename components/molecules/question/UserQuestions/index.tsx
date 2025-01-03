@@ -1,7 +1,6 @@
 import { useFetchOwnQuestions } from '@/hooks/question/useFetchOwnQuestions'
 import { QuestionType } from '@/types/question'
 import { FC } from 'react'
-import { StyleSheet } from 'react-native'
 import { SelectableQuestions, Text } from '../../../atoms'
 
 type UserQuestionsProps = {
@@ -31,12 +30,3 @@ export const UserQuestions: FC<UserQuestionsProps> = ({
     />
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // padding: 20,
-  },
-  questionSection: {
-    paddingTop: 20,
-  },
-})

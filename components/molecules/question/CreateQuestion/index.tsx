@@ -1,6 +1,6 @@
 import { useAuth } from '@/hooks/auth'
 import { useCreateQuestion } from '@/hooks/question/useCreateQuestion'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 
 import {
   CreateQuestionForm,

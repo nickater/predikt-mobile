@@ -1,6 +1,6 @@
 import { QuestionType } from '@/types/question'
 import React, { FC } from 'react'
-import { FlatList, Pressable, StyleSheet, View } from 'react-native'
+import { FlatList } from 'react-native'
 import { QuestionCard } from '../QuestionCard'
 
 type SelectableQuestionsProps = {
@@ -48,10 +48,3 @@ export const SelectableQuestions: FC<SelectableQuestionsProps> = ({
     />
   )
 }
-
-const styles = StyleSheet.create({
-  selected: {
-    backgroundColor: 'lightblue',
-    borderRadius: 10,
-  },
-})

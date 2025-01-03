@@ -1,4 +1,6 @@
 import { CreateQuestionType } from '@/types/question'
+import DateTimePicker from '@react-native-community/datetimepicker'
+import { Picker } from '@react-native-picker/picker'
 import { FC, useState } from 'react'
 import {
   Controller,
@@ -6,10 +8,8 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form'
-import { View, StyleSheet, Switch, Platform, Pressable } from 'react-native'
+import { Platform, Pressable, StyleSheet, Switch, View } from 'react-native'
 import { Button, Text, TextInput } from '../../atoms'
-import DateTimePicker from '@react-native-community/datetimepicker'
-import { Picker } from '@react-native-picker/picker'
 
 export type CreateQuestionFormInputsPick = Pick<
   CreateQuestionType,
@@ -55,7 +55,6 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
     handleSubmit,
     reset,
     formState: { errors },
-    watch,
   } = useForm<CreateQuestionFormInputsPick>({
     defaultValues: {
       visibility: 'public',
@@ -65,8 +64,6 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
       allow_anonymous_predictions: false,
     },
   })
-
-  const deadline = watch('deadline')
 
   const onValidSubmission = async (data: CreateQuestionFormInputsPick) => {
     setIsSubmitting(true)
