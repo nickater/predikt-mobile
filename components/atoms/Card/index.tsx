@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, ViewProps } from 'react-native'
 
-interface CardProps extends ViewProps {
+type CardProps = ViewProps & {
   children: React.ReactNode
   onPress?: () => void
 }

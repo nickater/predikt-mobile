@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import { StyleSheet, View, Pressable } from 'react-native'
 import { Text } from '../Text'
 
-interface ButtonBarProps {
+type ButtonBarProps = {
   buttonProps: {
     text: string
     onPress: () => void

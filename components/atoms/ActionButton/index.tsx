@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native'
 import { Text } from '../Text'
 
-interface ActionButtonProps {
+type ActionButtonProps = {
   title: string
   onPress: () => void
   style?: ViewStyle

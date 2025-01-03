@@ -3,7 +3,7 @@ import { PredictionCard } from '@/components/atoms/PredictionCard'
 import { PredictionWithRelations } from '@/types/prediction'
 import { FlatList, StyleSheet, View } from 'react-native'
 
-interface PredictionListProps {
+type PredictionListProps = {
   data: PredictionWithRelations[]
 }
 
