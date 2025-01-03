@@ -12,17 +12,13 @@ export const Card: React.FC<CardProps> = ({
   onPress,
   ...rest
 }) => {
-  const [isPressed, setIsPressed] = useState(false)
-
   return (
     <Pressable
       style={({ pressed }) => [
         styles.container,
         style,
-        pressed || isPressed ? styles.pressed : null,
+        onPress && pressed ? styles.pressed : null,
       ]}
-      onPressIn={() => setIsPressed(true)}
-      onPressOut={() => setIsPressed(false)}
       onPress={onPress}
       {...rest}
     >
