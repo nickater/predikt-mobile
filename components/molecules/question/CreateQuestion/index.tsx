@@ -7,9 +7,16 @@ import {
 } from '@/components/molecules/forms/CreateQuestionForm'
 import { CreateQuestionType } from '@/types/question'
 import { useCreateQuestion } from '@/hooks'
+import { FC } from 'react'
 
-export const CreateQuestion = (): React.JSX.Element => {
-  const { mutate } = useCreateQuestion()
+type CreateQuestionProps = {
+  onQuestionCreated: () => void
+}
+
+export const CreateQuestion: FC<CreateQuestionProps> = ({
+  onQuestionCreated,
+}) => {
+  const { mutateAsync } = useCreateQuestion()
   const { session } = useAuth()
 
   const user = session?.user
@@ -42,7 +49,9 @@ export const CreateQuestion = (): React.JSX.Element => {
       deadline: new Date(input.deadline).toISOString(),
     }
 
-    mutate(question)
+    await mutateAsync(question)
+
+    onQuestionCreated()
   }
 
   return (

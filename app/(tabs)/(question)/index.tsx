@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native'
 export default () => {
   const router = useRouter()
   const handleQuestionPress = (questionId: string) => {
-    router.push(`/(tabs)/(question)/question-detail/${questionId}`)
+    router.push(`/(tabs)/(question)/detail/${questionId}`)
   }
 
   const handleAddQuestionPress = () => {
