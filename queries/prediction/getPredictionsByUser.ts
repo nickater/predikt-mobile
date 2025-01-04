@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@/supabase'
+import { SupabaseClient } from '@/libs/supabase/types'
 import { PredictionWithRelations } from '@/types/prediction'
 import { QueryClient } from '@tanstack/react-query'
 

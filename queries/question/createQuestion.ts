@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@/supabase'
+import { SupabaseClient } from '@/libs/supabase/types'
 import { CreateQuestionType } from '@/types/question'
 
 export function createQuestion(

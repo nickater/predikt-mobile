@@ -1,4 +1,5 @@
-import 'react-native-reanimated'
+import '@/libs/reanimated.config'
+
 import { Providers } from '@/providers'
 import { Stack } from 'expo-router'
 

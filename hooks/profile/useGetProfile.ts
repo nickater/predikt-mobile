@@ -2,7 +2,7 @@ import { getProfileById } from '@/queries/profile/getProfileById'
 import { useQuery } from '@tanstack/react-query'
 import { useSupabase } from '../useSupabase'
 import { useAuth } from '../auth'
-import { SupabaseClient } from '@/supabase'
+import { SupabaseClient } from '@/libs/supabase/types'
 
 const ONE_HOUR = 1000 * 60 * 60
 

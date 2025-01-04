@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@/supabase'
+import { SupabaseClient } from '@/libs/supabase/types'
 import { CreatePredictionType } from '@/types/prediction'
 
 export function createPrediction(

@@ -39,14 +39,16 @@ export const useAuth = () => {
 
     if (error) {
       Alert.alert('Error', error.message)
-      return
+      return false
     }
 
-    if (!session) return
+    if (!session) return false
 
     await prefetchPublicQuestions(queryClient, supabase)
     await prefetchQuestionsByUser(queryClient, supabase, session.user.id)
     await prefetchPredictionsByUser(queryClient, supabase, session.user.id)
+
+    return true
   }
 
   const signUp = useCallback(
@@ -57,8 +59,11 @@ export const useAuth = () => {
         password,
       })
 
-      if (error) Alert.alert('Error', error.message)
-      if (!data) return
+      if (error) {
+        Alert.alert('Error', error.message)
+        return false
+      }
+      if (!data) return false
 
       const { user } = data
 
@@ -66,9 +71,14 @@ export const useAuth = () => {
         .from('profiles')
         .upsert([{ id: user.id, username }])
 
-      if (profileError) Alert.alert('Error', profileError.message)
+      if (profileError) {
+        Alert.alert('Error', profileError.message)
+        return false
+      }
 
       await prefetchPublicQuestions(queryClient, supabase)
+
+      return true
     },
     [queryClient, supabase],
   )

@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@/supabase'
+import { SupabaseClient } from '@/libs/supabase/types'
 import { QuestionType } from '@/types/question'
 
 export type QuestionWithPredictionCount = QuestionType & {

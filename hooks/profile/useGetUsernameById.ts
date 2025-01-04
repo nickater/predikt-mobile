@@ -1,5 +1,5 @@
 import { getUsernameById } from '@/queries/profile/getUsernameById'
-import { SupabaseClient } from '@/supabase'
+import { SupabaseClient } from '@/libs/supabase/types'
 import { useQuery } from '@tanstack/react-query'
 import { useSupabase } from '../useSupabase'
 

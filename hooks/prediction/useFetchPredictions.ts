@@ -2,7 +2,7 @@ import { getPredictionById } from '@/queries/prediction/getPrediction'
 import { PredictionType } from '@/types/prediction'
 import { useQuery } from '@tanstack/react-query'
 import { useSupabase } from '../useSupabase'
-import { SupabaseClient } from '@/supabase'
+import { SupabaseClient } from '@/libs/supabase/types'
 
 const ONE_HOUR = 1000 * 60 * 60
 

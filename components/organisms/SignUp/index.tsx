@@ -1,12 +1,13 @@
 import { Text } from '@/components/atoms'
 import { SignUpForm, SignUpFormUserInput } from '@/components/molecules'
 import { useAuth } from '@/hooks'
-import { router } from 'expo-router'
+import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { View } from 'react-native'
 
 export const SignUp = () => {
   const { signUp } = useAuth()
+  const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -14,8 +15,11 @@ export const SignUp = () => {
     setLoading(true)
     setError(null)
     try {
-      await signUp(data)
-      router.replace('/')
+      const result = await signUp(data)
+
+      if (result) {
+        router.replace('/')
+      }
     } catch {
       setError('Sign up failed. Please try again.')
     } finally {

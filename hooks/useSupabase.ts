@@ -1,4 +1,4 @@
-import { supabase } from '@/supabase'
+import { supabase } from '@/libs/supabase.config'
 import { useMemo } from 'react'
 
 export function useSupabase() {

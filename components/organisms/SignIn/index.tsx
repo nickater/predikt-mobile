@@ -16,8 +16,11 @@ export const SignIn = () => {
     setLoading(true)
     setError(null)
     try {
-      await signIn(data)
-      router.replace('/')
+      const result = await signIn(data)
+
+      if (result) {
+        router.replace('/')
+      }
     } catch {
       setError('Sign in failed. Please try again.')
     } finally {

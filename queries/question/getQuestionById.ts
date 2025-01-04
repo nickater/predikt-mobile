@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@/supabase'
+import { SupabaseClient } from '@/libs/supabase/types'
 
 export function getQuestionById(client: SupabaseClient, questionId: string) {
   return client

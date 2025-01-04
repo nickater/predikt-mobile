@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@/supabase'
+import { SupabaseClient } from '@/libs/supabase/types'
 import { PredictionType } from '@/types/prediction'
 
 // get a single prediction with its question title

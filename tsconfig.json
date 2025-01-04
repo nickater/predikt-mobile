@@ -5,6 +5,12 @@
       "@/*": [
         "./*"
       ],
+      "@/assets/*": [
+        "./assets/*"
+      ],
+      "@/libs/*": [
+        "./libs/*"
+      ],
       "@/components/*": [
         "./components/*"
       ],
