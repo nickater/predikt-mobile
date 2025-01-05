@@ -1,6 +1,8 @@
+import { Button, Text, TextInput } from '@/components/atoms'
 import { CreateQuestionType } from '@/types/question'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { Picker } from '@react-native-picker/picker'
+import RadioGroup from 'react-native-ui-lib/radioGroup'
+import RadioButton from 'react-native-ui-lib/radioButton'
 import { FC, useState } from 'react'
 import {
   Controller,
@@ -8,16 +10,11 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form'
-import { Platform, Pressable, StyleSheet, Switch, View } from 'react-native'
-import { Button, Text, TextInput } from '../../atoms'
+import { Platform, Pressable, StyleSheet, View } from 'react-native'
 
 export type CreateQuestionFormInputsPick = Pick<
   CreateQuestionType,
-  | 'visibility'
-  | 'title'
-  | 'description'
-  | 'deadline'
-  | 'allow_anonymous_predictions'
+  'visibility' | 'title' | 'description' | 'deadline'
 >
 
 export type CreateQuestionFormProps = {
@@ -61,7 +58,6 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
       title: '',
       description: '',
       deadline: new Date().toISOString(),
-      allow_anonymous_predictions: false,
     },
   })
 
@@ -182,37 +178,25 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
         {errors.deadline && (
           <Text style={styles.errorText}>{errors.deadline.message}</Text>
         )}
-
         <Text style={styles.label}>Visibility</Text>
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
-            <Picker
-              selectedValue={value}
+            <RadioGroup
+              initialValue={value}
               onValueChange={onChange}
-              style={styles.picker}
+              marginT-16
             >
-              <Picker.Item label="Public" value="public" />
-              <Picker.Item label="Private" value="private" />
-            </Picker>
+              <RadioButton value={'public'} label={'Public'} />
+              <RadioButton marginT-10 value={'personal'} label={'Personal'} />
+            </RadioGroup>
           )}
           name="visibility"
         />
-
-        <View style={styles.switchContainer}>
-          <Text style={styles.label}>Allow Anonymous Predictions</Text>
-          <Controller
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <Switch onValueChange={onChange} value={!!value} />
-            )}
-            name="allow_anonymous_predictions"
-          />
-        </View>
       </View>
 
-      <Button
-        title={isSubmitting ? 'Submitting...' : 'Submit'}
+      <Button.Primary
+        label={isSubmitting ? 'Submitting...' : 'Submit'}
         onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}
         disabled={isSubmitting}
       />
@@ -233,7 +217,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   section: {
-    gap: 12,
+    // gap: 12,
   },
   sectionTitle: {
     fontSize: 18,
@@ -289,7 +273,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   iosDatePicker: {
-    height: 180,
+    height: 160,
   },
   pickerContainer: {
     borderWidth: 1,

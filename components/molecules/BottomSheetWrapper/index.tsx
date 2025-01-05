@@ -5,8 +5,8 @@ import { View } from 'react-native'
 interface BottomSheetWrapperProps {
   children: React.ReactNode
   show: boolean
-  onClose: () => void
-  onOpen: () => void
+  onClose?: () => void
+  onOpen?: () => void
 }
 
 export const BottomSheetWrapper: React.FC<
@@ -14,7 +14,7 @@ export const BottomSheetWrapper: React.FC<
 > = ({ children, show, onClose, onOpen }) => {
   const bottomSheetRef = useRef<BottomSheet>(null)
 
-  const snapPoints = ['40%']
+  const snapPoints = ['50%', '90%']
 
   const handleSheetChanges = useCallback(
     (index: number) => {
@@ -39,8 +39,8 @@ export const BottomSheetWrapper: React.FC<
       snapPoints={snapPoints}
       ref={bottomSheetRef}
       onChange={handleSheetChanges}
-      enablePanDownToClose
       backdropComponent={() => <View style={{ backgroundColor: 'grey' }} />}
+      enablePanDownToClose
       index={-1}
     >
       <BottomSheetView style={{ padding: 16 }}>{children}</BottomSheetView>

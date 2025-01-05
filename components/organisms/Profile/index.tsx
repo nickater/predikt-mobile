@@ -1,7 +1,9 @@
-import { Button } from '@/components/atoms/Button'
-import { BottomSheetWrapper } from '@/components/molecules/BottomSheetWrapper'
-import { UpdatePassword } from '@/components/molecules/profile/UpdatePassword'
-import { UpdateUsername } from '@/components/molecules/profile/UpdateUsername'
+import { Button } from '@/components/atoms'
+import {
+  BottomSheetWrapper,
+  UpdatePassword,
+  UpdateUsername,
+} from '@/components/molecules'
 import { useAuth, useUpdateUsername } from '@/hooks'
 import { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
@@ -33,10 +35,11 @@ export const Profile = () => {
 
   return (
     <View style={styles.container}>
-      <Button title="Sign Out" onPress={signOut} />
-      <Button title="Update Username" onPress={showUpdateUsername} />
-
-      <Button title="Update Password" onPress={showUpdatePassword} />
+      <View style={styles.credentialsContainer}>
+        <Button.Primary label="Update Username" onPress={showUpdateUsername} />
+        <Button.Primary label="Update Password" onPress={showUpdatePassword} />
+        <Button.Primary label="Sign Out" onPress={signOut} />
+      </View>
       <BottomSheetWrapper
         show={updateUsernameVisible}
         onClose={() => setUpdateUsernameVisible(false)}
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   credentialsContainer: {
-    flexGrow: 1,
+    marginTop: 16,
     justifyContent: 'center',
     gap: 16,
   },

@@ -52,8 +52,8 @@ export const CreatePredictionForm: FC<CreatePredictionFormProps> = ({
       />
       {errors.prediction && <Text>This is required.</Text>}
 
-      <Button
-        title="Submit"
+      <Button.Primary
+        label="Submit"
         onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}
       />
     </View>

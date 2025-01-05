@@ -46,8 +46,8 @@ export const UpdateUsername: FC<UpdateUsernameProps> = ({ onSubmit }) => {
         )}
       />
 
-      <Button
-        title="Update Username"
+      <Button.Primary
+        label="Update Username"
         onPress={handleSubmit(handleUpdateUsername)}
       />
     </View>

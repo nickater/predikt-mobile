@@ -94,8 +94,8 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
         name="password"
       />
       {errors.password && <Text>This is required.</Text>}
-      <Button
-        title="Submit"
+      <Button.Primary
+        label="Submit"
         onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}
         disabled={isButtonDisabled}
       />

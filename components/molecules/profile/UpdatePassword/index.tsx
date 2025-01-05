@@ -80,8 +80,8 @@ export const UpdatePassword: FC<UpdatePasswordProps> = () => {
         )}
       />
 
-      <Button
-        title="Update Password"
+      <Button.Primary
+        label="Update Password"
         onPress={handleSubmit(handleUpdatePassword)}
       />
     </View>

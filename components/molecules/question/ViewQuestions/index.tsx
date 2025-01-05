@@ -41,7 +41,7 @@ export const ViewQuestions: FC<ViewQuestionsProps> = ({
         <ButtonBar
           buttonProps={[
             { text: 'Public', onPress: handleFilterPress('public') },
-            { text: 'Private', onPress: handleFilterPress('private') },
+            { text: 'Personal', onPress: handleFilterPress('private') },
           ]}
         />
         <Divider />

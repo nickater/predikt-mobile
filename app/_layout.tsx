@@ -1,4 +1,5 @@
 import '@/libs/reanimated.config'
+import '@/libs/RNUILib'
 
 import { Providers } from '@/providers'
 import { Stack } from 'expo-router'

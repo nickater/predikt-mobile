@@ -1,3 +1,5 @@
 export * from './forms'
 export * from './prediction'
 export * from './question'
+export * from './profile'
+export * from './BottomSheetWrapper'

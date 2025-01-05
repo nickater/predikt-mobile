@@ -2,22 +2,27 @@ import { PredictionWithRelations } from '@/types/prediction'
 import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
 import { FC, useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
+import { useSharedValue } from 'react-native-reanimated'
+import { AccordionItem } from '../AccordionView'
 import { Card } from '../Card'
 import { ConditionalText } from '../ConditionalText'
-import { Divider } from '../Divider'
 import { Text } from '../Text'
 
 type PredictionCardProps = PredictionWithRelations
 
 export const PredictionCard: FC<PredictionCardProps> = ({
   created_at,
-  is_anonymous,
   prediction,
   question: {
     author: { username: authorDisplayName } = {},
     title: questionTitle,
   },
 }) => {
+  const open = useSharedValue(false)
+  const onPress = () => {
+    open.value = !open.value
+  }
+
   const formattedCreatedAt = useMemo(() => {
     if (!created_at) return ''
 
@@ -26,67 +31,42 @@ export const PredictionCard: FC<PredictionCardProps> = ({
   }, [created_at])
 
   return (
-    <Card>
-      <View style={styles.questionContainer}>
-        <View style={styles.questionTopRow}>
+    <Card
+      showPressedColor={false}
+      style={{ backgroundColor: 'f5f5f5' }}
+      onPress={onPress}
+    >
+      <View>
+        <View style={styles.predictionTopRow}>
+          <Text>{formattedCreatedAt}</Text>
           <ConditionalText condition={authorDisplayName}>
             {authorDisplayName}
           </ConditionalText>
-          <Text position="center" variant="bold">
-            QUESTION
-          </Text>
-          <Text>{formattedCreatedAt}</Text>
         </View>
-        <View style={styles.questionBottomRow}>
-          <Text>{questionTitle}</Text>
+        <View>
+          <Text variant="bold">{questionTitle}</Text>
         </View>
       </View>
-      <Divider />
-      <View style={styles.predictionContainer}>
-        <View style={styles.predictionTopRow}>
-          <Text position="center" variant="bold">
-            PREDICTION
-          </Text>
-        </View>
+      <AccordionItem isExpanded={open} viewKey="Accordion">
         <View style={styles.predictionBottomRow}>
           <Text>{prediction}</Text>
         </View>
-        <View style={styles.anonymousContainer}>
-          <Text>Anonymous: {is_anonymous ? 'Yes' : 'No'}</Text>
-        </View>
-      </View>
+      </AccordionItem>
     </Card>
   )
 }
 
 const styles = StyleSheet.create({
-  questionContainer: {
-    paddingVertical: 18,
-  },
-  questionTopRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  questionBottomRow: {
-    backgroundColor: '#f5f5f5',
-    padding: 10,
-  },
-  predictionContainer: {
-    paddingTop: 18,
-  },
   predictionTopRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     marginBottom: 10,
   },
   predictionBottomRow: {
+    marginTop: 20,
     padding: 10,
     backgroundColor: '#f5f5f5',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  anonymousContainer: {
-    marginTop: 10,
+    borderRadius: 8,
+    width: '100%',
   },
 })

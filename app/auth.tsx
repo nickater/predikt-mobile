@@ -1,4 +1,4 @@
-import { Button, CustomSafeAreaView, SignIn, SignUp } from '@/components'
+import { CustomSafeAreaView, SignIn, SignUp, Button } from '@/components'
 import { useAuth } from '@/hooks'
 import { Redirect } from 'expo-router'
 import { useState } from 'react'
@@ -26,13 +26,12 @@ export default function Auth() {
         }}
       >
         {shouldShowRegistration ? <SignUp /> : <SignIn />}
-        <Button
-          title={
+        <Button.Primary
+          label={
             shouldShowRegistration
               ? 'Sign in to existing account'
               : 'Create account'
           }
-          type="link"
           onPress={handleToggle}
         />
       </KeyboardAwareScrollView>
