@@ -1,10 +1,10 @@
-import { PredictionList } from '../PredictionList'
-import { Text } from '@/components/atoms'
+import { LoadingBasicText, LoadingSpinner } from '@/components/atoms'
 import { ButtonBar } from '@/components/atoms/ButtonBar'
 import { Divider } from '@/components/atoms/Divider'
 import { useAuth, useFetchUserPredictions } from '@/hooks'
 import { useMemo, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
+import { PredictionList } from '../PredictionList'
 
 export const UserPredictions = () => {
   const { session } = useAuth()
@@ -38,13 +38,18 @@ export const UserPredictions = () => {
     [activePredictions, inactivePredictions],
   )
 
-  if (isLoading) return <Text>Loading...</Text>
-
+  
   const buttons = [
     { text: 'Active', onPress: () => setListFilter('active') },
     { text: 'Inactive', onPress: () => setListFilter('inactive') },
   ]
 
+  if (isLoading) return <LoadingSpinner />
+  
+  if (!predictions || predictions.length === 0) {
+    return <LoadingBasicText altText='No predictions found' />
+  }
+  
   return (
     <View style={styles.container}>
       <ButtonBar buttonProps={buttons} />

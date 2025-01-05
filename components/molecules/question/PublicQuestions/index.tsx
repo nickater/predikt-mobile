@@ -1,4 +1,5 @@
 import { SelectableQuestions, Text } from '@/components/atoms'
+import { LoadingSpinner } from '@/components/atoms/Loading/LoadingSpinner'
 import { useFetchPublicQuestions } from '@/hooks'
 import { QuestionType } from '@/types/question'
 import { FC } from 'react'
@@ -12,17 +13,10 @@ export const PublicQuestions: FC<PublicQuestionsProps> = ({
   const { data, error, isLoading } = useFetchPublicQuestions()
 
   const handleQuestionSelect = (question: QuestionType) => {
-    const hasQuestionDeadlineExpired = new Date(question.deadline) < new Date()
-
-    if (hasQuestionDeadlineExpired) {
-      alert('This question has expired.')
-      return
-    }
-
     onSelect(question.id)
   }
 
-  if (isLoading) return <Text>Loading...</Text>
+  if (isLoading) return <LoadingSpinner />
 
   if (error || !data) return <Text>Error: {error?.message}</Text>
 

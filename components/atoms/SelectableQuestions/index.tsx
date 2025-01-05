@@ -2,6 +2,7 @@ import { QuestionType } from '@/types/question'
 import { FC } from 'react'
 import { FlatList, StyleSheet } from 'react-native'
 import { QuestionCard } from '../QuestionCard'
+import { LoadingBasicText } from '../Loading'
 
 type SelectableQuestionsProps = {
   questions: (QuestionType & { predictionExists: boolean })[]
@@ -25,6 +26,10 @@ export const SelectableQuestions: FC<SelectableQuestionsProps> = ({
   const predictionCount = (question: QuestionType) => {
     if (!showPredictionCount) return -1
     return question.total_predictions
+  }
+
+  if (questions.length === 0) {
+    return <LoadingBasicText altText="No questions found" />
   }
 
   return (

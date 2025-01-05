@@ -5,7 +5,7 @@ import { questionQueryKeys } from './queryKeys'
 import { checkIfPredictionExists } from '@/queries/prediction/checkIfPredictionExists'
 import { useAuth } from '../auth'
 
-export const useFetchQuestionDetail = (questionId?: string) => {
+export const useFetchQuestionDetail = (questionId: string) => {
   const supabase = useSupabase()
   const { session } = useAuth()
 
@@ -20,6 +20,8 @@ export const useFetchQuestionDetail = (questionId?: string) => {
       session?.user?.id,
     )
 
+    console.log('predictionExists', predictionExists)
+
     return {
       ...data,
       predictionExists,
@@ -29,6 +31,6 @@ export const useFetchQuestionDetail = (questionId?: string) => {
   return useQuery({
     queryKey,
     queryFn,
-    enabled: !!questionId,
+    enabled: !!questionId && !!session?.user,  
   })
 }

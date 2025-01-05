@@ -10,11 +10,17 @@ import {
   CreatePredictionFormInputs,
 } from '../../forms/CreatePredictionForm/CreatePredictionForm'
 import { useCreatePredictionForm } from '../../forms/CreatePredictionForm/useCreatePredictionForm'
+import { ShowPredictions } from '../../prediction/ShowPredictions'
 
 type QuestionDetailProps = {
   questionId: string
   onPredictionSubmit: () => void
 }
+
+const USER_PREDICTION_EXISTS = 'You have already made a prediction'
+const USER_PREDICTION_DOES_NOT_EXIST = 'You have not made a prediction'
+
+const PREDICTION_DEADLINE_PASSED = 'The deadline for predictions has passed'
 
 export const QuestionDetail = ({
   questionId,
@@ -26,8 +32,43 @@ export const QuestionDetail = ({
     error,
     isLoading,
   } = useFetchQuestionDetail(questionId)
-
+  const { mutateAsync } = useCreatePrediction()
+  const { session } = useAuth()
   const createPredictionForm = useCreatePredictionForm()
+
+  const hasQuestionDeadlinePassed = useMemo(() => {
+    if (!question) return false
+    const deadline = new Date(question.deadline)
+    const now = new Date()
+    return now > deadline
+  }, [question])
+
+  const allowPrediction = useMemo(() => {
+    if (!question) return false
+
+    if (hasQuestionDeadlinePassed) return false
+
+    if (question.predictionExists) return false
+
+    return true
+
+  }, [question, hasQuestionDeadlinePassed])
+
+  const showPredictions = useMemo(() => {
+    if (!question) return false
+
+    if (hasQuestionDeadlinePassed) return true
+  }, [question, hasQuestionDeadlinePassed])
+
+  const userPredictionStatus = useMemo(() => {
+    if (!question) return ''
+
+    if (question.predictionExists) return USER_PREDICTION_EXISTS
+
+    if (hasQuestionDeadlinePassed) return PREDICTION_DEADLINE_PASSED
+
+    return USER_PREDICTION_DOES_NOT_EXIST
+  }, [question, hasQuestionDeadlinePassed])
 
   const formattedDeadline = useMemo(() => {
     if (!question) return ''
@@ -35,9 +76,7 @@ export const QuestionDetail = ({
     return formatDateTime(date)
   }, [question])
 
-  const { mutateAsync } = useCreatePrediction()
-  const { session } = useAuth()
-
+  
   if (isLoading) return <Text>Loading...</Text>
 
   if (isError || !question) return <Text>Error: {error?.message}</Text>
@@ -63,17 +102,22 @@ export const QuestionDetail = ({
           <Text variant="header2" style={styles.title}>
             {question.title}
           </Text>
+
+          <Text>{question.description}</Text>
         </View>
       </Card>
       <Card>
         <View>
           <Text>Deadline: {formattedDeadline}</Text>
         </View>
-        <View>
-          <Text style={styles.description}>Status: Open</Text>
+        <View style={{paddingTop: 10}}>
+          <Text style={styles.description}>Status: {`${hasQuestionDeadlinePassed ? 'Closed' : 'Open'}`}</Text>
+        </View>
+        <View style={{paddingTop: 10}}>
+          <Text>{userPredictionStatus}</Text>
         </View>
       </Card>
-      {!question.predictionExists ? (
+      {allowPrediction ? (
         <Card>
           <View>
             <Text>Make your prediction</Text>
@@ -83,13 +127,12 @@ export const QuestionDetail = ({
             />
           </View>
         </Card>
-      ) : (
-        <Card>
-          <View>
-            <Text>You have already made a prediction</Text>
-          </View>
-        </Card>
-      )}
+      ) : null}
+
+      { showPredictions ? (
+        <ShowPredictions questionId={question.id} show />
+      ) : null
+      }
     </KeyboardAwareScrollView>
   )
 }

@@ -1,32 +1,29 @@
-import { getPredictionById } from '@/queries/prediction/getPrediction'
-import { PredictionType } from '@/types/prediction'
+import { getPredictionsByQuestionId } from '@/queries/prediction/getPredictionsByQuestionId'
+import { QuestionType } from '@/types/question'
 import { useQuery } from '@tanstack/react-query'
-import { useSupabase } from '../useSupabase'
-import { SupabaseClient } from '@/libs/supabase/types'
 
 const ONE_HOUR = 1000 * 60 * 60
 
-export const getPredictionQueryFn =
-  (predictionId: PredictionType['id']) => (client: SupabaseClient) => {
-    return async () => {
-      const predictionResult = await getPredictionById(client, predictionId)
-      return predictionResult.data
-    }
+export const getPredictionsByQuestionIdQueryFn = async (questionId: QuestionType['id']) => {
+  const { data, error } = await getPredictionsByQuestionId(questionId)
+
+  if (error) {
+    throw new Error(error.message)
   }
 
-export const getPredictionQueryKey = (predictionId: PredictionType['id']) => [
-  'prediction',
-  predictionId,
+  return data
+}
+  
+
+export const getPredictionsByQuestionIdQueryKey = (questionId: QuestionType['id']) => [
+  'predictionsByQuestionId',
+  questionId,
 ]
 
-export function useFetchPredictions(predictionId: PredictionType['id']) {
-  const client = useSupabase()
+export function useFetchPredictions(questionId: QuestionType['id']) {
+  const queryKey = getPredictionsByQuestionIdQueryKey(questionId)
 
-  const queryKey = getPredictionQueryKey(predictionId)
-
-  const queryFnWithoutClient = getPredictionQueryFn(predictionId)
-
-  const queryFn = queryFnWithoutClient(client)
+  const queryFn = () => getPredictionsByQuestionIdQueryFn(questionId)
 
   return useQuery({ queryKey, queryFn, staleTime: ONE_HOUR })
 }

@@ -4,6 +4,7 @@ import {
   getUserPredictionsQueryFn,
   getUserPredictionsQueryKey,
 } from '@/queries/prediction/getPredictionsByUser'
+import { useAuth } from '../auth'
 
 export type UseFetchUserPredictionsReturnType = ReturnType<
   typeof useFetchUserPredictions
@@ -11,8 +12,11 @@ export type UseFetchUserPredictionsReturnType = ReturnType<
 
 const ONE_HOUR = 1000 * 60 * 60
 
-export function useFetchUserPredictions(userId?: string) {
+export function useFetchUserPredictions(_userId?: string) {
   const client = useSupabase()
+  const { session } = useAuth()
+
+  const userId = _userId || session?.user?.id
 
   const queryKey = getUserPredictionsQueryKey(userId!)
 

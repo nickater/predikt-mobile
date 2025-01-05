@@ -1,24 +1,12 @@
-import { LoadingBasicText, Text } from '@/components/atoms'
 import { PredictionCard } from '@/components/atoms/PredictionCard'
 import { PredictionWithRelations } from '@/types/prediction'
-import { FlatList, StyleSheet, View } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 
 type PredictionListProps = {
   data: PredictionWithRelations[]
 }
 
 export const PredictionList = ({ data }: PredictionListProps) => {
-  if (!data) {
-    return <LoadingBasicText />
-  }
-
-  if (data.length === 0) {
-    return (
-      <View style={styles.noDataContainer}>
-        <Text position="center">No predictions found</Text>
-      </View>
-    )
-  }
 
   return (
     <FlatList
@@ -27,8 +15,6 @@ export const PredictionList = ({ data }: PredictionListProps) => {
       renderItem={({ item }) => (
         <PredictionCard
           {...item}
-          questionTitle={item.question.title}
-          authorDisplayName={item.question.author.username}
         />
       )}
     />
@@ -38,9 +24,5 @@ export const PredictionList = ({ data }: PredictionListProps) => {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 16,
-  },
-  noDataContainer: {
-    flex: 1,
-    justifyContent: 'center',
   },
 })

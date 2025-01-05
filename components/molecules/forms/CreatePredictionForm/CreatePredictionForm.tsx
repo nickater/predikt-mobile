@@ -54,9 +54,7 @@ export const CreatePredictionForm: FC<CreatePredictionFormProps> = ({
 
       <Button
         title="Submit"
-        onPress={async () =>
-          handleSubmit(onValidSubmission, onInvalidSubmission)
-        }
+        onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}
       />
     </View>
   )

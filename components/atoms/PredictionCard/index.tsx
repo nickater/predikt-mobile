@@ -1,4 +1,4 @@
-import { PredictionType } from '@/types/prediction'
+import { PredictionWithRelations } from '@/types/prediction'
 import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
 import { FC, useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
@@ -7,17 +7,13 @@ import { ConditionalText } from '../ConditionalText'
 import { Divider } from '../Divider'
 import { Text } from '../Text'
 
-type PredictionCardProps = PredictionType & {
-  questionTitle: string
-  authorDisplayName: string | null
-}
+type PredictionCardProps = PredictionWithRelations 
 
 export const PredictionCard: FC<PredictionCardProps> = ({
   created_at,
   is_anonymous,
   prediction,
-  authorDisplayName,
-  questionTitle,
+  question: { author: { username: authorDisplayName } = {}, title: questionTitle },
 }) => {
   const formattedCreatedAt = useMemo(() => {
     if (!created_at) return ''

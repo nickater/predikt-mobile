@@ -5,5 +5,5 @@ export function createPrediction(
   client: SupabaseClient,
   prediction: CreatePredictionType,
 ) {
-  return client.from('predictions').insert(prediction)
+  return client.from('predictions').insert(prediction).throwOnError().select()
 }

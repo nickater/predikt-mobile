@@ -1,9 +1,13 @@
+import { FC } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-export const LoadingBasicText: React.FC = () => {
+type LoadingBasicTextProps = {
+  altText?: string
+}
+export const LoadingBasicText: FC<LoadingBasicTextProps> = ({altText}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Loading...</Text>
+      <Text style={styles.text}>{altText || 'Loading...'}</Text>
     </View>
   )
 }
