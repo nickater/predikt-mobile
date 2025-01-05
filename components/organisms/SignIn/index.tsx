@@ -16,7 +16,6 @@ export const SignIn = () => {
     setError(null)
     try {
       await signIn(data)
-
     } catch {
       setError('Sign in failed. Please try again.')
     } finally {

@@ -7,16 +7,11 @@ type PredictionListProps = {
 }
 
 export const PredictionList = ({ data }: PredictionListProps) => {
-
   return (
     <FlatList
       data={data}
       contentContainerStyle={styles.container}
-      renderItem={({ item }) => (
-        <PredictionCard
-          {...item}
-        />
-      )}
+      renderItem={({ item }) => <PredictionCard {...item} />}
     />
   )
 }

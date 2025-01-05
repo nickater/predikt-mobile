@@ -27,7 +27,11 @@ export const SignUp = () => {
         Create Account
       </Text>
       {error && (
-        <Text variant="highlighted" position="center" style={{ marginBottom: 10, color: 'red' }}>
+        <Text
+          variant="highlighted"
+          position="center"
+          style={{ marginBottom: 10, color: 'red' }}
+        >
           {error}
         </Text>
       )}

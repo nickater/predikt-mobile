@@ -7,11 +7,10 @@ import { PredictionList } from '../PredictionList'
 type ViewPredictionsProps = {}
 
 export const ViewPredictions: FC<ViewPredictionsProps> = () => {
-
-  const {data: userPredictions, isLoading } = useFetchUserPredictions() 
+  const { data: userPredictions, isLoading } = useFetchUserPredictions()
 
   if (isLoading) return <LoadingSpinner />
-   
+
   return (
     <View style={styles.container}>
       <PredictionList data={userPredictions} />
@@ -20,6 +19,5 @@ export const ViewPredictions: FC<ViewPredictionsProps> = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
 })

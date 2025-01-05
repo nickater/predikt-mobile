@@ -4,9 +4,11 @@ import { View, StyleSheet, ActivityIndicator } from 'react-native'
 type LoadingSpinnerProps = {}
 
 export const LoadingSpinner: FC<LoadingSpinnerProps> = () => {
-  return <View style={styles.container}>
-    <ActivityIndicator size="large" />
-  </View>
+  return (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

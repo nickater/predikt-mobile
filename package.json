@@ -72,7 +72,8 @@
   "eslintConfig": {
     "extends": [
       "expo",
-      "eslint:recommended"
+      "eslint:recommended",
+      "plugin:prettier/recommended"
     ]
   }
 }

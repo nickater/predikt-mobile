@@ -51,7 +51,6 @@ export const QuestionDetail = ({
     if (question.predictionExists) return false
 
     return true
-
   }, [question, hasQuestionDeadlinePassed])
 
   const showPredictions = useMemo(() => {
@@ -76,7 +75,6 @@ export const QuestionDetail = ({
     return formatDateTime(date)
   }, [question])
 
-  
   if (isLoading) return <Text>Loading...</Text>
 
   if (isError || !question) return <Text>Error: {error?.message}</Text>
@@ -110,10 +108,12 @@ export const QuestionDetail = ({
         <View>
           <Text>Deadline: {formattedDeadline}</Text>
         </View>
-        <View style={{paddingTop: 10}}>
-          <Text style={styles.description}>Status: {`${hasQuestionDeadlinePassed ? 'Closed' : 'Open'}`}</Text>
+        <View style={{ paddingTop: 10 }}>
+          <Text style={styles.description}>
+            Status: {`${hasQuestionDeadlinePassed ? 'Closed' : 'Open'}`}
+          </Text>
         </View>
-        <View style={{paddingTop: 10}}>
+        <View style={{ paddingTop: 10 }}>
           <Text>{userPredictionStatus}</Text>
         </View>
       </Card>
@@ -129,10 +129,9 @@ export const QuestionDetail = ({
         </Card>
       ) : null}
 
-      { showPredictions ? (
+      {showPredictions ? (
         <ShowPredictions questionId={question.id} show />
-      ) : null
-      }
+      ) : null}
     </KeyboardAwareScrollView>
   )
 }

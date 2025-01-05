@@ -38,18 +38,17 @@ export const UserPredictions = () => {
     [activePredictions, inactivePredictions],
   )
 
-  
   const buttons = [
     { text: 'Active', onPress: () => setListFilter('active') },
     { text: 'Inactive', onPress: () => setListFilter('inactive') },
   ]
 
   if (isLoading) return <LoadingSpinner />
-  
+
   if (!predictions || predictions.length === 0) {
-    return <LoadingBasicText altText='No predictions found' />
+    return <LoadingBasicText altText="No predictions found" />
   }
-  
+
   return (
     <View style={styles.container}>
       <ButtonBar buttonProps={buttons} />

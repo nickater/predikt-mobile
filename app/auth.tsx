@@ -18,23 +18,23 @@ export default function Auth() {
   }
 
   return (
-    <CustomSafeAreaView
-      horizontal
-    >
-      <KeyboardAwareScrollView contentContainerStyle={{
-        justifyContent: 'center',
-        flex: 1,
-      }}>
+    <CustomSafeAreaView horizontal>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{
+          justifyContent: 'center',
+          flex: 1,
+        }}
+      >
         {shouldShowRegistration ? <SignUp /> : <SignIn />}
-      <Button
-        title={
+        <Button
+          title={
             shouldShowRegistration
               ? 'Sign in to existing account'
               : 'Create account'
-        }
-        type='link'
-        onPress={handleToggle}
-      />
+          }
+          type="link"
+          onPress={handleToggle}
+        />
       </KeyboardAwareScrollView>
     </CustomSafeAreaView>
   )

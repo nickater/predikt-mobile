@@ -7,9 +7,7 @@ import { FC } from 'react'
 type PublicQuestionsProps = {
   onSelect: (questionId: string) => void
 }
-export const PublicQuestions: FC<PublicQuestionsProps> = ({
-  onSelect,
-}) => {
+export const PublicQuestions: FC<PublicQuestionsProps> = ({ onSelect }) => {
   const { data, error, isLoading } = useFetchPublicQuestions()
 
   const handleQuestionSelect = (question: QuestionType) => {

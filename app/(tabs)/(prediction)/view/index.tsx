@@ -3,10 +3,11 @@ import { ViewPredictions } from '@/components/molecules/prediction/ViewPredictio
 import { StyleSheet } from 'react-native'
 
 const ViewPredictionsScreen = () => {
-  return <CustomSafeAreaView style={styles.container} horizontal>
-    
-    <ViewPredictions />
-  </CustomSafeAreaView>
+  return (
+    <CustomSafeAreaView style={styles.container} horizontal>
+      <ViewPredictions />
+    </CustomSafeAreaView>
+  )
 }
 
 export default ViewPredictionsScreen

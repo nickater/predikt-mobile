@@ -44,7 +44,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             autoCapitalize="none"
-            keyboardType='email-address'
+            keyboardType="email-address"
             autoCorrect={false}
             placeholder="Username"
             onBlur={onBlur}

@@ -8,13 +8,15 @@ import {
 
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet'
 
-
 type TextInputProps = RNTextInputProps & {
   bottomSheet?: boolean
 }
 
-export const TextInput: FC<TextInputProps> = ({ style, bottomSheet, ...rest }) => {
-
+export const TextInput: FC<TextInputProps> = ({
+  style,
+  bottomSheet,
+  ...rest
+}) => {
   if (bottomSheet) {
     return (
       <View style={styles.container}>

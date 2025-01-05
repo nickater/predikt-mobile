@@ -7,13 +7,16 @@ import { ConditionalText } from '../ConditionalText'
 import { Divider } from '../Divider'
 import { Text } from '../Text'
 
-type PredictionCardProps = PredictionWithRelations 
+type PredictionCardProps = PredictionWithRelations
 
 export const PredictionCard: FC<PredictionCardProps> = ({
   created_at,
   is_anonymous,
   prediction,
-  question: { author: { username: authorDisplayName } = {}, title: questionTitle },
+  question: {
+    author: { username: authorDisplayName } = {},
+    title: questionTitle,
+  },
 }) => {
   const formattedCreatedAt = useMemo(() => {
     if (!created_at) return ''

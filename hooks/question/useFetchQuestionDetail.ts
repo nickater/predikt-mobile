@@ -31,6 +31,6 @@ export const useFetchQuestionDetail = (questionId: string) => {
   return useQuery({
     queryKey,
     queryFn,
-    enabled: !!questionId && !!session?.user,  
+    enabled: !!questionId && !!session?.user,
   })
 }

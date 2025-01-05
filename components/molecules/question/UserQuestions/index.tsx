@@ -6,9 +6,7 @@ import { FC } from 'react'
 type UserQuestionsProps = {
   onSelect: (questionId: string) => void
 }
-export const UserQuestions: FC<UserQuestionsProps> = ({
-  onSelect,
-}) => {
+export const UserQuestions: FC<UserQuestionsProps> = ({ onSelect }) => {
   const { data } = useFetchOwnQuestions()
 
   if (!data) return <LoadingSpinner />

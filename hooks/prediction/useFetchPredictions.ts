@@ -4,7 +4,9 @@ import { useQuery } from '@tanstack/react-query'
 
 const ONE_HOUR = 1000 * 60 * 60
 
-export const getPredictionsByQuestionIdQueryFn = async (questionId: QuestionType['id']) => {
+export const getPredictionsByQuestionIdQueryFn = async (
+  questionId: QuestionType['id'],
+) => {
   const { data, error } = await getPredictionsByQuestionId(questionId)
 
   if (error) {
@@ -13,12 +15,10 @@ export const getPredictionsByQuestionIdQueryFn = async (questionId: QuestionType
 
   return data
 }
-  
 
-export const getPredictionsByQuestionIdQueryKey = (questionId: QuestionType['id']) => [
-  'predictionsByQuestionId',
-  questionId,
-]
+export const getPredictionsByQuestionIdQueryKey = (
+  questionId: QuestionType['id'],
+) => ['predictionsByQuestionId', questionId]
 
 export function useFetchPredictions(questionId: QuestionType['id']) {
   const queryKey = getPredictionsByQuestionIdQueryKey(questionId)
