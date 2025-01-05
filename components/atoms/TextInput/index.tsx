@@ -2,11 +2,27 @@ import { FC } from 'react'
 import {
   StyleSheet,
   TextInput as RNTextInput,
-  TextInputProps,
+  TextInputProps as RNTextInputProps,
   View,
 } from 'react-native'
 
-export const TextInput: FC<TextInputProps> = ({ style, ...rest }) => {
+import { BottomSheetTextInput } from '@gorhom/bottom-sheet'
+
+
+type TextInputProps = RNTextInputProps & {
+  bottomSheet?: boolean
+}
+
+export const TextInput: FC<TextInputProps> = ({ style, bottomSheet, ...rest }) => {
+
+  if (bottomSheet) {
+    return (
+      <View style={styles.container}>
+        <BottomSheetTextInput {...rest} style={[styles.textInput, style]} />
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <RNTextInput {...rest} style={[styles.textInput, style]} />

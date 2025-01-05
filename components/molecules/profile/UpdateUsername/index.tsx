@@ -1,8 +1,8 @@
 import { Button, TextInput } from '@/components/atoms'
-import { useProfile, useUpdateUsername } from '@/hooks'
+import { useProfile } from '@/hooks'
 import { FC } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { useForm, Controller } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
+import { StyleSheet, View } from 'react-native'
 
 type UpdateUsernameProps = {
   onSubmit: ({ username }: { username: string }) => Promise<boolean>
@@ -35,10 +35,10 @@ export const UpdateUsername: FC<UpdateUsernameProps> = ({ onSubmit }) => {
         name="username"
         render={({ field: { onChange, value } }) => (
           <TextInput
+            bottomSheet
             autoCapitalize="none"
             autoComplete="off"
             autoCorrect={false}
-            enablesReturnKeyAutomatically
             placeholder={data?.username}
             onChangeText={onChange}
             value={value}
