@@ -1,6 +1,6 @@
 import { QuestionType } from '@/types/question'
 import { FC } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 import { QuestionCard } from '../QuestionCard'
 
 type SelectableQuestionsProps = {
@@ -31,6 +31,7 @@ export const SelectableQuestions: FC<SelectableQuestionsProps> = ({
     <FlatList
       data={questions}
       keyExtractor={(item) => item.id}
+      contentContainerStyle={styles.container}
       renderItem={({ item: question }) => {
         return (
           <QuestionCard
@@ -48,3 +49,9 @@ export const SelectableQuestions: FC<SelectableQuestionsProps> = ({
     />
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20,
+  },
+})

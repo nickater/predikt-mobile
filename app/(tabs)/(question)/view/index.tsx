@@ -2,10 +2,10 @@ import { CustomSafeAreaView, ViewQuestions } from '@/components'
 import { useRouter } from 'expo-router'
 import { StyleSheet } from 'react-native'
 
-export default () => {
+const QuestionScreen = () => {
   const router = useRouter()
   const handleQuestionPress = (questionId: string) => {
-    router.push(`/(tabs)/(question)/question-detail/${questionId}`)
+    router.push(`/(tabs)/(question)/detail/${questionId}`)
   }
 
   const handleAddQuestionPress = () => {
@@ -21,6 +21,8 @@ export default () => {
     </CustomSafeAreaView>
   )
 }
+
+export default QuestionScreen
 
 const styles = StyleSheet.create({
   container: {

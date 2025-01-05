@@ -8,7 +8,7 @@ type UserQuestionsProps = {
 }
 export const UserQuestions: FC<UserQuestionsProps> = ({
   onSelect,
-}): React.JSX.Element => {
+}) => {
   const { data } = useFetchOwnQuestions()
 
   if (!data) return <Text>Loading...</Text>

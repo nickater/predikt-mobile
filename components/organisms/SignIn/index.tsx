@@ -1,11 +1,10 @@
+import { Text } from '@/components/atoms'
 import { useAuth } from '@/hooks'
-import { router } from 'expo-router'
 import { useState } from 'react'
 import { View } from 'react-native'
-import { Text } from '@/components/atoms'
 
-import { SignInUserInput } from './types'
 import { SignInForm } from '@/components/molecules'
+import { SignInUserInput } from './types'
 
 export const SignIn = () => {
   const { signIn } = useAuth()
@@ -16,11 +15,8 @@ export const SignIn = () => {
     setLoading(true)
     setError(null)
     try {
-      const result = await signIn(data)
+      await signIn(data)
 
-      if (result) {
-        router.replace('/')
-      }
     } catch {
       setError('Sign in failed. Please try again.')
     } finally {

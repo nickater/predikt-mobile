@@ -12,7 +12,7 @@ type ViewQuestionsProps = {
 export const ViewQuestions: FC<ViewQuestionsProps> = ({
   onQuestionPress,
   onAddQuestionPress,
-}): React.JSX.Element => {
+}) => {
   const [filter, setFilter] = useState<'public' | 'private'>('public')
 
   const handleQuestionPress = useCallback(
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContainer: {
-    paddingTop: 20,
     paddingHorizontal: 20,
     flexGrow: 1,
   },

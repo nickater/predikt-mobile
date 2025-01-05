@@ -8,7 +8,7 @@ type PublicQuestionsProps = {
 }
 export const PublicQuestions: FC<PublicQuestionsProps> = ({
   onSelect,
-}): React.JSX.Element => {
+}) => {
   const { data, error, isLoading } = useFetchPublicQuestions()
 
   const handleQuestionSelect = (question: QuestionType) => {

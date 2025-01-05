@@ -18,7 +18,7 @@ type QuestionDetailProps = {
 export const QuestionDetail = ({
   questionId,
   onPredictionSubmit,
-}: QuestionDetailProps): React.JSX.Element => {
+}: QuestionDetailProps) => {
   const {
     data: question,
     isError,

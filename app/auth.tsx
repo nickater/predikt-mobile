@@ -1,16 +1,19 @@
 import { Button, CustomSafeAreaView, SignIn, SignUp } from '@/components'
+import { useAuth } from '@/hooks'
+import { Redirect } from 'expo-router'
 import { useState } from 'react'
 
 export default function Auth() {
   const [shouldShowRegistration, setShouldShowRegistration] = useState(false)
-  const [loading, setLoading] = useState(false)
+
+  const { session } = useAuth()
 
   const handleToggle = () => {
-    setLoading(true)
-    setTimeout(() => {
-      setShouldShowRegistration(!shouldShowRegistration)
-      setLoading(false)
-    }, 500)
+    setShouldShowRegistration((prev) => !prev)
+  }
+
+  if (session) {
+    return <Redirect href={'/(tabs)/(question)'} />
   }
 
   return (
@@ -23,14 +26,11 @@ export default function Auth() {
       {shouldShowRegistration ? <SignUp /> : <SignIn />}
       <Button
         title={
-          loading
-            ? 'Loading...'
-            : shouldShowRegistration
+            shouldShowRegistration
               ? 'Sign In'
               : 'Register'
         }
         onPress={handleToggle}
-        disabled={loading}
       />
     </CustomSafeAreaView>
   )
