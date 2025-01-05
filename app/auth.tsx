@@ -26,7 +26,9 @@ export default function Auth() {
         }}
       >
         {shouldShowRegistration ? <SignUp /> : <SignIn />}
-        <Button.Primary
+        <Button.Secondary
+          style={{ marginTop: 20 }}
+          link
           label={
             shouldShowRegistration
               ? 'Sign in to existing account'

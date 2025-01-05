@@ -2,7 +2,7 @@ import { FC, useCallback, useMemo, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { PublicQuestions } from '../PublicQuestions'
 import { UserQuestions } from '../UserQuestions'
-import { ActionButton, ButtonBar, Divider } from '@/components/atoms'
+import { Button, ButtonBar, Divider } from '@/components/atoms'
 
 type ViewQuestionsProps = {
   onQuestionPress: (questionId: string) => void
@@ -47,7 +47,11 @@ export const ViewQuestions: FC<ViewQuestionsProps> = ({
         <Divider />
         <View style={styles.listContainer}>{questionMap[filter]}</View>
       </View>
-      <ActionButton title="+" onPress={onAddQuestionPress} />
+      <Button.Action
+        label="+"
+        onPress={onAddQuestionPress}
+        floatLocation="bottom-right"
+      />
     </>
   )
 }
