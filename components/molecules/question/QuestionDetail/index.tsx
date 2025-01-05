@@ -2,8 +2,9 @@ import { Card, Text } from '@/components/atoms'
 import { useAuth, useCreatePrediction, useFetchQuestionDetail } from '@/hooks'
 import { formatDateTime } from '@/utils/stringFormat/dateFormatter'
 import { useMemo } from 'react'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
 import {
   CreatePredictionForm,
   CreatePredictionFormInputs,
@@ -56,7 +57,7 @@ export const QuestionDetail = ({
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <KeyboardAwareScrollView contentContainerStyle={styles.container}>
       <Card style={{ backgroundColor: '#f9f9f9' }}>
         <View>
           <Text variant="header2" style={styles.title}>
@@ -89,13 +90,13 @@ export const QuestionDetail = ({
           </View>
         </Card>
       )}
-    </ScrollView>
+    </KeyboardAwareScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
   },
   title: {
     marginVertical: 8,

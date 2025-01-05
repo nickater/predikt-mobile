@@ -26,7 +26,7 @@ export const SignIn = () => {
 
   return (
     <View>
-      <Text variant="header1" position="center">
+      <Text variant="header1" position="center" style={{ marginBottom: 20 }}>
         Sign In
       </Text>
       {error && (

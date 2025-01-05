@@ -29,7 +29,7 @@ export default function Auth() {
       <Button
         title={
             shouldShowRegistration
-              ? 'Sign In'
+              ? 'Sign in to existing account'
               : 'Create account'
         }
         type='link'
