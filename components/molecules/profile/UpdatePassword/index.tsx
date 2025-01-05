@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import { useUpdatePassword } from '@/hooks/profile/useUpdatePassword'
 
-type UpdatePasswordProps = {}
+type UpdatePasswordProps = unknown
 
 type FormData = {
   oldPassword: string
@@ -15,7 +15,7 @@ type FormData = {
 export const UpdatePassword: FC<UpdatePasswordProps> = () => {
   const { data } = useProfile()
   const { mutateAsync, error, isSuccess } = useUpdatePassword()
-  const { control, handleSubmit, reset, setFocus, resetField, register } =
+  const { control, handleSubmit, reset, setFocus, resetField } =
     useForm<FormData>({
       defaultValues: {
         oldPassword: '',

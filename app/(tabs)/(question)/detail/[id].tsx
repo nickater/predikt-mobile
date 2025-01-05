@@ -2,7 +2,7 @@ import { CustomSafeAreaView } from '@/components'
 import { QuestionDetail } from '@/components/molecules/question'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 
-export default () => {
+const QuestionDetailScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>()
 
   const router = useRouter()
@@ -20,3 +20,5 @@ export default () => {
     </CustomSafeAreaView>
   )
 }
+
+export default QuestionDetailScreen

@@ -4,7 +4,7 @@ import { FC } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { PredictionList } from '../PredictionList'
 
-type ViewPredictionsProps = {}
+type ViewPredictionsProps = unknown
 
 export const ViewPredictions: FC<ViewPredictionsProps> = () => {
   const { data: userPredictions, isLoading } = useFetchUserPredictions()
@@ -19,5 +19,7 @@ export const ViewPredictions: FC<ViewPredictionsProps> = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
 })

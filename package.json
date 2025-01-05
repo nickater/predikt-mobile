@@ -10,6 +10,7 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
+    "lint:fix": "eslint . --fix",
     "types:update": "supabase gen types typescript --linked > ./types/database.types.ts && supazod -i ./types/database.types.ts -o ./types/schema.zod.ts -t ./types/schemas.d.ts -s public"
   },
   "jest": {

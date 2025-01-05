@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { View, StyleSheet, ActivityIndicator } from 'react-native'
 
-type LoadingSpinnerProps = {}
+type LoadingSpinnerProps = unknown
 
 export const LoadingSpinner: FC<LoadingSpinnerProps> = () => {
   return (
