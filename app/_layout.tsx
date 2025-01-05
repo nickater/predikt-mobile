@@ -6,8 +6,11 @@ import { Stack } from 'expo-router'
 export default function AppLayout() {
   return (
     <Providers>
-      <Stack screenOptions={{ headerShown: false }}>
+      <Stack screenOptions={{ headerShown: false  }}>
         <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="auth" options={{
+          presentation: 'fullScreenModal'
+        }} />
       </Stack>
     </Providers>
   )

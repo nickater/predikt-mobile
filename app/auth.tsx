@@ -2,6 +2,7 @@ import { Button, CustomSafeAreaView, SignIn, SignUp } from '@/components'
 import { useAuth } from '@/hooks'
 import { Redirect } from 'expo-router'
 import { useState } from 'react'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
 
 export default function Auth() {
   const [shouldShowRegistration, setShouldShowRegistration] = useState(false)
@@ -13,25 +14,31 @@ export default function Auth() {
   }
 
   if (session) {
-    return <Redirect href={'/(tabs)/(question)'} />
+    return <Redirect href={'/(tabs)/(question)/view'} />
   }
 
   return (
     <CustomSafeAreaView
-      style={{
-        flex: 1,
-      }}
       horizontal
     >
-      {shouldShowRegistration ? <SignUp /> : <SignIn />}
+      <KeyboardAwareScrollView contentContainerStyle={{
+        justifyContent: 'center',
+        flex: 1,
+      }}>
+        {shouldShowRegistration ? <SignUp /> : <SignIn />}
       <Button
         title={
             shouldShowRegistration
               ? 'Sign In'
-              : 'Register'
+              : 'Create account'
         }
+        type='link'
         onPress={handleToggle}
       />
+      </KeyboardAwareScrollView>
     </CustomSafeAreaView>
   )
 }
+
+// TODO: Abstract the logic for toggling between sign in and sign up into a hook
+// TODO: Move the UI into a separate component

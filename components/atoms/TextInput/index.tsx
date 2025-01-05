@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   textInput: {
-    width: '100%',
     height: 50,
     padding: 10,
     borderWidth: 1,

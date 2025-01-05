@@ -6,7 +6,7 @@ import { Text } from '../Text'
 type ButtonProps = {
   title: string
   onPress: () => void
-  type?: 'primary' | 'secondary' | 'ghost' | 'disabled'
+  type?: 'primary' | 'secondary' | 'ghost' | 'link' | 'disabled'
   disabled?: boolean
 }
 export const Button: FC<ButtonProps> = ({
@@ -27,6 +27,8 @@ export const Button: FC<ButtonProps> = ({
         return buttonStyles.secondaryButton
       case 'ghost':
         return buttonStyles.ghostButton
+      case 'link':
+        return buttonStyles.linkButton
       case 'disabled':
         return buttonStyles.disabledButton
       default:
@@ -46,7 +48,8 @@ export const Button: FC<ButtonProps> = ({
         return buttonStyles.secondaryButtonText
       case 'ghost':
         return buttonStyles.ghostButtonText
-
+      case 'link':
+        return buttonStyles.linkButtonText
       case 'disabled':
         return buttonStyles.disabledButtonText
       default:
@@ -96,6 +99,14 @@ const buttonStyles = StyleSheet.create({
     borderColor: '#007bff',
   },
   ghostButtonText: {
+    color: '#007bff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  linkButton: {
+    backgroundColor: 'transparent',
+  },
+  linkButtonText: {
     color: '#007bff',
     fontSize: 16,
     fontWeight: 'bold',
