@@ -68,12 +68,5 @@
   "prettier": {
     "singleQuote": true,
     "semi": false
-  },
-  "eslintConfig": {
-    "extends": [
-      "expo",
-      "eslint:recommended",
-      "plugin:prettier/recommended"
-    ]
   }
 }
