@@ -1,6 +1,6 @@
 import { ThemeManager } from 'react-native-ui-lib'
 
-const theme = {
+export const theme = {
   primary: '#0d1b2a',
   secondary: '#1b263b',
   accent: '#415a77',
