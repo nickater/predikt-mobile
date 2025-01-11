@@ -1,8 +1,5 @@
 import { Button, Text, TextInput } from '@/components/atoms'
 import { CreateQuestionType } from '@/types/question'
-import DateTimePicker from '@react-native-community/datetimepicker'
-import RadioGroup from 'react-native-ui-lib/radioGroup'
-import RadioButton from 'react-native-ui-lib/radioButton'
 import { FC, useState } from 'react'
 import {
   Controller,
@@ -10,7 +7,10 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form'
-import { Platform, Pressable, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import DateTimePicker from 'react-native-ui-lib/dateTimePicker'
+import RadioButton from 'react-native-ui-lib/radioButton'
+import RadioGroup from 'react-native-ui-lib/radioGroup'
 
 export type CreateQuestionFormInputsPick = Pick<
   CreateQuestionType,
@@ -77,48 +77,6 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
     console.error(errors)
   }
 
-  const renderDatePicker = (field: any) => {
-    if (Platform.OS === 'ios') {
-      return (
-        <DateTimePicker
-          value={field.value ? new Date(field.value) : new Date()}
-          mode="datetime"
-          display="spinner"
-          onChange={(event, selectedDate) => {
-            field.onChange(selectedDate?.toISOString())
-          }}
-          style={styles.iosDatePicker}
-        />
-      )
-    }
-
-    return (
-      <>
-        <Pressable
-          onPress={() => setShowDatePicker(true)}
-          style={styles.dateButton}
-        >
-          <Text style={styles.dateButtonText}>
-            {new Date(field.value).toLocaleString()}
-          </Text>
-        </Pressable>
-
-        {showDatePicker && (
-          <DateTimePicker
-            value={field.value ? new Date(field.value) : new Date()}
-            mode="datetime"
-            onChange={(event, selectedDate) => {
-              setShowDatePicker(false)
-              if (selectedDate) {
-                field.onChange(selectedDate.toISOString())
-              }
-            }}
-          />
-        )}
-      </>
-    )
-  }
-
   return (
     <View style={styles.formContainer}>
       <View style={styles.section}>
@@ -172,7 +130,14 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
         <Controller
           control={control}
           rules={validationRules.deadline}
-          render={({ field }) => renderDatePicker(field)}
+          render={({ field }) => (
+            <DateTimePicker
+              mode="time"
+              value={new Date(field.value)}
+              onChange={field.onChange}
+              minimumDate={new Date()}
+            />
+          )}
           name="deadline"
         />
         {errors.deadline && (

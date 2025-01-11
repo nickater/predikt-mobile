@@ -6,14 +6,21 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EAS_LOCAL_BUILD_ARTIFACTS_DIR": "./builds"
+      }
     },
     "preview": {
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+
+    }
   },
   "submit": {
-    "production": {}
+    "production": {
+      
+    }
   }
 }

@@ -94,7 +94,7 @@ export const QuestionDetail = ({
   }
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+    <>
       <Card style={{ backgroundColor: '#f9f9f9' }}>
         <View>
           <Text variant="header2" style={styles.title}>
@@ -119,20 +119,23 @@ export const QuestionDetail = ({
       </Card>
       {allowPrediction ? (
         <Card>
-          <View>
+          <KeyboardAwareScrollView
+            contentContainerStyle={styles.container}
+            keyboardShouldPersistTaps="handled"
+          >
             <Text>Make your prediction</Text>
             <CreatePredictionForm
               {...createPredictionForm}
               onSubmit={onSubmit}
             />
-          </View>
+          </KeyboardAwareScrollView>
         </Card>
       ) : null}
 
       {showPredictions ? (
         <ShowPredictions questionId={question.id} show />
       ) : null}
-    </KeyboardAwareScrollView>
+    </>
   )
 }
 

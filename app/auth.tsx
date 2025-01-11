@@ -20,6 +20,7 @@ export default function Auth() {
   return (
     <CustomSafeAreaView horizontal>
       <KeyboardAwareScrollView
+        keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
           justifyContent: 'center',
           flex: 1,
