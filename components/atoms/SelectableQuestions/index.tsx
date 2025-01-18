@@ -37,6 +37,7 @@ export const SelectableQuestions: FC<SelectableQuestionsProps> = ({
       data={questions}
       keyExtractor={(item) => item.id}
       contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={false}
       renderItem={({ item: question }) => {
         return (
           <QuestionCard
