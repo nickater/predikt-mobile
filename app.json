@@ -15,7 +15,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.predikt.mobile",
-      "supportsTablet": false
+      "supportsTablet": false,
     },
     "android": {
       "adaptiveIcon": {
@@ -32,13 +32,9 @@
     "experiments": {
       "typedRoutes": true
     },
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "984427f8-1bdd-4ad3-823c-692918c416d7"
-      }
-    }
+    "platforms": [
+      "ios",
+      "android"
+    ]
   }
 }

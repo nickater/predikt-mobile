@@ -7,7 +7,9 @@ export function getTimeRemaining(deadline: string): string | null {
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24))
 
-  if (days > 0) return `${days} days remaining`
+  if (days > 1) return `${days} days remaining`
+
+  if (days === 1) return '1 day remaining'
 
   if (days === 0) return 'Today'
 

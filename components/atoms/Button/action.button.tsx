@@ -1,7 +1,8 @@
+import { useThemeColor } from '@/hooks'
 import { useMemo } from 'react'
+import { StyleSheet } from 'react-native'
 import { RoundButton } from '../Button/round.button'
 import { ButtonProps } from './types'
-import { StyleSheet } from 'react-native'
 
 type ActionButtonProps = {
   floatLocation?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
@@ -11,7 +12,9 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
   label,
   onPress,
   floatLocation,
+  ...rest
 }) => {
+  const theme = useThemeColor()
   const mappedFloatLocation = useMemo(
     () => ({
       'top-left': { top: 0, left: 0 },
@@ -26,14 +29,25 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
     return StyleSheet.create({
       button: {
         position: 'absolute',
+        backgroundColor: theme.textSecondary,
+        color: theme.background,
+        elevation: 4,
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        opacity: 0.9,
         width: 60,
         height: 60,
         ...mappedFloatLocation[floatLocation || 'bottom-right'],
       },
     }).button
-  }, [floatLocation, mappedFloatLocation])
+  }, [floatLocation, mappedFloatLocation, theme])
 
   return (
-    <RoundButton label={label} onPress={onPress} style={buttonStyle} text40L />
+    <RoundButton
+      label={label}
+      onPress={onPress}
+      style={buttonStyle}
+      text40L
+      {...rest}
+    />
   )
 }

@@ -1,12 +1,12 @@
 import { Text } from '@/components'
-import { useAuth, useThemeColor } from '@/hooks'
-import { theme } from '@/libs/RNUILib/theme'
+import { useAdjustColor, useAuth, useThemeColor } from '@/hooks'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import { Redirect, Tabs } from 'expo-router'
 
 export default function TabsLayout() {
   const { session, loading } = useAuth()
-  // const { tabIconDefault, tabIconSelected } = useThemeColor()
+  const theme = useThemeColor()
+  const selectedButtonColor = useAdjustColor(theme.accent, 120)
 
   if (loading) {
     return <Text>Loading...</Text>
@@ -19,10 +19,17 @@ export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarInactiveTintColor: 'lightgray',
-        tabBarActiveTintColor: theme.accent,
+        tabBarInactiveTintColor: theme.accent,
+        tabBarActiveTintColor: selectedButtonColor,
         headerShown: false,
         tabBarHideOnKeyboard: true,
+        sceneStyle: {
+          backgroundColor: 'red',
+        },
+        tabBarStyle: {
+          backgroundColor: theme.background,
+          borderTopColor: theme.divider,
+        },
       }}
     >
       <Tabs.Screen

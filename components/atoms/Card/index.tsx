@@ -1,3 +1,4 @@
+import { useAdjustColor, useThemeColor } from '@/hooks'
 import { useMemo } from 'react'
 import { Pressable, StyleSheet, ViewProps } from 'react-native'
 
@@ -14,6 +15,9 @@ export const Card: React.FC<CardProps> = ({
   showPressedColor = true,
   ...rest
 }) => {
+  const theme = useThemeColor()
+  const pressedColor = useAdjustColor(theme.accent, 120)
+
   const shouldShowPressedColor = useMemo(() => {
     return showPressedColor && onPress
   }, [showPressedColor, onPress])
@@ -29,7 +33,10 @@ export const Card: React.FC<CardProps> = ({
       style={({ pressed }) => [
         styles.container,
         style,
-        shouldShowPressedColor && pressed ? styles.pressed : null,
+        { backgroundColor: theme.background },
+        shouldShowPressedColor && pressed
+          ? { backgroundColor: pressedColor }
+          : {},
       ]}
       onPress={handleOnPress}
       {...rest}
@@ -43,11 +50,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     margin: 8,
-    backgroundColor: '#fff',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     borderRadius: 8,
-  },
-  pressed: {
-    backgroundColor: '#e0e0e0',
   },
 })

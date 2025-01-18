@@ -1,6 +1,6 @@
-import { Button, Text, TextInput } from '@/components/atoms'
+import { Button, Divider, Text, TextInput } from '@/components/atoms'
 import { CreateQuestionType } from '@/types/question'
-import { FC, useState } from 'react'
+import { FC, useMemo, useState } from 'react'
 import {
   Controller,
   SubmitErrorHandler,
@@ -8,14 +8,15 @@ import {
   useForm,
 } from 'react-hook-form'
 import { StyleSheet, View } from 'react-native'
-import DateTimePicker from 'react-native-ui-lib/dateTimePicker'
 import RadioButton from 'react-native-ui-lib/radioButton'
 import RadioGroup from 'react-native-ui-lib/radioGroup'
+import DateTimePicker from 'react-native-date-picker'
+import { DateUtils } from '@/utils/date'
 
 export type CreateQuestionFormInputsPick = Pick<
   CreateQuestionType,
-  'visibility' | 'title' | 'description' | 'deadline'
->
+  'visibility' | 'title' | 'description'
+> & { deadline: Date }
 
 export type CreateQuestionFormProps = {
   onSubmit: SubmitHandler<CreateQuestionFormInputsPick>
@@ -34,8 +35,7 @@ const validationRules = {
   },
   deadline: {
     required: 'Please select a deadline',
-    validate: (value: string) => {
-      const date = new Date(value)
+    validate: (date: Date) => {
       return date > new Date() || 'Deadline must be in the future'
     },
   },
@@ -44,8 +44,9 @@ const validationRules = {
 export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
   onSubmit,
 }) => {
+  const startDate = useMemo(() => DateUtils.now(), [])
+
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showDatePicker, setShowDatePicker] = useState(false)
 
   const {
     control,
@@ -57,7 +58,7 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
       visibility: 'public',
       title: '',
       description: '',
-      deadline: new Date().toISOString(),
+      deadline: DateUtils.fromDayjs(startDate),
     },
   })
 
@@ -81,8 +82,9 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
     <View style={styles.formContainer}>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Basic Information</Text>
-
+        <Divider />
         <Text style={styles.label}>Question</Text>
+
         <Controller
           control={control}
           rules={validationRules.title}
@@ -97,11 +99,13 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
           )}
           name="title"
         />
+
         {errors.title && (
           <Text style={styles.errorText}>{errors.title.message}</Text>
         )}
 
         <Text style={styles.label}>Description</Text>
+
         <Controller
           control={control}
           rules={validationRules.description}
@@ -125,17 +129,16 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Settings</Text>
-
+        <Divider />
         <Text style={styles.label}>Deadline</Text>
         <Controller
           control={control}
           rules={validationRules.deadline}
           render={({ field }) => (
             <DateTimePicker
-              mode="time"
-              value={new Date(field.value)}
-              onChange={field.onChange}
-              minimumDate={new Date()}
+              date={field.value}
+              mode="datetime"
+              onDateChange={field.onChange}
             />
           )}
           name="deadline"

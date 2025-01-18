@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 
 export const Divider = () => {
   const theme = useThemeColor()
-  const colorStyle = { borderBottomColor: theme.icon }
+  const colorStyle = { borderBottomColor: theme.primary }
   return <View style={[styles.container, colorStyle]} />
 }
 

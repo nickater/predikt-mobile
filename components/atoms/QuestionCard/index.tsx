@@ -8,7 +8,7 @@ import { Divider } from '../Divider'
 import { Text } from '../Text'
 import { QuestionCardProps } from './types'
 import { getTimeRemaining } from './utils'
-import { useGetUsernameById } from '@/hooks'
+import { useGetUsernameById, useThemeColor } from '@/hooks'
 
 export const QuestionCard = (props: QuestionCardProps) => {
   const {
@@ -20,6 +20,8 @@ export const QuestionCard = (props: QuestionCardProps) => {
     onSelect,
     authorId,
   } = props
+  const theme = useThemeColor()
+
   const formattedDeadline = useMemo(() => {
     const deadlineDate = new Date(deadline)
     return formatShortDate(deadlineDate)
@@ -40,15 +42,15 @@ export const QuestionCard = (props: QuestionCardProps) => {
   return (
     <Card onPress={handleSelect(id)}>
       <View style={styles.topContainer}>
-        <Text variant="bold2" position="center">
+        <Text variant="bold2" style={{ flexShrink: 1 }}>
           {title}
         </Text>
         {predictionExists && (
           <FontAwesome
-            style={{ paddingLeft: 6 }}
+            style={{ marginLeft: 6 }}
             name="check-circle"
             size={24}
-            color="green"
+            color={theme.textSecondary}
           />
         )}
       </View>

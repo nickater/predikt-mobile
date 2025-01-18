@@ -4,5 +4,4 @@ export type ButtonProps = {
   disabled?: boolean
   outline?: boolean
   label: string
-  onPress: () => void
 } & ButtonBaseProps
