@@ -1,5 +1,5 @@
 import { Text } from '@/components/atoms'
-import { useFetchPredictions } from '@/hooks'
+import { useFetchPredictionsByQuestionId } from '@/hooks'
 import { FC } from 'react'
 import { View, StyleSheet } from 'react-native'
 
@@ -12,7 +12,7 @@ export const ShowPredictions: FC<ShowPredictionsProps> = ({
   questionId,
   show,
 }) => {
-  const { data, isLoading } = useFetchPredictions(questionId)
+  const { data, isLoading } = useFetchPredictionsByQuestionId(questionId)
 
   return (
     <View style={styles.container}>

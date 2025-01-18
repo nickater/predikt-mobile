@@ -2,7 +2,7 @@ import { SupabaseClient } from '@/libs/supabase/types'
 import { PredictionWithRelations } from '@/types/prediction'
 import { QueryClient } from '@tanstack/react-query'
 
-const getPredictionsByUser = (client: SupabaseClient, userId: string) => {
+const getPredictionsByUserId = (client: SupabaseClient, userId: string) => {
   return client
     .from('predictions')
     .select(
@@ -22,7 +22,7 @@ const getPredictionsByUser = (client: SupabaseClient, userId: string) => {
 export const getUserPredictionsQueryFn =
   (userId: string) => (client: SupabaseClient) => {
     return async (): Promise<PredictionWithRelations[]> => {
-      const userPredictionsResult = await getPredictionsByUser(client, userId)
+      const userPredictionsResult = await getPredictionsByUserId(client, userId)
       return userPredictionsResult.data
     }
   }

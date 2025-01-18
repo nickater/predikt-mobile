@@ -1,13 +1,10 @@
 import { getPredictionsByQuestionId } from '@/queries/prediction/getPredictionsByQuestionId'
-import { QuestionType } from '@/types/question'
 import { useQuery } from '@tanstack/react-query'
 
 const ONE_HOUR = 1000 * 60 * 60
 
-export const getPredictionsByQuestionIdQueryFn = async (
-  questionId: QuestionType['id'],
-) => {
-  const { data, error } = await getPredictionsByQuestionId(questionId)
+export const getPredictionsByIdQueryFn = async (id: string) => {
+  const { data, error } = await getPredictionsByQuestionId(id)
 
   if (error) {
     throw new Error(error.message)
@@ -16,14 +13,18 @@ export const getPredictionsByQuestionIdQueryFn = async (
   return data
 }
 
-export const getPredictionsByQuestionIdQueryKey = (
-  questionId: QuestionType['id'],
-) => ['predictionsByQuestionId', questionId]
+export const getPredictionsByIdQueryKey = (
+  id: string,
+  type: 'user' | 'question' = 'question',
+) => ['predictionsByQuestionId', id, type]
 
-export function useFetchPredictions(questionId: QuestionType['id']) {
-  const queryKey = getPredictionsByQuestionIdQueryKey(questionId)
+export function useFetchPredictions(
+  id: string,
+  type: 'user' | 'question' = 'question',
+) {
+  const queryKey = getPredictionsByIdQueryKey(id)
 
-  const queryFn = () => getPredictionsByQuestionIdQueryFn(questionId)
+  const queryFn = () => getPredictionsByIdQueryFn(id)
 
-  return useQuery({ queryKey, queryFn, staleTime: ONE_HOUR })
+  return useQuery({ queryKey, queryFn, staleTime: ONE_HOUR, enabled: !!id })
 }

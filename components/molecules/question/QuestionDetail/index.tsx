@@ -1,5 +1,10 @@
 import { Card, Text } from '@/components/atoms'
-import { useAuth, useCreatePrediction, useFetchQuestionDetail } from '@/hooks'
+import {
+  useAuth,
+  useCreatePrediction,
+  useFetchPredictions,
+  useFetchQuestionDetail,
+} from '@/hooks'
 import { formatDateTime } from '@/utils/stringFormat/dateFormatter'
 import { useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
@@ -10,7 +15,7 @@ import {
   CreatePredictionFormInputs,
 } from '../../forms/CreatePredictionForm/CreatePredictionForm'
 import { useCreatePredictionForm } from '../../forms/CreatePredictionForm/useCreatePredictionForm'
-import { ShowPredictions } from '../../prediction/ShowPredictions'
+import { ViewPredictions } from '../../prediction/ViewPredictions'
 
 type QuestionDetailProps = {
   questionId: string
@@ -35,6 +40,7 @@ export const QuestionDetail = ({
   const { mutateAsync } = useCreatePrediction()
   const { session } = useAuth()
   const createPredictionForm = useCreatePredictionForm()
+  const { ...predictionResults } = useFetchPredictions(questionId, 'question')
 
   const hasQuestionDeadlinePassed = useMemo(() => {
     if (!question) return false
@@ -132,9 +138,7 @@ export const QuestionDetail = ({
         </Card>
       ) : null}
 
-      {showPredictions ? (
-        <ShowPredictions questionId={question.id} show />
-      ) : null}
+      {showPredictions ? <ViewPredictions {...predictionResults} /> : null}
     </>
   )
 }

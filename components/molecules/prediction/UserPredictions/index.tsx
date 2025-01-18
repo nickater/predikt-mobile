@@ -1,15 +1,16 @@
 import { LoadingBasicText, LoadingSpinner } from '@/components/atoms'
 import { ButtonBar } from '@/components/atoms/ButtonBar'
 import { Divider } from '@/components/atoms/Divider'
-import { useAuth, useFetchUserPredictions } from '@/hooks'
+import { useAuth, useFetchPredictions } from '@/hooks'
 import { useMemo, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { PredictionList } from '../PredictionList'
 
 export const UserPredictions = () => {
   const { session } = useAuth()
-  const { data: predictions, isLoading } = useFetchUserPredictions(
+  const { data: predictions, isLoading } = useFetchPredictions(
     session?.user.id,
+    'user',
   )
 
   const [listFilter, setListFilter] = useState<'active' | 'inactive'>('active')
