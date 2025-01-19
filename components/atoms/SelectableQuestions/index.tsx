@@ -1,7 +1,7 @@
 import { QuestionType } from '@/types/question'
 import { FC } from 'react'
 import { FlatList, StyleSheet } from 'react-native'
-import { QuestionCard } from '../QuestionCard'
+import { QuestionCard } from '../../molecules/question/QuestionCard'
 import { LoadingBasicText } from '../Loading'
 
 type SelectableQuestionsProps = {

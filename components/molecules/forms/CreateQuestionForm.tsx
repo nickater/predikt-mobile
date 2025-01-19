@@ -7,7 +7,7 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, useColorScheme } from 'react-native'
 import { RadioGroup } from '../RadioGroup'
 import DateTimePicker from 'react-native-date-picker'
 import { DateUtils } from '@/utils/date'
@@ -44,7 +44,7 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
   onSubmit,
 }) => {
   const startDate = useMemo(() => DateUtils.now(), [])
-
+  const scheme = useColorScheme()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const {
@@ -138,6 +138,7 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
               date={field.value}
               mode="datetime"
               onDateChange={field.onChange}
+              theme={scheme}
             />
           )}
           name="deadline"
