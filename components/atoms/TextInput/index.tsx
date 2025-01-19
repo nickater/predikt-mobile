@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet'
+import { useThemeColor } from '@/hooks'
 
 type TextInputProps = RNTextInputProps & {
   bottomSheet?: boolean
@@ -17,17 +18,32 @@ export const TextInput: FC<TextInputProps> = ({
   bottomSheet,
   ...rest
 }) => {
+  const theme = useThemeColor()
+
+  const textInputProps = {
+    placeholderTextColor: theme.secondary,
+    style: [
+      styles.textInput,
+      style,
+      {
+        color: theme.secondary,
+        backgroundColor: 'white',
+        fontSize: 20,
+      },
+    ],
+  }
+
   if (bottomSheet) {
     return (
-      <View style={styles.container}>
-        <BottomSheetTextInput {...rest} style={[styles.textInput, style]} />
+      <View style={[styles.container]}>
+        <BottomSheetTextInput {...rest} {...textInputProps} />
       </View>
     )
   }
 
   return (
-    <View style={styles.container}>
-      <RNTextInput {...rest} style={[styles.textInput, style]} />
+    <View style={[styles.container]}>
+      <RNTextInput {...rest} {...textInputProps} />
     </View>
   )
 }
@@ -40,10 +56,7 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 8,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,

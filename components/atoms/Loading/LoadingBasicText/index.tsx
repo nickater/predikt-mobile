@@ -1,5 +1,7 @@
 import { FC } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { View } from 'react-native-ui-lib'
+import { Text } from '../../Text'
 
 type LoadingBasicTextProps = {
   altText?: string
@@ -7,7 +9,7 @@ type LoadingBasicTextProps = {
 export const LoadingBasicText: FC<LoadingBasicTextProps> = ({ altText }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{altText || 'Loading...'}</Text>
+      <Text variant="header1">{altText || 'Loading...'}</Text>
     </View>
   )
 }
@@ -17,9 +19,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  text: {
-    fontSize: 18,
-    color: '#000',
   },
 })

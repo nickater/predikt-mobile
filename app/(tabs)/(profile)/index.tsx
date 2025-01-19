@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native'
 
 export default function ProfileTab() {
   return (
-    <CustomSafeAreaView style={styles.container} horizontal>
+    <CustomSafeAreaView style={styles.container} bottom={false}>
       <Profile />
     </CustomSafeAreaView>
   )

@@ -28,7 +28,9 @@ export default function TabsLayout() {
         },
         tabBarStyle: {
           backgroundColor: theme.background,
-          borderTopColor: theme.divider,
+          borderTopWidth: 0,
+          paddingTop: 8,
+          minHeight: 64,
         },
       }}
     >

@@ -4,4 +4,7 @@ export type ButtonProps = {
   disabled?: boolean
   outline?: boolean
   label: string
+  fontSize?: FontSize
 } & ButtonBaseProps
+
+export type FontSize = 'small' | 'medium' | 'large'

@@ -8,8 +8,7 @@ import {
   useForm,
 } from 'react-hook-form'
 import { StyleSheet, View } from 'react-native'
-import RadioButton from 'react-native-ui-lib/radioButton'
-import RadioGroup from 'react-native-ui-lib/radioGroup'
+import { RadioGroup } from '../RadioGroup'
 import DateTimePicker from 'react-native-date-picker'
 import { DateUtils } from '@/utils/date'
 
@@ -153,36 +152,38 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
             <RadioGroup
               initialValue={value}
               onValueChange={onChange}
-              marginT-16
-            >
-              <RadioButton value={'public'} label={'Public'} />
-              <RadioButton marginT-10 value={'personal'} label={'Personal'} />
-            </RadioGroup>
+              buttonData={[
+                { label: 'Public', value: 'public' },
+                { label: 'Private', value: 'private' },
+              ]}
+            />
           )}
           name="visibility"
         />
       </View>
 
-      <Button.Primary
-        label={isSubmitting ? 'Submitting...' : 'Submit'}
-        onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}
-        disabled={isSubmitting}
-      />
+      <View style={[styles.submitButtonContainer, styles.section]}>
+        <Button.Primary
+          label={isSubmitting ? 'Submitting...' : 'Submit'}
+          onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}
+          disabled={isSubmitting}
+        />
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   formContainer: {
+    flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 5,
-    gap: 16,
+    gap: 20,
+    justifyContent: 'space-between',
   },
   section: {
     // gap: 12,
@@ -220,10 +221,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 10,
   },
-  submitButton: {
-    backgroundColor: '#007AFF',
-    borderRadius: 8,
-    padding: 16,
+  submitButtonContainer: {
     marginTop: 16,
   },
   submitButtonDisabled: {
@@ -249,8 +247,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#fff',
     overflow: 'hidden',
-  },
-  picker: {
-    // height: 50,
   },
 })

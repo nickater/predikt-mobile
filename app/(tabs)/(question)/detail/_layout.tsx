@@ -1,13 +1,12 @@
-import { HeaderGoBackButton } from '@/components'
 import { Stack } from 'expo-router'
 
 const QuestionDetailLayout = () => {
   return (
-    <Stack screenOptions={{ headerTitle: '' }}>
+    <Stack>
       <Stack.Screen
         name="[id]"
         options={{
-          headerLeft: HeaderGoBackButton,
+          headerShown: false,
         }}
       />
     </Stack>

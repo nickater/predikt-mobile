@@ -34,11 +34,19 @@ export const Profile = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container]}>
       <View style={styles.credentialsContainer}>
-        <Button.Primary label="Update Username" onPress={showUpdateUsername} />
-        <Button.Primary label="Update Password" onPress={showUpdatePassword} />
-        <Button.Primary label="Sign Out" onPress={signOut} />
+        <Button.Primary
+          label="Update Username"
+          onPress={showUpdateUsername}
+          fontSize="large"
+        />
+        <Button.Primary
+          label="Update Password"
+          onPress={showUpdatePassword}
+          fontSize="large"
+        />
+        <Button.Primary label="Sign Out" onPress={signOut} fontSize="large" />
       </View>
       <BottomSheetWrapper
         show={updateUsernameVisible}
@@ -63,6 +71,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
+    padding: 16,
   },
   credentialsContainer: {
     marginTop: 16,

@@ -1,4 +1,4 @@
-import { CreateQuestion, CustomSafeAreaView } from '@/components'
+import { CreateQuestion, CustomSafeAreaView, Handle } from '@/components'
 import { useRouter } from 'expo-router'
 import { StyleSheet } from 'react-native'
 
@@ -10,7 +10,8 @@ const CreateQuestionScreen = () => {
   }
 
   return (
-    <CustomSafeAreaView style={styles.container}>
+    <CustomSafeAreaView style={styles.container} bottom={false} top={false}>
+      <Handle />
       <CreateQuestion onQuestionCreated={handleOnQuestionCreated} />
     </CustomSafeAreaView>
   )

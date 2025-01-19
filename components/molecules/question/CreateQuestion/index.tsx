@@ -44,7 +44,6 @@ export const CreateQuestion: FC<CreateQuestionProps> = ({
       title: input.title,
       description: input.description,
       visibility: input.visibility,
-      allow_anonymous_predictions: input.allow_anonymous_predictions,
       author_id: user.id,
       deadline: new Date(input.deadline).toISOString(),
     }
@@ -56,7 +55,7 @@ export const CreateQuestion: FC<CreateQuestionProps> = ({
 
   return (
     <ScrollView
-      style={styles.createQuestionFormContainer}
+      contentContainerStyle={styles.createQuestionFormContainer}
       keyboardShouldPersistTaps="handled"
       showsVerticalScrollIndicator={false}
     >
@@ -67,7 +66,7 @@ export const CreateQuestion: FC<CreateQuestionProps> = ({
 
 const styles = StyleSheet.create({
   createQuestionFormContainer: {
-    // padding: 20,
     // flex: 1,
+    paddingBottom: 24,
   },
 })

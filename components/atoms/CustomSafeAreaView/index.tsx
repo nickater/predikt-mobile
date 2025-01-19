@@ -1,19 +1,33 @@
 import { FC, PropsWithChildren } from 'react'
-import { SafeAreaView, StyleSheet, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { SafeAreaViewProps } from 'react-native-safe-area-context'
+
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { View } from 'react-native-ui-lib'
 
 type CustomSafeAreaViewProps = SafeAreaViewProps & {
   horizontal?: boolean
+  top?: boolean
+  bottom?: boolean
 }
+
 export const CustomSafeAreaView: FC<
   PropsWithChildren<CustomSafeAreaViewProps>
-> = ({ children, style, horizontal }) => {
+> = ({ children, style, horizontal, bottom = true, top = true }) => {
+  const insets = useSafeAreaInsets()
+
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={[styles.container, style, horizontal && styles.horizontal]}>
-        {children}
-      </View>
-    </SafeAreaView>
+    <View
+      style={[
+        styles.container,
+        style,
+        horizontal && styles.horizontal,
+        { paddingBottom: bottom ? insets.bottom : 0 },
+        { paddingTop: top ? insets.top : 0 },
+      ]}
+    >
+      {children}
+    </View>
   )
 }
 

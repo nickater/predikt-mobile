@@ -1,4 +1,4 @@
-import { CustomSafeAreaView } from '@/components'
+import { CustomSafeAreaView, Handle } from '@/components'
 import { QuestionDetail } from '@/components/molecules/question'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 
@@ -12,7 +12,8 @@ const QuestionDetailScreen = () => {
   }
 
   return (
-    <CustomSafeAreaView>
+    <CustomSafeAreaView top={false}>
+      <Handle />
       <QuestionDetail
         questionId={id}
         onPredictionSubmit={handleOnPredictionSubmit}

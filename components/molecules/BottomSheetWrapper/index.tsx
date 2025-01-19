@@ -1,3 +1,4 @@
+import { useAdjustColor, useThemeColor } from '@/hooks'
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
 import { PropsWithChildren, useCallback, useRef } from 'react'
 import { View } from 'react-native'
@@ -13,8 +14,10 @@ export const BottomSheetWrapper: React.FC<
   PropsWithChildren<BottomSheetWrapperProps>
 > = ({ children, show, onClose, onOpen }) => {
   const bottomSheetRef = useRef<BottomSheet>(null)
+  const theme = useThemeColor()
+  const background = useAdjustColor(theme.background, 2)
 
-  const snapPoints = ['50%', '90%']
+  const snapPoints = ['60%']
 
   const handleSheetChanges = useCallback(
     (index: number) => {
@@ -41,9 +44,16 @@ export const BottomSheetWrapper: React.FC<
       onChange={handleSheetChanges}
       backdropComponent={() => <View style={{ backgroundColor: 'grey' }} />}
       enablePanDownToClose
+      enableOverDrag={false}
+      handleIndicatorStyle={{ backgroundColor: theme.textPrimary }}
+      handleStyle={{ backgroundColor: background }}
       index={-1}
     >
-      <BottomSheetView style={{ padding: 16 }}>{children}</BottomSheetView>
+      <BottomSheetView
+        style={{ padding: 16, backgroundColor: background, flex: 1 }}
+      >
+        {children}
+      </BottomSheetView>
     </BottomSheet>
   )
 }
