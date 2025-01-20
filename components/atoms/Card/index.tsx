@@ -11,7 +11,7 @@ export const Card: React.FC<CardProps> = ({
   ...rest
 }) => {
   const theme = useThemeColor()
-  const pressedColor = useAdjustColor(theme.accent, 120)
+  const pressedColor = useAdjustColor(theme.background, 20)
 
   const shouldShowPressedColor = useMemo(() => {
     return showPressedColor && onPress

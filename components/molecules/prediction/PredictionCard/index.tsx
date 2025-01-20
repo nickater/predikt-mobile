@@ -40,7 +40,7 @@ export const PredictionCard: PredictionCardProps = ({
           </ConditionalText>
         </View>
         <View>
-          <Text variant="bold">{questionTitle}</Text>
+          <Text variant="bold2">{questionTitle}</Text>
         </View>
       </View>
       <AccordionItem isExpanded={open} viewKey="Accordion">

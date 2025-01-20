@@ -28,7 +28,6 @@ export const ViewQuestions: FC<ViewQuestionsProps> = ({
 
   const questionMap = useMemo(
     () => ({
-      // all: <PublicQuestions onSelect={handleQuestionPress} />,
       public: <PublicQuestions onSelect={handleQuestionPress} />,
       private: <UserQuestions onSelect={handleQuestionPress} />,
     }),

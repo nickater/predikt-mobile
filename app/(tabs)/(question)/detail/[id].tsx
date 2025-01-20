@@ -12,7 +12,7 @@ const QuestionDetailScreen = () => {
   }
 
   return (
-    <CustomSafeAreaView top={false}>
+    <CustomSafeAreaView top={false} horizontal>
       <Handle />
       <QuestionDetail
         questionId={id}

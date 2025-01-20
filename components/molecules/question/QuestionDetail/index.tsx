@@ -80,7 +80,7 @@ export const QuestionDetail = ({
 
   return (
     <View style={styles.container}>
-      <Card style={{ backgroundColor: '#f9f9f9' }}>
+      <Card>
         <View>
           <Text variant="header2" style={styles.title}>
             {question.title}
