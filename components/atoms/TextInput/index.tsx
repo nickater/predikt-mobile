@@ -1,17 +1,9 @@
 import { FC } from 'react'
-import {
-  StyleSheet,
-  TextInput as RNTextInput,
-  TextInputProps as RNTextInputProps,
-  View,
-} from 'react-native'
+import { StyleSheet, TextInput as RNTextInput, View } from 'react-native'
 
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet'
 import { useThemeColor } from '@/hooks'
-
-type TextInputProps = RNTextInputProps & {
-  bottomSheet?: boolean
-}
+import { TextInputProps } from './types'
 
 export const TextInput: FC<TextInputProps> = ({
   style,

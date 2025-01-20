@@ -1,15 +1,11 @@
-import { PredictionCard } from '@/components/atoms/PredictionCard'
-import { PredictionWithRelations } from '@/types/prediction'
+import { PredictionCard } from '@/components/molecules/prediction/PredictionCard'
 import { FlatList, StyleSheet } from 'react-native'
+import { PredictionListProps } from './types'
 
-type PredictionListProps = {
-  data: PredictionWithRelations[]
-}
-
-export const PredictionList = ({ data }: PredictionListProps) => {
+export const PredictionList: PredictionListProps = ({ predictions }) => {
   return (
     <FlatList
-      data={data}
+      data={predictions}
       contentContainerStyle={styles.container}
       renderItem={({ item }) => <PredictionCard {...item} />}
     />

@@ -1,90 +1,42 @@
-import { Button, TextInput } from '@/components/atoms'
-import { useProfile } from '@/hooks'
-import { FC, useEffect } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { useForm, Controller } from 'react-hook-form'
-import { useUpdatePassword } from '@/hooks/profile/useUpdatePassword'
+import {
+  UpdatePasswordFormInput,
+  useAuth,
+  useUpdatePasswordForm,
+} from '@/hooks'
+import { SubmitHandler } from 'react-hook-form'
+import { Alert, StyleSheet } from 'react-native'
+import { UpdatePasswordForm } from '../../forms'
+import { UpdatePasswordProps } from './types'
 
-type UpdatePasswordProps = unknown
+export const UpdatePassword: UpdatePasswordProps = ({ onSubmit }) => {
+  const { updatePassword } = useAuth()
+  const { control, handleSubmit, reset, formState } = useUpdatePasswordForm()
 
-type FormData = {
-  oldPassword: string
-  newPassword: string
-}
+  const handleUpdateUsername: SubmitHandler<UpdatePasswordFormInput> = async ({
+    oldPassword,
+    newPassword,
+  }) => {
+    const password = newPassword
+    await updatePassword(password)
 
-export const UpdatePassword: FC<UpdatePasswordProps> = () => {
-  const { data } = useProfile()
-  const { mutateAsync, error, isSuccess } = useUpdatePassword()
-  const { control, handleSubmit, reset, setFocus, resetField } =
-    useForm<FormData>({
-      defaultValues: {
-        oldPassword: '',
-        newPassword: '',
-      },
-    })
-
-  const handleUpdatePassword = async (formData: FormData) => {
-    await mutateAsync({
-      id: data?.id,
-      oldPassword: formData.oldPassword,
-      newPassword: formData.newPassword,
-    })
+    reset()
+    onSubmit()
   }
 
-  useEffect(() => {
-    if (error) {
-      resetField('oldPassword')
-      setFocus('oldPassword')
-    }
-  }, [error, resetField, setFocus])
-
-  useEffect(() => {
-    if (isSuccess) {
-      reset({ oldPassword: '', newPassword: '' })
-    }
-  }, [isSuccess, reset])
+  const handleInvalidUsername = () => {
+    // TODO
+    Alert.alert(
+      'Invalid username',
+      'Username must be at least 3 characters long.',
+    )
+  }
 
   return (
-    <View style={styles.container}>
-      <Controller
-        control={control}
-        name="oldPassword"
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            focusable
-            secureTextEntry
-            autoCapitalize="none"
-            autoComplete="off"
-            autoCorrect={false}
-            enablesReturnKeyAutomatically
-            placeholder="Enter old password"
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="newPassword"
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            secureTextEntry
-            autoCapitalize="none"
-            autoComplete="off"
-            autoCorrect={false}
-            enablesReturnKeyAutomatically
-            placeholder="Enter new password"
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
-      />
-
-      <Button.Primary
-        label="Update Password"
-        onPress={handleSubmit(handleUpdatePassword)}
-      />
-    </View>
+    <UpdatePasswordForm
+      control={control}
+      formState={formState}
+      onSubmit={handleSubmit(handleUpdateUsername, handleInvalidUsername)}
+    />
   )
 }
 

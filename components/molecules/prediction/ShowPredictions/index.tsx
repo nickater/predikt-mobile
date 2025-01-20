@@ -1,18 +1,10 @@
 import { Text } from '@/components/atoms'
-import { useFetchPredictionsByQuestionId } from '@/hooks'
-import { FC } from 'react'
+import { useFetchPredictions } from '@/hooks'
 import { View, StyleSheet } from 'react-native'
+import { ShowPredictionsProps } from './types'
 
-type ShowPredictionsProps = {
-  questionId: string
-  show: boolean
-}
-
-export const ShowPredictions: FC<ShowPredictionsProps> = ({
-  questionId,
-  show,
-}) => {
-  const { data, isLoading } = useFetchPredictionsByQuestionId(questionId)
+export const ShowPredictions: ShowPredictionsProps = ({ questionId, show }) => {
+  const { data, isLoading } = useFetchPredictions(questionId, 'question')
 
   return (
     <View style={styles.container}>

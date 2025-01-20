@@ -1,15 +1,9 @@
 import { QuestionType } from '@/types/question'
 import { FC } from 'react'
 import { FlatList, StyleSheet } from 'react-native'
-import { QuestionCard } from '../../molecules/question/QuestionCard'
-import { LoadingBasicText } from '../Loading'
-
-type SelectableQuestionsProps = {
-  questions: (QuestionType & { predictionExists: boolean })[]
-  onSelect: (question: QuestionType) => void
-  selectedQuestionId?: string | null
-  showPredictionCount?: boolean
-}
+import { QuestionCard } from '@/molecules/question/QuestionCard'
+import { LoadingBasicText } from '@/atoms/Loading/LoadingBasicText'
+import { SelectableQuestionsProps } from './types'
 
 export const SelectableQuestions: FC<SelectableQuestionsProps> = ({
   questions,

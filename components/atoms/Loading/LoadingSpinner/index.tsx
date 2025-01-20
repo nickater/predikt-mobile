@@ -1,9 +1,6 @@
-import { FC } from 'react'
 import { View, StyleSheet, ActivityIndicator } from 'react-native'
 
-type LoadingSpinnerProps = unknown
-
-export const LoadingSpinner: FC<LoadingSpinnerProps> = () => {
+export const LoadingSpinner = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" />

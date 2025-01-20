@@ -1,3 +1,6 @@
+import { PropsWithChildren } from 'react'
+import { TextProps as RNTextProps } from 'react-native'
+
 export type TextVariant =
   | 'header1'
   | 'header2'
@@ -12,3 +15,7 @@ export type TextVariant =
   | 'large'
 
 export type TextPosition = 'left' | 'center' | 'right'
+
+export type TextProps = PropsWithChildren<
+  RNTextProps & { variant?: TextVariant; position?: TextPosition }
+>

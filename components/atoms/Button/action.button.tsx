@@ -1,7 +1,7 @@
 import { useThemeColor } from '@/hooks'
 import { useMemo } from 'react'
 import { StyleSheet } from 'react-native'
-import { RoundButton } from '../Button/round.button'
+import { RoundButton } from '@/atoms/Button/round.button'
 import { ButtonProps } from './types'
 
 type ActionButtonProps = {

@@ -1,14 +1,15 @@
-import { FC, PropsWithChildren } from 'react'
-import { StyleSheet, Text as RNText, TextProps } from 'react-native'
-import { TextPosition, TextVariant } from './types'
-import { Theme } from '@/libs/RNUILib'
 import { useThemeColor } from '@/hooks'
+import { Theme } from '@/libs/RNUILib'
+import { FC } from 'react'
+import { Text as RNText, StyleSheet } from 'react-native'
+import { TextProps } from './types'
 
-export const Text: FC<
-  PropsWithChildren<
-    TextProps & { variant?: TextVariant; position?: TextPosition }
-  >
-> = ({ variant, position, children, ...props }) => {
+export const Text: FC<TextProps> = ({
+  variant,
+  position,
+  children,
+  ...props
+}) => {
   const theme = useThemeColor()
   const styles = makeStyles(theme)
 

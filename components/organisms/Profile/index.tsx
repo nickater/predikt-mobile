@@ -1,16 +1,13 @@
 import { Button } from '@/components/atoms'
-import {
-  BottomSheetWrapper,
-  UpdatePassword,
-  UpdateUsername,
-} from '@/components/molecules'
-import { useAuth, useUpdateUsername } from '@/hooks'
+import { BottomSheetWrapper, UpdateUsername } from '@/components/molecules'
+import { UpdatePassword } from '@/components/molecules/question/UpdatePassword'
+import { useAuth, useProfile } from '@/hooks'
 import { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 
 export const Profile = () => {
-  const { signOut, session } = useAuth()
-  const { mutateAsync } = useUpdateUsername()
+  const { data: profile } = useProfile()
+  const { signOut } = useAuth()
 
   const [updateUsernameVisible, setUpdateUsernameVisible] = useState(false)
   const [updatePasswordVisible, setUpdatePasswordVisible] = useState(false)
@@ -25,12 +22,8 @@ export const Profile = () => {
     setUpdatePasswordVisible(true)
   }
 
-  const handleUsernameUpdate = async ({ username }: { username: string }) => {
-    const userId = session?.user?.id
-
-    await mutateAsync({ id: userId, newUsername: username })
+  const afterUpdateUsername = () => {
     setUpdateUsernameVisible(false)
-    return true
   }
 
   return (
@@ -53,7 +46,7 @@ export const Profile = () => {
         onClose={() => setUpdateUsernameVisible(false)}
         onOpen={() => {}}
       >
-        <UpdateUsername onSubmit={handleUsernameUpdate} />
+        <UpdateUsername onSubmit={afterUpdateUsername} />
       </BottomSheetWrapper>
 
       <BottomSheetWrapper
@@ -61,7 +54,7 @@ export const Profile = () => {
         onClose={() => setUpdatePasswordVisible(false)}
         onOpen={() => {}}
       >
-        <UpdatePassword />
+        <UpdatePassword userId={profile?.id} />
       </BottomSheetWrapper>
     </View>
   )

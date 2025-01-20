@@ -1,11 +1,8 @@
 import { FC } from 'react'
-import { StyleSheet } from 'react-native'
-import { View } from 'react-native-ui-lib'
-import { Text } from '../../Text'
+import { StyleSheet, View } from 'react-native'
+import { Text } from '@/components/atoms/Text'
+import { LoadingBasicTextProps } from './types'
 
-type LoadingBasicTextProps = {
-  altText?: string
-}
 export const LoadingBasicText: FC<LoadingBasicTextProps> = ({ altText }) => {
   return (
     <View style={styles.container}>

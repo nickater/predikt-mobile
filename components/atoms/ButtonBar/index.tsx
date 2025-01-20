@@ -1,14 +1,8 @@
 import { FC, useState } from 'react'
 import { StyleSheet, View, Pressable } from 'react-native'
-import { Text } from '../Text'
+import { Text } from '@/components/atoms/Text'
 import { useAdjustColor, useThemeColor } from '@/hooks'
-
-type ButtonBarProps = {
-  buttonProps: {
-    text: string
-    onPress: () => void
-  }[]
-}
+import { ButtonBarProps } from './types'
 
 export const ButtonBar: FC<ButtonBarProps> = ({ buttonProps }) => {
   const [selectedButton, setSelectedButton] = useState(0)

@@ -2,13 +2,7 @@ import { useAdjustColor, useThemeColor } from '@/hooks'
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
 import { PropsWithChildren, useCallback, useRef } from 'react'
 import { View } from 'react-native'
-
-interface BottomSheetWrapperProps {
-  children: React.ReactNode
-  show: boolean
-  onClose?: () => void
-  onOpen?: () => void
-}
+import { BottomSheetWrapperProps } from './types'
 
 export const BottomSheetWrapper: React.FC<
   PropsWithChildren<BottomSheetWrapperProps>

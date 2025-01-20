@@ -1,15 +1,9 @@
 import { FC, PropsWithChildren } from 'react'
 import { StyleSheet } from 'react-native'
-import { SafeAreaViewProps } from 'react-native-safe-area-context'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { View } from 'react-native-ui-lib'
-
-type CustomSafeAreaViewProps = SafeAreaViewProps & {
-  horizontal?: boolean
-  top?: boolean
-  bottom?: boolean
-}
+import { CustomSafeAreaViewProps } from './types'
 
 export const CustomSafeAreaView: FC<
   PropsWithChildren<CustomSafeAreaViewProps>

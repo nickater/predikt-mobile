@@ -91,11 +91,47 @@ export const useAuth = () => {
     if (error) Alert.alert('Error', error.message)
   }, [queryClient, supabase])
 
+  const updatePassword = async (password: string) => {
+    const { error } = await supabase.auth.updateUser({
+      password,
+    })
+
+    if (error) {
+      Alert.alert('Error', error.message)
+      return false
+    }
+
+    return true
+  }
+
+  const updateUsername = async (username: string) => {
+    const { user } = session
+
+    if (!user) return
+    const id = user.id
+
+    const { error } = await supabase.from('profiles').upsert([
+      {
+        id,
+        username,
+      },
+    ])
+
+    if (error) {
+      Alert.alert('Error', error.message)
+      return false
+    }
+
+    return true
+  }
+
   return {
     loading,
     session,
     signIn,
     signUp,
     signOut,
+    updateUsername,
+    updatePassword,
   }
 }

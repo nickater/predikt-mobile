@@ -1,25 +1,9 @@
 import { Button, Divider, Text, TextInput } from '@/components/atoms'
-import { CreateQuestionType } from '@/types/question'
-import { FC, useMemo, useState } from 'react'
-import {
-  Controller,
-  SubmitErrorHandler,
-  SubmitHandler,
-  useForm,
-} from 'react-hook-form'
+import { RadioGroup } from '@/components/molecules/RadioGroup'
+import { Controller } from 'react-hook-form'
 import { StyleSheet, View, useColorScheme } from 'react-native'
-import { RadioGroup } from '../RadioGroup'
 import DateTimePicker from 'react-native-date-picker'
-import { DateUtils } from '@/utils/date'
-
-export type CreateQuestionFormInputsPick = Pick<
-  CreateQuestionType,
-  'visibility' | 'title' | 'description'
-> & { deadline: Date }
-
-export type CreateQuestionFormProps = {
-  onSubmit: SubmitHandler<CreateQuestionFormInputsPick>
-}
+import { CreateQuestionFormProps } from './types'
 
 const validationRules = {
   title: {
@@ -34,48 +18,19 @@ const validationRules = {
   },
   deadline: {
     required: 'Please select a deadline',
-    validate: (date: Date) => {
+    validate: (dateString: string) => {
+      const date = new Date(dateString)
       return date > new Date() || 'Deadline must be in the future'
     },
   },
 }
 
-export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
+export const CreateQuestionForm: CreateQuestionFormProps = ({
+  control,
+  formState: { errors },
   onSubmit,
 }) => {
-  const startDate = useMemo(() => DateUtils.now(), [])
   const scheme = useColorScheme()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<CreateQuestionFormInputsPick>({
-    defaultValues: {
-      visibility: 'public',
-      title: '',
-      description: '',
-      deadline: DateUtils.fromDayjs(startDate),
-    },
-  })
-
-  const onValidSubmission = async (data: CreateQuestionFormInputsPick) => {
-    setIsSubmitting(true)
-    try {
-      await onSubmit(data)
-      reset()
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const onInvalidSubmission: SubmitErrorHandler<
-    CreateQuestionFormInputsPick
-  > = (errors) => {
-    console.error(errors)
-  }
 
   return (
     <View style={styles.formContainer}>
@@ -135,7 +90,7 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
           rules={validationRules.deadline}
           render={({ field }) => (
             <DateTimePicker
-              date={field.value}
+              date={new Date(field.value)}
               mode="datetime"
               onDateChange={field.onChange}
               theme={scheme}
@@ -165,9 +120,10 @@ export const CreateQuestionForm: FC<CreateQuestionFormProps> = ({
 
       <View style={[styles.submitButtonContainer, styles.section]}>
         <Button.Primary
-          label={isSubmitting ? 'Submitting...' : 'Submit'}
-          onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}
-          disabled={isSubmitting}
+          // label={isSubmitting ? 'Submitting...' : 'Submit'}
+          label="Submit"
+          onPress={onSubmit}
+          // disabled={isSubmitting}
         />
       </View>
     </View>

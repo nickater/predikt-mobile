@@ -1,12 +1,7 @@
 import { useAdjustColor, useThemeColor } from '@/hooks'
 import { useMemo } from 'react'
-import { Pressable, StyleSheet, ViewProps } from 'react-native'
-
-type CardProps = ViewProps & {
-  children: React.ReactNode
-  onPress?: () => void
-  showPressedColor?: boolean
-}
+import { Pressable, StyleSheet } from 'react-native'
+import { CardProps } from './types'
 
 export const Card: React.FC<CardProps> = ({
   children,

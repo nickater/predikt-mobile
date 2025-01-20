@@ -1,14 +1,10 @@
 import { FC } from 'react'
 import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
 import { View } from 'react-native'
-import { Button, Text, TextInput } from '../../../atoms'
-import { SignUpFormUserInput } from './types'
+import { Button, Text, TextInput } from '@/components/atoms'
+import { SignUpFormProps, SignUpFormUserInput } from './types'
 
-type SignUpFormProps = {
-  onSubmit: (data: SignUpFormUserInput) => void
-}
-
-export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit }) => {
+export const SignUpForm: SignUpFormProps = ({ onSubmit }) => {
   const {
     control,
     handleSubmit,

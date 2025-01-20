@@ -1,16 +1,12 @@
-import { PredictionWithRelations } from '@/types/prediction'
+import { Card, ConditionalText, Text } from '@/components/atoms'
+import { AccordionItem } from '@/components/molecules/AccordionItem'
 import { formatShortDate } from '@/utils/stringFormat/dateFormatter'
-import { FC, useMemo } from 'react'
+import { useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
-import { AccordionItem } from '../AccordionView'
-import { Card } from '../Card'
-import { ConditionalText } from '../ConditionalText'
-import { Text } from '../Text'
+import { PredictionCardProps } from './types'
 
-type PredictionCardProps = PredictionWithRelations
-
-export const PredictionCard: FC<PredictionCardProps> = ({
+export const PredictionCard: PredictionCardProps = ({
   created_at,
   prediction,
   question: {

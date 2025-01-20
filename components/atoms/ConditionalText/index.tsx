@@ -1,12 +1,6 @@
 import { PropsWithChildren } from 'react'
-import { Text } from '../Text'
-import { TextPosition, TextVariant } from '../Text/types'
-
-type ConditionalTextProps = {
-  variant?: TextVariant
-  position?: TextPosition
-  condition: unknown
-}
+import { Text } from '@/components/atoms/Text'
+import { ConditionalTextProps } from './types'
 
 export const ConditionalText: React.FC<
   PropsWithChildren<ConditionalTextProps>

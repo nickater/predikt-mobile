@@ -33,8 +33,8 @@ export const UserPredictions = () => {
 
   const questionMap = useMemo(
     () => ({
-      active: <PredictionList data={activePredictions} />,
-      inactive: <PredictionList data={inactivePredictions} />,
+      active: <PredictionList predictions={activePredictions} />,
+      inactive: <PredictionList predictions={inactivePredictions} />,
     }),
     [activePredictions, inactivePredictions],
   )

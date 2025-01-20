@@ -1,56 +1,39 @@
-import { Button, TextInput } from '@/components/atoms'
-import { useProfile } from '@/hooks'
-import { FC } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { StyleSheet, View } from 'react-native'
+import {
+  UpdateUsernameFormInput,
+  useAuth,
+  useUpdateUsernameForm,
+} from '@/hooks'
+import { SubmitHandler } from 'react-hook-form'
+import { Alert, StyleSheet } from 'react-native'
+import { UpdateUsernameForm } from '../../forms/UpdateUsernameForm'
+import { UpdateUsernameProps } from './types'
 
-type UpdateUsernameProps = {
-  onSubmit: ({ username }: { username: string }) => Promise<boolean>
-}
+export const UpdateUsername: UpdateUsernameProps = ({ onSubmit }) => {
+  const { updateUsername } = useAuth()
+  const { control, handleSubmit, reset, formState } = useUpdateUsernameForm()
 
-type FormData = {
-  username: string
-}
+  const handleUpdateUsername: SubmitHandler<UpdateUsernameFormInput> = async ({
+    username,
+  }) => {
+    await updateUsername(username)
+    reset()
+    onSubmit()
+  }
 
-export const UpdateUsername: FC<UpdateUsernameProps> = ({ onSubmit }) => {
-  const { data } = useProfile()
-  const { control, handleSubmit, reset } = useForm<FormData>({
-    defaultValues: {
-      username: data?.username || '',
-    },
-  })
-
-  const handleUpdateUsername = async (formData: FormData) => {
-    const result = await onSubmit({ username: formData.username })
-
-    if (result) {
-      reset({ username: '' })
-    }
+  const handleInvalidUsername = () => {
+    // TODO
+    Alert.alert(
+      'Invalid username',
+      'Username must be at least 3 characters long.',
+    )
   }
 
   return (
-    <View style={styles.container}>
-      <Controller
-        control={control}
-        name="username"
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            bottomSheet
-            autoCapitalize="none"
-            autoComplete="off"
-            autoCorrect={false}
-            placeholder={data?.username}
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
-      />
-
-      <Button.Primary
-        label="Update Username"
-        onPress={handleSubmit(handleUpdateUsername)}
-      />
-    </View>
+    <UpdateUsernameForm
+      control={control}
+      formState={formState}
+      onSubmit={handleSubmit(handleUpdateUsername, handleInvalidUsername)}
+    />
   )
 }
 

@@ -1,22 +1,20 @@
-import { FC } from 'react'
+import { Button, Text, TextInput } from '@/components/atoms'
 import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
 import { View } from 'react-native'
-import { Button, Text, TextInput } from '../../../atoms'
-import { SignInFormUserInput } from './types'
+import { CreatePredictionFormProps, SignInFormUserInput } from './types'
 
-type CreatePredictionFormProps = {
-  onSubmit: (data: SignInFormUserInput) => void
-}
+const TEST_EMAIL = process.env.EXPO_PUBLIC_TEST_EMAIL
+const TEST_PASSWORD = process.env.EXPO_PUBLIC_TEST_PASSWORD
 
-export const SignInForm: FC<CreatePredictionFormProps> = ({ onSubmit }) => {
+export const SignInForm: CreatePredictionFormProps = ({ onSubmit }) => {
   const {
     control,
     handleSubmit,
     formState: { errors, dirtyFields },
   } = useForm<SignInFormUserInput>({
     defaultValues: {
-      email: 'nick@mail.co',
-      password: 'password',
+      email: TEST_EMAIL ?? '',
+      password: TEST_PASSWORD ?? '',
     },
   })
 

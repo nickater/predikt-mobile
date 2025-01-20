@@ -1,20 +1,15 @@
 import { Card, Text } from '@/components/atoms'
 import {
-  useAuth,
-  useCreatePrediction,
   useFetchPredictions,
   useFetchQuestionDetail,
+  useProfile,
 } from '@/hooks'
 import { formatDateTime } from '@/utils/stringFormat/dateFormatter'
 import { useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
-import {
-  CreatePredictionForm,
-  CreatePredictionFormInputs,
-} from '../../forms/CreatePredictionForm/CreatePredictionForm'
-import { useCreatePredictionForm } from '../../forms/CreatePredictionForm/useCreatePredictionForm'
+import { CreatePrediction } from '../../prediction/CreatePrediction'
 import { ViewPredictions } from '../../prediction/ViewPredictions'
 
 type QuestionDetailProps = {
@@ -37,10 +32,8 @@ export const QuestionDetail = ({
     error,
     isLoading,
   } = useFetchQuestionDetail(questionId)
-  const { mutateAsync } = useCreatePrediction()
-  const { session } = useAuth()
-  const createPredictionForm = useCreatePredictionForm()
-  const { ...predictionResults } = useFetchPredictions(questionId, 'question')
+  const predictionResults = useFetchPredictions(questionId, 'question')
+  const { data: profile } = useProfile()
 
   const hasQuestionDeadlinePassed = useMemo(() => {
     if (!question) return false
@@ -85,22 +78,8 @@ export const QuestionDetail = ({
 
   if (isError || !question) return <Text>Error: {error?.message}</Text>
 
-  const onSubmit = async (data: CreatePredictionFormInputs) => {
-    if (!session?.user) return
-
-    await mutateAsync({
-      user_id: session.user.id,
-      question_id: question.id,
-      prediction: data.prediction,
-    })
-
-    createPredictionForm.reset()
-
-    onPredictionSubmit()
-  }
-
   return (
-    <>
+    <View style={styles.container}>
       <Card style={{ backgroundColor: '#f9f9f9' }}>
         <View>
           <Text variant="header2" style={styles.title}>
@@ -125,21 +104,19 @@ export const QuestionDetail = ({
       </Card>
       {allowPrediction ? (
         <Card>
-          <KeyboardAwareScrollView
-            contentContainerStyle={styles.container}
-            keyboardShouldPersistTaps="handled"
-          >
+          <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
             <Text>Make your prediction</Text>
-            <CreatePredictionForm
-              {...createPredictionForm}
-              onSubmit={onSubmit}
+            <CreatePrediction
+              userId={profile?.id}
+              questionId={questionId}
+              onPredictionSubmit={onPredictionSubmit}
             />
           </KeyboardAwareScrollView>
         </Card>
       ) : null}
 
       {showPredictions ? <ViewPredictions {...predictionResults} /> : null}
-    </>
+    </View>
   )
 }
 
@@ -151,7 +128,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   description: {
-    // marginBottom: 20,
     color: 'red',
   },
   row: {

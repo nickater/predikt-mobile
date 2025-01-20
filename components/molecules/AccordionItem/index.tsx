@@ -1,20 +1,12 @@
 import { FC } from 'react'
 import { StyleSheet, View } from 'react-native'
 import Animated, {
-  SharedValue,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
-
-type AccordionItemProps = {
-  isExpanded: SharedValue<boolean>
-  children: React.ReactNode
-  viewKey: string
-  style?: any
-  duration?: number
-}
+import { AccordionItemProps } from './types'
 
 export const AccordionItem: FC<AccordionItemProps> = ({
   isExpanded,
