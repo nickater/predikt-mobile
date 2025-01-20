@@ -2,6 +2,7 @@ import dayjs from '@/libs/dayjs.config'
 
 export const DateUtils = {
   now: () => dayjs(),
+  create: (date: string) => dayjs(date),
   format: (date: Date, format: string) => dayjs(date).format(format),
   isBefore: (date: Date, compare: Date) => dayjs(date).isBefore(compare),
   isAfter: (date: Date, compare: Date) => dayjs(date).isAfter(compare),

@@ -1,15 +1,16 @@
 import { LoadingBasicText, LoadingSpinner } from '@/components/atoms'
 import { ButtonBar } from '@/components/atoms/ButtonBar'
 import { Divider } from '@/components/atoms/Divider'
-import { useAuth, useFetchPredictions } from '@/hooks'
+import { useFetchPredictions, useProfile } from '@/hooks'
+import { DateUtils } from '@/utils/date'
 import { useMemo, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { PredictionList } from '../PredictionList'
 
 export const UserPredictions = () => {
-  const { session } = useAuth()
+  const { data: profile } = useProfile()
   const { data: predictions, isLoading } = useFetchPredictions(
-    session?.user.id,
+    profile?.id,
     'user',
   )
 
@@ -17,9 +18,10 @@ export const UserPredictions = () => {
 
   const activePredictions = useMemo(
     () =>
-      predictions?.filter(
-        (prediction) => new Date(prediction.question.deadline) > new Date(),
-      ),
+      predictions?.filter((prediction) => {
+        const deadline = DateUtils.create(prediction.question.deadline)
+        return deadline.isSameOrAfter(DateUtils.now())
+      }),
     [predictions],
   )
 
@@ -65,5 +67,6 @@ const styles = StyleSheet.create({
   },
   list: {
     flexGrow: 1,
+    paddingHorizontal: 20,
   },
 })

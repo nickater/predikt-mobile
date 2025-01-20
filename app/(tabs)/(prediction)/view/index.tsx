@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 
 const ViewPredictionsScreen = () => {
   return (
-    <CustomSafeAreaView style={styles.container} horizontal>
+    <CustomSafeAreaView style={styles.container}>
       <UserPredictions />
     </CustomSafeAreaView>
   )

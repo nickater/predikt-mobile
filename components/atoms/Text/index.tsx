@@ -4,12 +4,7 @@ import { FC } from 'react'
 import { Text as RNText, StyleSheet } from 'react-native'
 import { TextProps } from './types'
 
-export const Text: FC<TextProps> = ({
-  variant,
-  position,
-  children,
-  ...props
-}) => {
+export const Text: TextProps = ({ variant, position, children, ...props }) => {
   const theme = useThemeColor()
   const styles = makeStyles(theme)
 

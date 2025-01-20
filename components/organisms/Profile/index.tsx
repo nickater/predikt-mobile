@@ -2,6 +2,7 @@ import { Button } from '@/components/atoms'
 import { BottomSheetWrapper, UpdateUsername } from '@/components/molecules'
 import { UpdatePassword } from '@/components/molecules/question/UpdatePassword'
 import { useAuth, useProfile } from '@/hooks'
+import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 

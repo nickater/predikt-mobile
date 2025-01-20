@@ -45,7 +45,7 @@ export const PredictionCard: PredictionCardProps = ({
       </View>
       <AccordionItem isExpanded={open} viewKey="Accordion">
         <View style={styles.predictionBottomRow}>
-          <Text>{prediction}</Text>
+          <Text style={styles.predictionText}>{prediction}</Text>
         </View>
       </AccordionItem>
     </Card>
@@ -64,5 +64,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     borderRadius: 8,
     width: '100%',
+  },
+  predictionText: {
+    color: '#000',
   },
 })

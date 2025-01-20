@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import { TextProps as RNTextProps } from 'react-native'
 
 export type TextVariant =
@@ -16,6 +16,8 @@ export type TextVariant =
 
 export type TextPosition = 'left' | 'center' | 'right'
 
-export type TextProps = PropsWithChildren<
-  RNTextProps & { variant?: TextVariant; position?: TextPosition }
+export type TextProps = FC<
+  PropsWithChildren<
+    RNTextProps & { variant?: TextVariant; position?: TextPosition }
+  >
 >

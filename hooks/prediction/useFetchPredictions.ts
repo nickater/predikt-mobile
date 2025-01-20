@@ -1,17 +1,14 @@
-import { getPredictionsByQuestionId } from '@/queries/prediction/getPredictionsByQuestionId'
+import { useSupabase } from '@/hooks'
+import {
+  getPredictionsByQuestionQueryFn,
+  getPredictionsByQuestionQueryKey,
+} from '@/queries/prediction/getPredictionsByQuestionId'
+import {
+  getUserPredictionsQueryFn,
+  getUserPredictionsQueryKey,
+} from '@/queries/prediction/getPredictionsByUser'
 import { useQuery } from '@tanstack/react-query'
-
-const ONE_HOUR = 1000 * 60 * 60
-
-export const getPredictionsByIdQueryFn = async (id: string) => {
-  const { data, error } = await getPredictionsByQuestionId(id)
-
-  if (error) {
-    throw new Error(error.message)
-  }
-
-  return data
-}
+import { useCallback, useMemo } from 'react'
 
 export const getPredictionsByIdQueryKey = (
   id: string,
@@ -22,9 +19,24 @@ export function useFetchPredictions(
   id: string,
   type: 'user' | 'question' = 'question',
 ) {
-  const queryKey = getPredictionsByIdQueryKey(id)
+  const client = useSupabase()
+  const queryKey = useMemo(() => {
+    switch (type) {
+      case 'user':
+        return getUserPredictionsQueryKey(id)
+      case 'question':
+        return getPredictionsByQuestionQueryKey(id)
+    }
+  }, [id, type])
 
-  const queryFn = () => getPredictionsByIdQueryFn(id)
+  const queryFn = useCallback(async () => {
+    switch (type) {
+      case 'user':
+        return getUserPredictionsQueryFn(id)(client)()
+      case 'question':
+        return getPredictionsByQuestionQueryFn(id)(client)()
+    }
+  }, [client, id, type])
 
-  return useQuery({ queryKey, queryFn, staleTime: ONE_HOUR, enabled: !!id })
+  return useQuery({ queryKey, queryFn, enabled: !!id })
 }
