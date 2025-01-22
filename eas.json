@@ -1,26 +1,26 @@
 {
   "cli": {
-    "version": ">=14.2.0",
     "appVersionSource": "remote"
   },
   "build": {
+    "base": {
+      "env": {  
+        "EAS_LOCAL_BUILD_ARTIFACTS_DIR": "./builds"
+      }
+    },
     "development": {
       "developmentClient": true,
       "distribution": "internal",
       "env": {
-        "EAS_LOCAL_BUILD_ARTIFACTS_DIR": "./builds"
+        "APP_VARIANT": "development"
       }
     },
     "preview": {
-      "distribution": "internal"
-    },
-    "production": {
-
-    }
-  },
-  "submit": {
-    "production": {
-      
+      "distribution": "internal",
+      "environment": "preview",
+      "env": {
+        "APP_VARIANT": "preview"
+      }
     }
   }
 }

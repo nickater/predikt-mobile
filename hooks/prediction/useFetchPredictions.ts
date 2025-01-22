@@ -1,4 +1,4 @@
-import { useSupabase } from '@/hooks'
+import { useSupabase } from '@/hooks/useSupabase'
 import {
   getPredictionsByQuestionQueryFn,
   getPredictionsByQuestionQueryKey,
