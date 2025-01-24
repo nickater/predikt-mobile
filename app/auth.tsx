@@ -41,6 +41,3 @@ export default function Auth() {
     </CustomSafeAreaView>
   )
 }
-
-// TODO: Abstract the logic for toggling between sign in and sign up into a hook
-// TODO: Move the UI into a separate component

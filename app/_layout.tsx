@@ -8,6 +8,7 @@ export default function AppLayout() {
   return (
     <Providers>
       <Stack
+        initialRouteName="welcome"
         screenOptions={{
           headerShown: false,
           headerStyle: {
@@ -15,6 +16,7 @@ export default function AppLayout() {
           },
         }}
       >
+        <Stack.Screen name="welcome" />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen
           name="auth"

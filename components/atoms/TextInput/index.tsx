@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   textInput: {
-    height: 50,
+    height: 40,
     padding: 10,
     borderWidth: 1,
     borderRadius: 8,
