@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   horizontal: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
 })

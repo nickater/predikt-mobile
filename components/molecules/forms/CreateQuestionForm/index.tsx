@@ -23,6 +23,9 @@ const validationRules = {
       return date > new Date() || 'Deadline must be in the future'
     },
   },
+  visibility: {
+    required: 'Please select a visibility option',
+  },
 }
 
 export const CreateQuestionForm: CreateQuestionFormProps = ({

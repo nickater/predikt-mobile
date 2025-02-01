@@ -7,6 +7,7 @@ const mapFontSize = {
   small: 12,
   medium: 16,
   large: 20,
+  xlarge: 24,
 }
 
 export const PrimaryButton: FC<ButtonProps> = ({
@@ -15,16 +16,17 @@ export const PrimaryButton: FC<ButtonProps> = ({
   ...props
 }) => {
   const theme = useThemeColor()
-  const pressedColor = useAdjustColor(theme.background, 0.5)
+  const pressedColor = useAdjustColor(theme.textSecondary, 0.5)
 
   return (
     <ButtonBase
       size={size}
       {...props}
       text50
-      color={theme.textPrimary}
+      borderRadius={8}
+      color={theme.background}
       labelStyle={{ fontSize: mapFontSize[fontSize] }}
-      backgroundColor={theme.background}
+      backgroundColor={theme.textSecondary}
       activeBackgroundColor={pressedColor}
     />
   )

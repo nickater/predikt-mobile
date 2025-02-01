@@ -1,11 +1,11 @@
 import { CustomSafeAreaView } from '@/components'
-import { Profile } from '@/components/organisms/Profile'
+import { ProfileSettingsScreen } from '@/components/organisms/ProfileV2'
 import { StyleSheet } from 'react-native'
 
 export default function ProfileTab() {
   return (
-    <CustomSafeAreaView style={styles.container} bottom={false}>
-      <Profile />
+    <CustomSafeAreaView style={styles.container} bottom={false} horizontal>
+      <ProfileSettingsScreen />
     </CustomSafeAreaView>
   )
 }

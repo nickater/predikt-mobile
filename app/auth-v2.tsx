@@ -2,7 +2,6 @@
 // TODO: Move the UI into a separate component
 
 import { Logo, Tabs, Text, TextInput } from '@/components'
-import React from 'react'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
 
 const AuthScreen = () => {

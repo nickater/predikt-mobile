@@ -4,7 +4,11 @@ import {
   useFetchQuestionDetail,
   useProfile,
 } from '@/hooks'
-import { formatDateTime } from '@/utils/stringFormat/dateFormatter'
+import {
+  formatDateTime,
+  formatShortDate,
+  formatShortTime,
+} from '@/utils/stringFormat/dateFormatter'
 import { useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
 
@@ -71,7 +75,10 @@ export const QuestionDetail = ({
   const formattedDeadline = useMemo(() => {
     if (!question) return ''
     const date = new Date(question.deadline)
-    return formatDateTime(date)
+    const dateString = formatShortDate(date)
+    const timeString = formatShortTime(date)
+
+    return `${dateString} ${timeString}`
   }, [question])
 
   if (isLoading) return <Text>Loading...</Text>
@@ -81,24 +88,22 @@ export const QuestionDetail = ({
   return (
     <View style={styles.container}>
       <Card>
-        <View>
-          <Text variant="header2" style={styles.title}>
+        <View style={styles.row}>
+          <Text>Deadline: {formattedDeadline}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.description}>
+            Status: {`${hasQuestionDeadlinePassed ? 'Closed' : 'Open'}`}
+          </Text>
+        </View>
+        <View style={styles.section}>
+          <Text variant="extraBold" style={styles.title}>
             {question.title}
           </Text>
 
           <Text>{question.description}</Text>
         </View>
-      </Card>
-      <Card>
-        <View>
-          <Text>Deadline: {formattedDeadline}</Text>
-        </View>
-        <View style={{ paddingTop: 10 }}>
-          <Text style={styles.description}>
-            Status: {`${hasQuestionDeadlinePassed ? 'Closed' : 'Open'}`}
-          </Text>
-        </View>
-        <View style={{ paddingTop: 10 }}>
+        <View style={{ marginTop: 10 }}>
           <Text>{userPredictionStatus}</Text>
         </View>
       </Card>
@@ -141,6 +146,9 @@ const styles = StyleSheet.create({
   },
   infoText: {
     flex: 1,
+    marginBottom: 8,
+  },
+  section: {
     marginBottom: 8,
   },
 })

@@ -32,5 +32,7 @@ export const UpdateUsernameForm: UpdateUsernameFormProps = ({
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    // backgroundColor: 'red',
+  },
 })

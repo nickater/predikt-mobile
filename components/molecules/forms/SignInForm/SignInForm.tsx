@@ -1,6 +1,6 @@
-import { Button, Text, TextInput } from '@/components/atoms'
+import { Button, Card, Text, TextInput } from '@/components/atoms'
 import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
-import { View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { CreatePredictionFormProps, SignInFormUserInput } from './types'
 
 const TEST_EMAIL = process.env.EXPO_PUBLIC_TEST_EMAIL
@@ -32,7 +32,7 @@ export const SignInForm: CreatePredictionFormProps = ({ onSubmit }) => {
     Object.keys(errors).length > 0 || Object.keys(dirtyFields).length === 0
 
   return (
-    <View>
+    <Card>
       <Controller
         control={control}
         rules={{
@@ -40,6 +40,7 @@ export const SignInForm: CreatePredictionFormProps = ({ onSubmit }) => {
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
+            style={styles.input}
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Email"
@@ -59,6 +60,7 @@ export const SignInForm: CreatePredictionFormProps = ({ onSubmit }) => {
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
+            style={styles.input}
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Password"
@@ -77,6 +79,12 @@ export const SignInForm: CreatePredictionFormProps = ({ onSubmit }) => {
         onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}
         disabled={isButtonDisabled}
       />
-    </View>
+    </Card>
   )
 }
+
+const styles = StyleSheet.create({
+  input: {
+    marginBottom: 20,
+  },
+})

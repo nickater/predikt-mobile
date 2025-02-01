@@ -21,7 +21,7 @@ export const UpdatePasswordForm: UpdatePasswordFormProps = ({
             autoComplete="off"
             autoCorrect={false}
             enablesReturnKeyAutomatically
-            placeholder="Enter old password"
+            placeholder="Current password"
             onChangeText={onChange}
             value={value}
           />
@@ -37,7 +37,7 @@ export const UpdatePasswordForm: UpdatePasswordFormProps = ({
             autoComplete="off"
             autoCorrect={false}
             enablesReturnKeyAutomatically
-            placeholder="Enter new password"
+            placeholder="New password"
             onChangeText={onChange}
             value={value}
           />
@@ -50,5 +50,7 @@ export const UpdatePasswordForm: UpdatePasswordFormProps = ({
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    gap: 20,
+  },
 })

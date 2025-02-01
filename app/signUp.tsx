@@ -1,4 +1,3 @@
-import React from 'react'
 import { View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import Icon from '@expo/vector-icons/FontAwesome' // Ensure this package is installed
 import { Text, TextInput } from '@/components'

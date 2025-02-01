@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
-import { View } from 'react-native'
-import { Button, Text, TextInput } from '@/components/atoms'
+import { StyleSheet, View } from 'react-native'
+import { Button, Card, Text, TextInput } from '@/components/atoms'
 import { SignUpFormProps, SignUpFormUserInput } from './types'
 
 export const SignUpForm: SignUpFormProps = ({ onSubmit }) => {
@@ -31,7 +31,7 @@ export const SignUpForm: SignUpFormProps = ({ onSubmit }) => {
     Object.keys(errors).length > 0 || Object.keys(dirtyFields).length === 0
 
   return (
-    <View>
+    <Card>
       <Controller
         control={control}
         rules={{
@@ -39,6 +39,7 @@ export const SignUpForm: SignUpFormProps = ({ onSubmit }) => {
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
+            style={styles.input}
             autoCapitalize="none"
             keyboardType="email-address"
             autoCorrect={false}
@@ -59,6 +60,7 @@ export const SignUpForm: SignUpFormProps = ({ onSubmit }) => {
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
+            style={styles.input}
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Email"
@@ -78,6 +80,7 @@ export const SignUpForm: SignUpFormProps = ({ onSubmit }) => {
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
+            style={styles.input}
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Password"
@@ -95,6 +98,12 @@ export const SignUpForm: SignUpFormProps = ({ onSubmit }) => {
         onPress={handleSubmit(onValidSubmission, onInvalidSubmission)}
         disabled={isButtonDisabled}
       />
-    </View>
+    </Card>
   )
 }
+
+const styles = StyleSheet.create({
+  input: {
+    marginBottom: 16,
+  },
+})

@@ -4,7 +4,7 @@ import {
   useUpdateUsernameForm,
 } from '@/hooks'
 import { SubmitHandler } from 'react-hook-form'
-import { Alert, StyleSheet } from 'react-native'
+import { Alert, InteractionManager, StyleSheet } from 'react-native'
 import { UpdateUsernameForm } from '../../forms/UpdateUsernameForm'
 import { UpdateUsernameProps } from './types'
 

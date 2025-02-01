@@ -1,25 +1,35 @@
 import { useThemeColor } from '@/hooks'
 import { Theme } from '@/libs/RNUILib'
-import { FC } from 'react'
 import { Text as RNText, StyleSheet } from 'react-native'
 import { TextProps } from './types'
 
-export const Text: TextProps = ({ variant, position, children, ...props }) => {
+export const Text: TextProps = ({
+  variant,
+  color,
+  position,
+  children,
+  style,
+  ...rest
+}) => {
   const theme = useThemeColor()
   const styles = makeStyles(theme)
 
   return (
     <RNText
-      {...props}
+      {...rest}
       allowFontScaling={true}
       adjustsFontSizeToFit={true}
       ellipsizeMode="clip"
       maxFontSizeMultiplier={1}
       lineBreakMode="tail"
       style={[
-        styles[variant ?? 'paragraph'],
+        styles[variant ?? 'regular'],
         styles[position ?? 'left'],
-        props.style,
+        styles[color ?? 'primary'],
+        {
+          fontSize: 16,
+        },
+        style,
       ]}
     >
       {children}
@@ -29,56 +39,76 @@ export const Text: TextProps = ({ variant, position, children, ...props }) => {
 
 const makeStyles = (theme: Theme) =>
   StyleSheet.create({
-    header1: {
-      fontSize: 32,
-      fontWeight: 'bold',
+    // colors
+    primary: {
       color: theme.textPrimary,
     },
-    header2: {
-      fontSize: 24,
-      fontWeight: '600',
+    secondary: {
       color: theme.textSecondary,
     },
-    paragraph: {
-      fontSize: 16,
-      color: theme.textPrimary,
-      lineHeight: 24,
+    tertiary: {
+      color: theme.primaryVariant,
     },
-    caption: {
-      fontSize: 12,
-      color: '#999999',
+    error: {
+      color: theme.error,
     },
-    link: {
-      fontSize: 16,
-      color: '#007bff',
-      textDecorationLine: 'underline',
+    success: {
+      color: theme.success,
     },
-    highlighted: {
-      fontSize: 16,
-      color: '#ff5722',
-      backgroundColor: '#ffffe0',
+    // variants
+    regular: {
+      fontFamily: 'Montserrat-Regular',
     },
     bold: {
-      fontSize: 16,
-      color: theme.textPrimary,
-      fontWeight: 'bold',
-    },
-    bold2: {
-      fontSize: 20,
-      color: theme.textPrimary,
-      fontWeight: 'bold',
+      fontFamily: 'Montserrat-Bold',
     },
     italic: {
-      fontSize: 16,
-      color: theme.textPrimary,
-      fontStyle: 'italic',
+      fontFamily: 'Montserrat-Italic',
     },
-    small: {
-      fontSize: 14,
+    light: {
+      fontFamily: 'Montserrat-Light',
     },
-    large: {
-      fontSize: 20,
+    medium: {
+      fontFamily: 'Montserrat-Medium',
     },
+    semiBold: {
+      fontFamily: 'Montserrat-SemiBold',
+    },
+    extraBold: {
+      fontFamily: 'Montserrat-ExtraBold',
+    },
+    thin: {
+      fontFamily: 'Montserrat-Thin',
+    },
+    underline: {
+      fontFamily: 'Montserrat-Regular',
+      textDecorationLine: 'underline',
+    },
+    strikethrough: {
+      fontFamily: 'Montserrat-Regular',
+      textDecorationLine: 'line-through',
+    },
+    uppercase: {
+      fontFamily: 'Montserrat-Regular',
+      textTransform: 'uppercase',
+    },
+    lowercase: {
+      fontFamily: 'Montserrat-Regular',
+      textTransform: 'lowercase',
+    },
+    header1: {
+      fontFamily: 'Montserrat-ExtraBold',
+      fontSize: 32,
+    },
+    header2: {
+      fontFamily: 'Montserrat-Bold',
+      fontSize: 24,
+    },
+    header3: {
+      fontFamily: 'Montserrat-SemiBold',
+      fontSize: 18,
+    },
+    // positions
     left: {
       textAlign: 'left',
     },

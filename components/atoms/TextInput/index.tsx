@@ -20,32 +20,20 @@ export const TextInput: FC<TextInputProps> = ({
       {
         color: theme.secondary,
         backgroundColor: 'white',
-        fontSize: 20,
+        fontSize: 16,
       },
     ],
   }
 
   if (bottomSheet) {
-    return (
-      <View style={[styles.container]}>
-        <BottomSheetTextInput {...rest} {...textInputProps} />
-      </View>
-    )
+    return <BottomSheetTextInput {...rest} {...textInputProps} />
   }
 
-  return (
-    <View style={[styles.container]}>
-      <RNTextInput {...rest} {...textInputProps} />
-    </View>
-  )
+  return <RNTextInput {...rest} {...textInputProps} />
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 10,
-  },
   textInput: {
-    height: 40,
     padding: 10,
     borderWidth: 1,
     borderRadius: 8,

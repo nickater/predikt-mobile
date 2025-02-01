@@ -42,7 +42,7 @@ export const QuestionCard = (props: QuestionCardProps) => {
   return (
     <Card onPress={handleSelect(id)}>
       <View style={styles.topContainer}>
-        <Text variant="bold2" style={{ flexShrink: 1 }}>
+        <Text variant="extraBold" style={{ flexShrink: 1 }}>
           {title}
         </Text>
         {predictionExists && (

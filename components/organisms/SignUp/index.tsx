@@ -27,17 +27,13 @@ export const SignUp = () => {
         Create Account
       </Text>
       {error && (
-        <Text
-          variant="highlighted"
-          position="center"
-          style={{ marginBottom: 10, color: 'red' }}
-        >
+        <Text color="error" position="center" style={{ marginBottom: 10 }}>
           {error}
         </Text>
       )}
       <SignUpForm onSubmit={handleOnSubmit} />
       {loading && (
-        <Text variant="paragraph" position="center" style={{ marginTop: 10 }}>
+        <Text position="center" style={{ marginTop: 10 }}>
           Signing up...
         </Text>
       )}

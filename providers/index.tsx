@@ -4,6 +4,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
 import { DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { useThemeColor } from '@/hooks'
+import { BottomSheetProvider } from './BottomSheetProvider'
 
 export const Providers: FC<PropsWithChildren> = ({ children }) => {
   const theme = useThemeColor()
@@ -19,11 +20,13 @@ export const Providers: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <QueryProvider>
-      <KeyboardProvider>
-        <ThemeProvider value={NavTheme}>
-          <GestureHandlerRootView>{children}</GestureHandlerRootView>
-        </ThemeProvider>
-      </KeyboardProvider>
+      <GestureHandlerRootView>
+        <BottomSheetProvider>
+          <KeyboardProvider>
+            <ThemeProvider value={NavTheme}>{children}</ThemeProvider>
+          </KeyboardProvider>
+        </BottomSheetProvider>
+      </GestureHandlerRootView>
     </QueryProvider>
   )
 }

@@ -27,11 +27,7 @@ export const PredictionCard: PredictionCardProps = ({
   }, [created_at])
 
   return (
-    <Card
-      showPressedColor={false}
-      style={{ backgroundColor: 'f5f5f5' }}
-      onPress={onPress}
-    >
+    <Card showPressedColor={false} onPress={onPress}>
       <View>
         <View style={styles.predictionTopRow}>
           <Text>{formattedCreatedAt}</Text>
@@ -40,12 +36,12 @@ export const PredictionCard: PredictionCardProps = ({
           </ConditionalText>
         </View>
         <View>
-          <Text variant="bold2">{questionTitle}</Text>
+          <Text variant="bold">{questionTitle}</Text>
         </View>
       </View>
       <AccordionItem isExpanded={open} viewKey="Accordion">
         <View style={styles.predictionBottomRow}>
-          <Text style={styles.predictionText}>{prediction}</Text>
+          <Text>{prediction}</Text>
         </View>
       </AccordionItem>
     </Card>
@@ -61,11 +57,6 @@ const styles = StyleSheet.create({
   predictionBottomRow: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: '#f5f5f5',
-    borderRadius: 8,
     width: '100%',
-  },
-  predictionText: {
-    color: '#000',
   },
 })
