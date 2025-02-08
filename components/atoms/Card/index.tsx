@@ -45,7 +45,7 @@ const makeStyles = (theme: Theme) =>
       padding: 16,
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
       borderRadius: 8,
-      backgroundColor: theme.background,
+      backgroundColor: theme.surface,
     },
     pressed: {
       backgroundColor: theme.backgroundVariant,

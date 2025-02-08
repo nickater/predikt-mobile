@@ -32,10 +32,10 @@ export default function AppLayout() {
   })
 
   useEffect(() => {
-    if (loaded) {
+    if (loaded && !error) {
       SplashScreen.hideAsync()
     }
-  }, [loaded])
+  }, [error, loaded])
 
   return (
     <Providers>

@@ -1,4 +1,4 @@
-import { Button, Divider, Text, TextInput } from '@/components/atoms'
+import { Button, Card, Divider, Text, TextInput } from '@/components/atoms'
 import { RadioGroup } from '@/components/molecules/RadioGroup'
 import { Controller } from 'react-hook-form'
 import { StyleSheet, View, useColorScheme } from 'react-native'
@@ -37,21 +37,20 @@ export const CreateQuestionForm: CreateQuestionFormProps = ({
 
   return (
     <View style={styles.formContainer}>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Basic Information</Text>
-        <Divider />
-        <Text style={styles.label}>Question</Text>
+      <Card style={styles.section}>
+        <Text variant="header1">Basic Information</Text>
+        <Text variant="header3">Question</Text>
 
         <Controller
           control={control}
           rules={validationRules.title}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              style={styles.input}
               placeholder="Enter your question"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              multiline
             />
           )}
           name="title"
@@ -61,14 +60,13 @@ export const CreateQuestionForm: CreateQuestionFormProps = ({
           <Text style={styles.errorText}>{errors.title.message}</Text>
         )}
 
-        <Text style={styles.label}>Description</Text>
-
+        <Text variant="header3">Description</Text>
         <Controller
           control={control}
           rules={validationRules.description}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              style={[styles.input, styles.textArea]}
+              style={[styles.textArea]}
               placeholder="Provide more context (optional)"
               onBlur={onBlur}
               onChangeText={onChange}
@@ -79,15 +77,15 @@ export const CreateQuestionForm: CreateQuestionFormProps = ({
           )}
           name="description"
         />
+
         {errors.description && (
           <Text style={styles.errorText}>{errors.description.message}</Text>
         )}
-      </View>
+      </Card>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Settings</Text>
-        <Divider />
-        <Text style={styles.label}>Deadline</Text>
+      <Card style={styles.section}>
+        <Text variant="header1">Settings</Text>
+        <Text variant="header3">Deadline</Text>
         <Controller
           control={control}
           rules={validationRules.deadline}
@@ -104,7 +102,7 @@ export const CreateQuestionForm: CreateQuestionFormProps = ({
         {errors.deadline && (
           <Text style={styles.errorText}>{errors.deadline.message}</Text>
         )}
-        <Text style={styles.label}>Visibility</Text>
+        <Text variant="header3">Visibility</Text>
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
@@ -119,9 +117,9 @@ export const CreateQuestionForm: CreateQuestionFormProps = ({
           )}
           name="visibility"
         />
-      </View>
+      </Card>
 
-      <View style={[styles.submitButtonContainer, styles.section]}>
+      <View style={styles.submitButtonContainer}>
         <Button.Primary
           // label={isSubmitting ? 'Submitting...' : 'Submit'}
           label="Submit"
@@ -146,7 +144,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   section: {
-    // gap: 12,
+    gap: 12,
+    paddingVertical: 16,
   },
   sectionTitle: {
     fontSize: 18,
@@ -157,17 +156,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 4,
-    fontSize: 16,
-    backgroundColor: '#fff',
-  },
   textArea: {
-    height: 100,
+    minHeight: 40,
     textAlignVertical: 'top',
   },
   errorText: {

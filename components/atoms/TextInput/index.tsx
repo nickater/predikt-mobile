@@ -13,13 +13,13 @@ export const TextInput: FC<TextInputProps> = ({
   const theme = useThemeColor()
 
   const textInputProps = {
-    placeholderTextColor: theme.secondary,
+    placeholderTextColor: theme.textSecondary,
     style: [
       styles.textInput,
       style,
       {
-        color: theme.secondary,
-        backgroundColor: 'white',
+        // color: theme.secondary,
+        // backgroundColor: 'white',
         fontSize: 16,
       },
     ],
@@ -35,7 +35,9 @@ export const TextInput: FC<TextInputProps> = ({
 const styles = StyleSheet.create({
   textInput: {
     padding: 10,
-    borderWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
+    color: 'white',
     borderRadius: 8,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,

@@ -13,7 +13,7 @@ export const Providers: FC<PropsWithChildren> = ({ children }) => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: theme.surface,
+      background: theme.background,
       primary: theme.primary,
     },
   }

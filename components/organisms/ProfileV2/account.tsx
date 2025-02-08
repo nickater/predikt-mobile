@@ -2,7 +2,7 @@ import { Card, Text } from '@/components/atoms'
 import { Chevron, QuestionCircle } from '@/components/atoms/Icon'
 import { Theme } from '@/libs/RNUILib'
 import { FC } from 'react'
-import { Alert, Pressable, StyleSheet, TouchableOpacity } from 'react-native'
+import { Alert, Pressable, StyleSheet } from 'react-native'
 
 type AccountSectionProps = {
   onLogoutPress: () => void
